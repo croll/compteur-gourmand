@@ -2,7 +2,14 @@
   <ion-toolbar>
     <div class="header">
       <div class="title" width-70 tinymce [bindTo]="'HOME.PAGE_TITLE'">Compteur gourmand, compteur gagnant !</div>
-      <img width-30 src="assets/img/logo.jpg"/>
+      <div width-30>
+        <img src="assets/img/logo.jpg"/>
+      </div>
+        <ion-buttons end>
+        <button color="secondary" class="admin-button" ion-button small (click)="goToAdminPage()">
+          <ion-icon name="settings"></ion-icon>
+        </button>
+        </ion-buttons>
     </div>
   </ion-toolbar>
 </ion-header>

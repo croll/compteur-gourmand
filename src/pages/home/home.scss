@@ -1,10 +1,10 @@
 page-home {
 
-  button {
-    width: 100%;
-    height: 8em;
-    font-size: 2em;
-    color: blue;
+  .admin-button-container {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
   }
 
 }

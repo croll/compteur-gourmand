@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController, ModalController } from 'ionic-angular';
 import { FootprintPage } from '../footprint/footprint';
+import { AdminPage } from '../admin/admin';
 import { ChoosePage } from '../choose/choose';
 
 @Component({
@@ -21,6 +22,10 @@ export class HomePage {
 
   begin() {
     this.navCtrl.push(ChoosePage)
+  }
+
+  goToAdminPage() {
+    this.navCtrl.push(AdminPage)
   }
 
 }
