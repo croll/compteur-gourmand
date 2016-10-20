@@ -32,26 +32,16 @@
 }
 
 ion-footer {
-  ion-col {
-    display: table;
     img {
       width: 3rem;
-      display: table-cell;
-      vertical-align: middle;
     }
-    div {
-      display: table-cell;
-      vertical-align: middle;
-    }
-  }
+}
 
-  ion-buttons {
+ion-buttons {
     float: left;
     &:last-child {
       float:right;
     }
-
-  }
 }
 
 .modal-wrapper {

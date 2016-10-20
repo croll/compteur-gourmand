@@ -33,22 +33,15 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-grid>
-      <ion-row>
-        <ion-col width-50 center>
-          <!-- <a href align="left" tinymce [bindTo]="'HOME.FOOTER_TEXT_LEFT'"></a> -->
-          <div>
-            <button ion-button clear align="left" (click)="footprintPopover()">
-              <img align="left" src="assets/img/earth.png"/>
-              <div style="margin-left:25px">Surface de terre sauvée en 1 an grace à votre engagement</div>
-            </button>
-          </div>
-        </ion-col>
-        <ion-col width-50 center>
-          <img src="assets/img/coins.png"/>
-          <div tinymce [bindTo]="'HOME.FOOTER_TEXT_RIGHT'">Montant économisé en 1 an grâce à votre engagement</div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-buttons start>
+      <button ion-button clear align="left" (click)="footprintPopover()">
+        <img align="left" src="assets/img/earth.png"/>
+        <div style="margin-left:25px">Surface de terre sauvée en 1 an grace à votre engagement</div>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+        <img src="assets/img/coins.png"/>
+        <div tinymce [bindTo]="'HOME.FOOTER_TEXT_RIGHT'">Montant économisé en 1 an grâce à votre engagement</div>
+    </ion-buttons>
   </ion-toolbar>
 </ion-footer>
