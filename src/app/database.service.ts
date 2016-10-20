@@ -20,7 +20,7 @@ export class Database {
       }
     }
 
-    committment = {
+    commitment = {
       _id: 0,
       title: '',
       subtitle: '',
@@ -42,11 +42,11 @@ export class Database {
         _id: '',
         text: ''
       },
-      committments: [] // Array of committments
+      commitments: [] // Array of commitments
     }
 
-    user_committment = {
-      committment: null,
+    user_commitment = {
+      commitment: null,
       nb_of_unit: 0,
       nb_of_person: 0,
       timestamp: 0
@@ -55,7 +55,7 @@ export class Database {
     contribution = {
       _id: 0,
       event: null,
-      user_committments: [], // array of user_committment
+      user_commitments: [], // array of user_commitment
       user: {
         _id: 0,
         firstname: '',
@@ -70,9 +70,9 @@ export class Database {
 
     constructor() {
       this._db = new PouchDB('compteurgourmand');
-      this._db.info().then(function(info: any) {
-         console.log(info);
-      });
+      // this._db.info().then((info: any) => {
+      //    this._db.destroy();
+      // });
     }
 
     getDb() {

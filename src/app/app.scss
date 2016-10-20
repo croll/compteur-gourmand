@@ -32,10 +32,36 @@
 }
 
 ion-footer {
-  img {
-    width: 4rem;
+  ion-col {
+    display: table;
+    img {
+      width: 3rem;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    div {
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
-  div {
-    padding-left: 20px;
+
+  ion-buttons {
+    float: left;
+    &:last-child {
+      float:right;
+    }
+
   }
+}
+
+.modal-wrapper {
+     width: 80%;
+     left: 10%;
+     right: 10%;
+}
+
+.help {
+  font-size: 1rem;
+  font-style: italic;
+  color: #444;
 }

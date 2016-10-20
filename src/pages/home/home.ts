@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
+import { FootprintPage } from '../footprint/footprint';
+import { ChoosePage } from '../choose/choose';
 
 @Component({
   selector: 'page-home',
@@ -8,12 +10,17 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
 
   }
 
-  // keyupHandlerFunction(html) {
-  //   console.log(html);
-  // }
+  footprintPopover() {
+    let popover = this.modalCtrl.create(FootprintPage);
+    popover.present();
+  }
+
+  begin() {
+    this.navCtrl.push(ChoosePage)
+  }
 
 }

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { CompteurGourmand } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { FootprintPage } from '../pages/footprint/footprint';
+import { ChoosePage } from '../pages/choose/choose';
 import { TinyMCE } from './tinymce.directive';
 import { Database } from './database.service';
 
@@ -9,6 +11,8 @@ import { Database } from './database.service';
   declarations: [
     CompteurGourmand,
     HomePage,
+    FootprintPage,
+    ChoosePage,
     TinyMCE
   ],
   imports: [
@@ -17,7 +21,9 @@ import { Database } from './database.service';
   bootstrap: [IonicApp],
   entryComponents: [
     CompteurGourmand,
-    HomePage
+    HomePage,
+    FootprintPage,
+    ChoosePage,
   ],
   providers: [
     Database

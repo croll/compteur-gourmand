@@ -35,14 +35,22 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    let text = "Lorem ipsum";
     this.db.getDb().get(this.bindTo).then((myString) => {
       if (myString.text == "") {
-        myString.text = "Lorem ipsum";
+        if (this.el.nativeElement.innerHTML) {
+          myString.text = this.el.nativeElement.innerHTML;
+        } else {
+          myString.text = text;
+        }
       }
       this.myString = myString;
     }, (err) => {
       if (err.name == 'not_found') {
-        this.myString = {_id: this.bindTo, text: 'Lorem ipsum'};
+        if (this.el.nativeElement.innerHTML) {
+          text = this.el.nativeElement.innerHTML;
+        }
+        this.myString = {_id: this.bindTo, text: text};
       } else {
         console.log(err);
       }
