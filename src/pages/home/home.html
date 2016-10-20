@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="header">
+      <div class="title" width-70 tinymce [bindTo]="'HOME.PAGE_TITLE'"></div>
+      <img width-30 src="assets/img/logo.jpg"/>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <div tinymce [bindTo]="'HOME.CONTENT'"></div>
+    </ion-row>
+    <ion-row center>
+      <ion-col offset-33 width-33>
+        <button ion-button>Commencer</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50 center>
+          <img align="left" src="assets/img/earth.png"/>
+          <div align="left" tinymce [bindTo]="'HOME.FOOTER_TEXT_LEFT'"></div>
+        </ion-col>
+        <ion-col width-50 center>
+          <img src="assets/img/coins.png"/>
+          <div tinymce [bindTo]="'HOME.FOOTER_TEXT_RIGHT'"></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
