@@ -1,0 +1,20 @@
+<ion-content padding>
+
+<span tinymce bindTo="'CHOOSE.YOUR_FIRSTNAME'">Indiquez votre prénom</span><input type="text" name="firstname" ([value])="firstname" /><span tinymce bindTo="'CHOOSE.YOUR_FIRSTNAME_HELP'" class="help">Cela nous permettra d'afficher votre
+engagement sur le grand écran !</span>
+
+<h1 tinymce bindTo="'CHOOSE.HEADING_QUESTION'">Prêt(e) à prendre 1, 2 ou 3 engagements sur les 12 prochains mois ?</h1>
+
+
+</ion-content>
+
+<ion-footer>
+    <ion-buttons left>
+      <button ion-button color="light" (click)="goBack()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button end disabled="userCommitments.length">Suivant</button>
+    </ion-buttons>
+</ion-footer>
