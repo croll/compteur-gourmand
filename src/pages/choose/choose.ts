@@ -13,7 +13,6 @@ export class ChoosePage {
   constructor(public navCtrl: NavController) {}
 
   ionViewDidLoad() {
-    console.log('Hello ChoosePage Page');
   }
 
   goBack() {

@@ -32,6 +32,7 @@ export class CompteurGourmand {
   openPage(page) {
     this.menu.close();
     this.nav.push(page.component);
+    // this.nav.setRoot(page.component);
   }
 
 }
