@@ -3,7 +3,7 @@
     <ion-title>Liste des événements</ion-title>
     <ion-buttons end>
       <button ion-button (click)="add()">
-        <ion-icon name="add"></ion-icon>
+        <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -21,8 +21,8 @@
         <p>
           {{item.start_date | date:'short'}} -- {{item.end_date | date:'short'}}
         </p>
-        <button item-right>
-          <ion-icon name="home"></ion-icon>
+        <button ion-button item-right clear large (click)="edit(item._id)">
+          <ion-icon name="build"></ion-icon>
         </button>
       </ion-item>
       <ion-item-options side="right">

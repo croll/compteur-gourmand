@@ -16,15 +16,20 @@ export class EventListPage {
   ionViewDidLoad() {
 
     this.eventList = [
-      {name: "Premier event de test", description: "La description de l'event", start_date: new Date(), end_date: new Date()},
-      {name: "Deuxième event de test", description: "La description de l'event", start_date: new Date(), end_date: new Date()},
-      {name: "Troisième event de test", description: "La description de l'event", start_date: new Date(), end_date: new Date()},
+      {_id: '1', name: "Premier event de test", description: "La description de l'event", start_date: new Date(), end_date: new Date()},
+      {_id: '2', name: "Deuxième event de test", description: "La description de l'event", start_date: new Date(), end_date: new Date()},
+      {_id: '3', name: "Troisième event de test", description: "La description de l'event", start_date: new Date(), end_date: new Date()},
     ];
   }
 
   add() {
-    console.log("ADD !");
     this.navCtrl.push(EventFormPage);
+  }
+
+  edit(id) {
+    this.navCtrl.push(EventFormPage, {
+      id: id
+    });
   }
 
 }

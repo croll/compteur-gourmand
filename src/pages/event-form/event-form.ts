@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Database } from '../../app/database.service';
 
@@ -17,8 +17,14 @@ export class EventFormPage {
 
   eventForm: any;
   title: string = "Créér un nouvel événement";
+  eventId: number;
 
-  constructor(public navCtrl: NavController, private formBuilder: FormBuilder, private db: Database) {}
+  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private db: Database) {
+    this.eventId = navParams.get('id') || null;
+    if (this.eventId) {
+      this.title = "Modifier un événement";
+    }
+  }
 
   ionViewDidLoad() {
     this.eventForm = this.formBuilder.group({
