@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { NavController, ModalController } from 'ionic-angular';
 import { FootprintPage } from '../footprint/footprint';
-import { AdminPage } from '../admin/admin';
 import { ChoosePage } from '../choose/choose';
 
 @Component({
@@ -11,8 +10,10 @@ import { ChoosePage } from '../choose/choose';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  choosePage;
 
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+    this.choosePage = ChoosePage;
   }
 
   footprintPopover() {
@@ -20,12 +21,8 @@ export class HomePage {
     popover.present();
   }
 
-  begin() {
-    this.navCtrl.push(ChoosePage)
-  }
-
-  goToAdminPage() {
-    this.navCtrl.push(AdminPage)
+  openPage(p) {
+      this.navCtrl.push(p);
   }
 
 }

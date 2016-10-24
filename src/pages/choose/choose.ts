@@ -8,7 +8,8 @@ import { NavController } from 'ionic-angular';
 export class ChoosePage {
 
   userCommitment = [];
-  
+  firstname = '';
+
   constructor(public navCtrl: NavController) {}
 
   ionViewDidLoad() {
