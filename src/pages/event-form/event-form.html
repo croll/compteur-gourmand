@@ -7,11 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>event-form</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
-
 
 <ion-content padding>
 
@@ -28,14 +27,10 @@
     </ion-item>
     <ion-item>
       <ion-label>Actif</ion-label>
-      <ion-toggle [checked]="eventForm.active"></ion-toggle>
+      <ion-toggle [checked]="eventForm.active" formControlName="active"></ion-toggle>
     </ion-item>
-    <ion-item>
-      <h2>Champs obligatoires</h2>
-    </ion-item>
-    <ion-item>
-      <ion-label>Actif</ion-label>
-      <ion-toggle type="text" [checked]="eventForm.active"></ion-toggle>
-    </ion-item>
+    <div class="button-container">
+      <button ion-button type="submit" value="Valider">Créer l'événement</button>
+    </div>
   </form>
 </ion-content>

@@ -15,7 +15,8 @@ import { Database } from '../../app/database.service';
 })
 export class EventFormPage {
 
-  eventForm;
+  eventForm: any;
+  title: string = "Créér un nouvel événement";
 
   constructor(public navCtrl: NavController, private formBuilder: FormBuilder, private db: Database) {}
 
@@ -23,14 +24,14 @@ export class EventFormPage {
     this.eventForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: '',
-      active: [1],
+      active: [false],
       start_date: ['', Validators.required],
       end_date: ['']
     });
   }
 
   save() {
-    console.log("SAVE");
+    alert('todo !');
   }
 
 }
