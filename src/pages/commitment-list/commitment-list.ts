@@ -1,22 +1,35 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { CommitmentFormPage } from '../commitment-form/commitment-form';
 
-/*
-  Generated class for the CommitmentList page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-commitment-list',
   templateUrl: 'commitment-list.html'
 })
 export class CommitmentListPage {
 
+  commitmentList: any;
+
   constructor(public navCtrl: NavController) {}
 
   ionViewDidLoad() {
-    console.log('Hello CommitmentListPage Page');
+
+    this.commitmentList = [
+        {_id: '1', name: "Je ne gaspille plus mon pain rassis", description: "La description", logo: ""},
+        {_id: '2', name: "Je ne jette plus mes yaourts périmés", description: "La description", logo: ""},
+        {_id: '3', name: "J’opte pour un repas végétarien plus souvent", description: "La description", logo: ""}
+    ];
+
+  }
+
+  add() {
+    this.navCtrl.push(CommitmentFormPage);
+  }
+
+  edit(id) {
+    this.navCtrl.push(CommitmentFormPage, {
+      id: id
+    });
   }
 
 }
