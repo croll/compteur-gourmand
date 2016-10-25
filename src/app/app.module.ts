@@ -13,6 +13,7 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
 import { TinyMCE } from './tinymce.directive';
 import { Database } from './database.service';
 import { CgMiracast } from '../providers/cg-miracast';
+import { StoredEvent } from '../db/event';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { CgMiracast } from '../providers/cg-miracast';
   providers: [
     Database,
     CgMiracast,
+    StoredEvent,
   ]
 })
 export class AppModule {}

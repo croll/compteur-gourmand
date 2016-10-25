@@ -13,10 +13,5 @@
 */
 declare module '*';
 
-declare module PresentationNavigator {
-  export interface Navigator {
-     presentation: any;
-  }
-}
-
 interface Navigator { presentation: any }
+interface Window { PouchDB: any }
