@@ -7,9 +7,10 @@ export class Database {
 
     private _db: any;
 
-    event = {
-      _id: 0,
+    public event = {
+      _id: '',
       name: '',
+      description: '',
       active: 0,
       start_date: null,
       end_date: null,
@@ -21,19 +22,16 @@ export class Database {
     }
 
     commitment = {
-      _id: 0,
-      title: '',
-      subtitle: '',
+      _id: '',
+      name: '',
+      short_description : '',
+      description : '',
       logo: '',
-      popup_text: '',
-      popup_image: '',
-      validation_image: '',
-      ideas_text: '',
       ask_for_persons: 0,
-      ark_for_periodicity: 0,
-      order: 0,
+      ask_for_periodicity: 0,
       m2_saved_by_unit: 0,
       euros_saved_by_unit: 0,
+      order: 0,
       active: 0
     }
 
@@ -53,7 +51,7 @@ export class Database {
     }
 
     contribution = {
-      _id: 0,
+      _id: '',
       event: null,
       user_commitments: [], // array of user_commitment
       user: {
