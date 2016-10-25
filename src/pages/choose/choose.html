@@ -1,10 +1,109 @@
 <ion-content padding>
 
-<span tinymce bindTo="'CHOOSE.YOUR_FIRSTNAME'">Indiquez votre prénom</span><input type="text" name="firstname" [(value)]="firstname" /><span tinymce bindTo="'CHOOSE.YOUR_FIRSTNAME_HELP'" class="help">Cela nous permettra d'afficher votre
-engagement sur le grand écran !</span>
+  <div class="top">
+      <div tinymce bindTo="'CHOOSE.YOUR_FIRSTNAME'">Indiquez votre prénom</div>
+      <div><input type="text" name="firstname" [(value)]="firstname" /></div>
+      <div tinymce bindTo="'CHOOSE.YOUR_FIRSTNAME_HELP'" class="help">Cela nous permettra d'afficher votre
+  engagement sur le grand écran !</div>
+  </div>
 
-<h1 tinymce bindTo="'CHOOSE.HEADING_QUESTION'">Prêt(e) à prendre 1, 2 ou 3 engagements sur les 12 prochains mois ?</h1>
+  <h1 tinymce bindTo="'CHOOSE.HEADING_QUESTION'">Prêt(e) à prendre 1, 2 ou 3 engagements sur les 12 prochains mois ?</h1>
 
+  <div class="commitment-list">
+    <button ion-button>
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+    <ion-slides>
+      <ion-slide>
+        <div class="commitments">
+          <!-- COMMITMENT -->
+          <div class="commitment">
+            <ion-card>
+              <div class="title">
+                  <p>Je ne gaspille plus mon pain rassis</p>
+                  <ion-icon name="checkmark-circle" large></ion-icon>
+              </div>
+              <img src="assets/img/bread.jpg">
+              <ion-item>
+                <img src="assets/img/earth.jpg" item-left large>
+                <h2>33 m²</h2>
+                <p>Surface préservée</p>
+              </ion-item>
+              <ion-item>
+                <img src="assets/img/coins.jpg" item-left large>
+                <h2>8€</h2>
+                <p>Argent économisé</p>
+              </ion-item>
+            </ion-card>
+            <div class="caption">
+              <p>
+                Faites du pain perdu ou de lachapelure avec votre pain rassis !
+              </p>
+              <a>En savoir plus</a>
+            </div>
+          </div>
+          <!-- END -->
+          <!-- COMMITMENT -->
+          <div class="commitment">
+            <ion-card>
+              <div class="title">
+                  <p>Je ne gaspille plus mon pain rassis</p>
+                  <ion-icon name="checkmark-circle" large></ion-icon>
+              </div>
+              <img src="assets/img/bread.jpg">
+              <ion-item>
+                <img src="assets/img/earth.jpg" item-left large>
+                <h2>33 m²</h2>
+                <p>Surface préservée</p>
+              </ion-item>
+              <ion-item>
+                <img src="assets/img/coins.jpg" item-left large>
+                <h2>8€</h2>
+                <p>Argent économisé</p>
+              </ion-item>
+            </ion-card>
+            <div class="caption">
+              <p>
+                Faites du pain perdu ou de lachapelure avec votre pain rassis !
+              </p>
+              <a>En savoir plus</a>
+            </div>
+          </div>
+          <!-- END -->
+          <!-- COMMITMENT -->
+          <div class="commitment">
+            <ion-card>
+              <div class="title">
+                  <p>Je ne gaspille plus mon pain rassis</p>
+                  <ion-icon name="checkmark-circle" large></ion-icon>
+              </div>
+              <img src="assets/img/bread.jpg">
+              <ion-item>
+                <img src="assets/img/earth.jpg" item-left large>
+                <h2>33 m²</h2>
+                <p>Surface préservée</p>
+              </ion-item>
+              <ion-item>
+                <img src="assets/img/coins.jpg" item-left large>
+                <h2>8€</h2>
+                <p>Argent économisé</p>
+              </ion-item>
+            </ion-card>
+            <div class="caption">
+              <p>
+                Faites du pain perdu ou de lachapelure avec votre pain rassis !
+              </p>
+              <a>En savoir plus</a>
+            </div>
+          </div>
+          <!-- END -->
+        </div>
+      </ion-slide>
+    </ion-slides>
+    <button ion-button class="r">
+      <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+  </div>
 
 </ion-content>
 
