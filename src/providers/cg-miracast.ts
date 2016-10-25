@@ -16,55 +16,57 @@ export class CgMiracast {
 
   constructor() {
     console.log("CgMiracast...");
-    this.init();
+    //this.init();
   }
 
-  private init() {
-      let rootelem = document.querySelector('ion-app');
-      switch(rootelem.getAttribute("cg-part")) {
-          case "tablette":
-            this.initTablette();
-          break;
-          case "presentation":
-            this.initPresentation();
-          break;
-          default:
-            console.error("Pas de cg-part !");
-      }
+  public init() {
+    let rootelem = document.querySelector('ion-app');
+    switch(rootelem.getAttribute("cg-part")) {
+      case "tablette":
+        console.log("CgMiracast... tablette");
+        this.initTablette();
+      break;
+      case "presentation":
+      console.log("CgMiracast... presentation");
+        this.initPresentation();
+      break;
+      default:
+        console.error("Pas de cg-part !");
+    }
   }
 
   private initTablette() {
-      this._mode="tablette";
-      navigator.presentation.onavailablechange = (screenEvent) => {
-         if(screenEvent.available) {
-            this.session = navigator.presentation.requestSession("display.html");
-            this.session.onmessage = (msg) => {
-                this.onmessage.emit(msg);
-            }; // we don't care this app
-            this.session.onstatechange = function() {
-                //button.disabled = self.session.state != "connected";
-            }
-         }
-      };
-      console.log("Miracast inited has Tablette mode");
+    this._mode="tablette";
+    navigator.presentation.onavailablechange = (screenEvent) => {
+      if(screenEvent.available) {
+        this.session = navigator.presentation.requestSession("display.html");
+        this.session.onmessage = (msg) => {
+          this.onmessage.emit(msg);
+        }; // we don't care this app
+        this.session.onstatechange = function() {
+          //button.disabled = self.session.state != "connected";
+        }
+      }
+    };
+    console.log("Miracast inited has Tablette mode");
   }
 
   private initPresentation() {
-      this._mode="presentation";
-      navigator.presentation.onpresent = (presentEvent) => {
-          this.session = presentEvent.session;
-          this.session.onmessage = (msg) => {
-              this.onmessage.emit(msg);
-          };
-          this.session.onstatechange = function(){
-              //div.innerText = session.state;
-          }
+    this._mode="presentation";
+    navigator.presentation.onpresent = (presentEvent) => {
+      this.session = presentEvent.session;
+      this.session.onmessage = (msg) => {
+        this.onmessage.emit(msg);
       };
-      console.log("Miracast inited has Presentation mode");
+      this.session.onstatechange = function(){
+        //div.innerText = session.state;
+      }
+    };
+    console.log("Miracast inited has Presentation mode");
   }
 
   get mode() {
-      return this._mode;
+    return this._mode;
   }
 
 }

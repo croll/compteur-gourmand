@@ -29,9 +29,9 @@ export class CompteurGourmand {
 
     platform.ready().then(() => {
       StatusBar.styleDefault();
-    });
+      miracast.init();
 
-    switch (miracast.mode) {
+      switch (miracast.mode) {
         case "tablette":
           this.rootPage = HomePage;
         break;
@@ -41,7 +41,9 @@ export class CompteurGourmand {
         default:
           console.error("Pas de cg-part !");
           this.rootPage = HomePage;
-    }
+      }
+    });
+
   }
 
   openPage(page) {
