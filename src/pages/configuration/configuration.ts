@@ -23,4 +23,8 @@ export class ConfigurationPage {
     });
   }
 
+  save() {
+    alert("TODO !");
+  }
+
 }
