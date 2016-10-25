@@ -18,30 +18,16 @@
   width: 100%;
 }
 
-.header {
-  .title {
-    padding-left: 1rem;
-    font-weight: bold;
-  }
-  img {
-    position: absolute;
-    top: 0.9rem;
-    right: 1rem;
-    height: 50px;
-  }
-}
-
 ion-footer {
+    text-transform: none!important;
     img {
       width: 3rem;
     }
 }
 
-ion-buttons {
-    float: left;
-    &:last-child {
-      float:right;
-    }
+.button-container {
+  text-align: center;
+  margin-top: 60px;
 }
 
 .modal-wrapper {

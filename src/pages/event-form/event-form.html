@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="eventForm" (ngSubmit)="save()">
+    <ion-item>
+      <ion-label>Nom</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-textarea type="text" formControlName="description"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Actif</ion-label>
+      <ion-toggle [checked]="eventForm.active" formControlName="active"></ion-toggle>
+    </ion-item>
+    <div class="button-container">
+      <button ion-button type="submit" value="Valider" [disabled]="!eventForm.valid">Créer l'événement</button>
+    </div>
+  </form>
+</ion-content>

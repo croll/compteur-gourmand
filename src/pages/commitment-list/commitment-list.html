@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Liste des engagements</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="add()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+   <ion-item-sliding *ngFor="let item of commitmentList">
+      <ion-item>
+        <h2>{{item.name}}</h2>
+        <h3>
+          {{item.description}}
+        </h3>
+        <button ion-button item-right clear large (click)="edit(item._id)">
+          <ion-icon name="build"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item-options side="right">
+      <button ion-button color="secondary">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

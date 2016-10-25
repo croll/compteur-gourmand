@@ -1,18 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <div class="header">
-      <div class="title" width-70 tinymce [bindTo]="'HOME.PAGE_TITLE'">Compteur gourmand, compteur gagnant !</div>
-      <div width-30>
-        <img src="assets/img/logo.jpg"/>
-      </div>
-        <ion-buttons end>
-        <button color="secondary" class="admin-button" ion-button small (click)="goToAdminPage()">
-          <ion-icon name="settings"></ion-icon>
-        </button>
-        </ion-buttons>
-    </div>
-  </ion-toolbar>
-</ion-header>
+  <ion-header>
+    <ion-navbar primary>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name='menu'></ion-icon>
+      </button>
+      <ion-title>
+        Compteur gourmand, compteur gagnant !
+      </ion-title>
+      <ion-buttons end>
+        <img src="assets/img/logo.jpg" style="height: 45px;margin-top: 5px"/>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content padding>
   <ion-grid>
@@ -23,25 +21,36 @@
         <p>Calculez les gains financiers et écologiques que vous pouvez réaliser en adoptant une consommation alimentaire plus économe, et choisissez quels sont les petits changements sur lesquels vous pouvez vous engager... Alors, ready my radis ?</p>
       </div>
     </ion-row>
-    <ion-row center>
-      <ion-col offset-33 width-33>
-        <button ion-button (click)="begin()">Commencer</button>
-      </ion-col>
-    </ion-row>
+    <div class="button-container">
+      <button ion-button (click)="openPage(choosePage)">Commencer</button>
+    </div>
   </ion-grid>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <ion-buttons start>
-      <button ion-button clear align="left" (click)="footprintPopover()">
-        <img align="left" src="assets/img/earth.png"/>
-        <div style="margin-left:25px">Surface de terre sauvée en 1 an grace à votre engagement</div>
-      </button>
-    </ion-buttons>
+  <ion-navbar>
+    <button ion-button clear align="left" (click)="footprintPopover()">
+      <img align="left" src="assets/img/earth.png"/>
+      <div tinymce [bindTo]="'HOME>FOOTER_TEXT_LEFT'" style="margin-left:25px">Surface de terre sauvée en 1 an grace à votre engagement</div>
+    </button>
     <ion-buttons end>
+      <button ion-button clear>
         <img src="assets/img/coins.png"/>
         <div tinymce [bindTo]="'HOME.FOOTER_TEXT_RIGHT'">Montant économisé en 1 an grâce à votre engagement</div>
+      </button>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-navbar>
 </ion-footer>
+
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer> -->
