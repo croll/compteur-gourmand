@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import PouchDB from 'pouchdb';
+//import docuri from 'docuri';
 
 @Injectable()
 export class Database {
 
-    private _db: any;
+  //private _db: PouchDB.Database<any>;
+  private _db: any;
 
     public event = {
       _id: '',
@@ -67,13 +69,31 @@ export class Database {
     }
 
     constructor() {
+      window.PouchDB=PouchDB; // hack to enable pouchdb inspector
       this._db = new PouchDB('compteurgourmand');
+      this._db.info().then((infos) => {
+        console.log("db infos: ", infos);
+      }).catch((err) => {
+        console.log("db infos failed: ", err);
+      })
       // this._db.info().then((info: any) => {
       //    this._db.destroy();
       // });
+
+      /*
+      let event = new Event();
+      event.name = "plop";
+      event.make_id();
+      console.log("event: ", event);
+      this._db.put(event).then((res) => {
+        console.log("event puted: ", res);
+      }).catch((err) => {
+        console.log("event puted failed: ", err);
+      })
+      */
     }
 
-    getDb() {
+    public getDb() {
       return this._db;
     }
 

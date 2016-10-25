@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Validators, FormBuilder } from '@angular/forms';
-import { Database } from '../../app/database.service';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+//import { Database } from '../../app/database.service';
+import { StoredEvent, Event } from '../../db/event';
 
 /*
   Generated class for the EventForm page.
@@ -15,11 +16,12 @@ import { Database } from '../../app/database.service';
 })
 export class EventFormPage {
 
-  eventForm: any;
+  eventForm: FormGroup;
   title: string = "Créér un nouvel événement";
-  eventId: number;
+  eventId: string;
+  loadedEvent: Event;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private db: Database) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent) {
     this.eventId = navParams.get('id') || null;
     if (this.eventId) {
       this.title = "Modifier un événement";
@@ -34,10 +36,30 @@ export class EventFormPage {
       start_date: ['', Validators.required],
       end_date: ['']
     });
+
+    if (this.eventId) {
+      this.store.get(this.eventId).then((doc) => {
+        this.loadedEvent = doc;
+        let e = {
+          name: doc.name,
+          description: doc.description,
+          active: doc.active,
+          start_date: doc.start_date,
+          end_date: doc.end_date,
+        };
+        console.log("edit: ", doc, e);
+        this.eventForm.setValue(e);
+      });
+    }
   }
 
   save() {
-    alert('todo !');
+    let e = new Event(this.eventForm.getRawValue());
+    this.store.put(e).then((res) => {
+      console.log("event puted: ", res);
+    }).catch((err) => {
+      console.log("event puted failed: ", err);
+    });
   }
 
 }

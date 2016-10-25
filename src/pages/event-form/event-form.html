@@ -18,6 +18,14 @@
       <ion-label>Actif</ion-label>
       <ion-toggle [checked]="eventForm.active" formControlName="active"></ion-toggle>
     </ion-item>
+    <ion-item>
+      <ion-label>Date Debut</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="start_date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date Fin</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="end_date"></ion-datetime>
+    </ion-item>
     <div class="button-container">
       <button ion-button type="submit" value="Valider" [disabled]="!eventForm.valid">Créer l'événement</button>
     </div>

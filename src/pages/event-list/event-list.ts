@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { EventFormPage } from '../event-form/event-form';
+import { StoredEvent } from '../../db/event';
 
 @Component({
   selector: 'page-event-list',
@@ -9,17 +10,24 @@ import { EventFormPage } from '../event-form/event-form';
 
 export class EventListPage {
 
-  eventList: any;
+  eventList: {}[];
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, private store: StoredEvent) {
+
+  }
 
   ionViewDidLoad() {
-
-    this.eventList = [
-      {_id: '1', name: "Premier event de test", description: "La description de l'event", start_date: new Date(), end_date: new Date()},
-      {_id: '2', name: "Deuxième event de test", description: "La description de l'event", start_date: new Date(), end_date: new Date()},
-      {_id: '3', name: "Troisième event de test", description: "La description de l'event", start_date: new Date(), end_date: new Date()},
-    ];
+    this.store.list().then((res) => {
+      console.log("res: ", res);
+      let list = []
+      res.rows.forEach((elem) => {
+        list.push(elem.doc);
+      });
+      console.log("liste: ", list);
+      this.eventList = list;
+    }).catch((err) => {
+      alert("erreur de recuperation de la liste: "+err);
+    });
   }
 
   add() {
