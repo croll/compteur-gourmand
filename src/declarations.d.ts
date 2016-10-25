@@ -12,3 +12,11 @@
   https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
 */
 declare module '*';
+
+declare module PresentationNavigator {
+  export interface Navigator {
+     presentation: any;
+  }
+}
+
+interface Navigator { presentation: any }
