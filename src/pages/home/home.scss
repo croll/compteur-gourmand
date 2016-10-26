@@ -1,2 +1,11 @@
 page-home {
+  ion-content {
+    text-align: center;
+    .button-container {
+      button {
+        padding: 50px 150px;
+        font-size: 2rem;
+      }
+    }
+  }
 }

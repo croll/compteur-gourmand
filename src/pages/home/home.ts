@@ -17,8 +17,8 @@ export class HomePage {
   }
 
   footprintPopover() {
-    let popover = this.modalCtrl.create(FootprintPage);
-    popover.present();
+    let modal = this.modalCtrl.create(FootprintPage);
+    modal.present();
   }
 
   openPage(p) {
