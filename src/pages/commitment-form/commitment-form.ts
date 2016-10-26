@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Validators, FormBuilder } from '@angular/forms';
-import { Database } from '../../app/database.service';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+//import { Database } from '../../app/database.service';
+import { StoredCommitment, Commitment } from '../../db/commitment';
+import { AlertController } from 'ionic-angular';
 
 /*
   Generated class for the CommitmentForm page.
@@ -15,19 +17,18 @@ import { Database } from '../../app/database.service';
 })
 export class CommitmentFormPage {
 
-  commitmentForm: any;
-  title: string = "Créer un engagement";
-  commitmentId: number;
+  form: FormGroup;
+  id: string;
+  loadedDoc: Commitment;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private db: Database) {
-    this.commitmentId = navParams.get('id') || null;
-    if (this.commitmentId) {
-      this.title = "Modifier un engagement";
-    }
+  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredCommitment, private alertCtrl: AlertController) {
+    console.log("paf");
+    this.id = navParams.get('id') || null;
   }
 
   ionViewDidLoad() {
-    this.commitmentForm = this.formBuilder.group({
+    console.log("paf2");
+    this.form = this.formBuilder.group({
       name: ['', Validators.required],
       short_description: ['', Validators.required],
       description: ['', Validators.required],
@@ -39,10 +40,84 @@ export class CommitmentFormPage {
       order: 0,
       active: [false]
     });
+
+    if (this.id) {
+      this.load(this.id);
+    }
+  }
+
+  load(id: string) {
+    return this.store.get(id).then((doc) => {
+      this.loadedDoc = doc;
+      this.id = this.loadedDoc._id;
+      let e = {
+        name: doc.name,
+        short_description: doc.short_description,
+        description: doc.description,
+        logo: doc.logo,
+        ask_for_persons: doc.ask_for_persons,
+        ask_for_periodicity: doc.ask_for_periodicity,
+        m2_saved_by_unit: doc.m2_saved_by_unit,
+        euros_saved_by_unit: doc.euros_saved_by_unit,
+        order: doc.order,
+        active: doc.active,
+      };
+      this.form.setValue(e);
+    });
   }
 
   save() {
-    alert("TODO !");
+    console.log("save...");
+    let e = new Commitment(this.form.getRawValue());
+    if (this.loadedDoc) {
+      e._id = this.loadedDoc._id;
+      e._rev = this.loadedDoc._rev;
+    }
+    this.store.put(e).then((res) => {
+      console.log("commitment puted: ", res);
+      return this.load(res.id).then((res) => {
+        this.navCtrl.pop();
+      })
+    }).catch((err) => {
+      console.log("commitment puted failed: ", err);
+    });
   }
+
+  remove() {
+    this.store.remove(this.loadedDoc).then((res) => {
+      this.id=undefined;
+      this.loadedDoc=undefined;
+      this.navCtrl.pop();
+    }).catch((err)=>{
+      alert("Impossible de supprmier : "+err);
+    })
+  }
+
+  showRemoveConfirm(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    let self=this;
+
+    let confirm = this.alertCtrl.create({
+      title: 'Confirmation',
+      message: 'Voulez vous vraiment supprimer cet évènement ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Supprimer',
+          handler: () => {
+            self.remove();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
 
 }
