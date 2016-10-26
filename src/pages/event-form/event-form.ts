@@ -17,15 +17,11 @@ import { StoredEvent, Event } from '../../db/event';
 export class EventFormPage {
 
   form: FormGroup;
-  title: string = "Créér un nouvel événement";
   id: string;
   loadedDoc: Event;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent) {
     this.id = navParams.get('id') || null;
-    if (this.id) {
-      this.title = "Modifier un événement";
-    }
   }
 
   ionViewDidLoad() {
@@ -38,22 +34,27 @@ export class EventFormPage {
     });
 
     if (this.id) {
-      this.store.get(this.id).then((doc) => {
-        this.loadedDoc = doc;
-        let e = {
-          name: doc.name,
-          description: doc.description,
-          active: doc.active,
-          start_date: doc.start_date,
-          end_date: doc.end_date,
-        };
-        console.log("edit: ", doc, e);
-        this.form.setValue(e);
-      });
+      this.load(this.id);
     }
   }
 
+  load(id: string) {
+    return this.store.get(id).then((doc) => {
+      this.loadedDoc = doc;
+      this.id = this.loadedDoc._id;
+      let e = {
+        name: doc.name,
+        description: doc.description,
+        active: doc.active,
+        start_date: doc.start_date,
+        end_date: doc.end_date,
+      };
+      this.form.setValue(e);
+    });
+  }
+
   save() {
+    console.log("save...");
     let e = new Event(this.form.getRawValue());
     if (this.loadedDoc) {
       e._id = this.loadedDoc._id;
@@ -61,7 +62,7 @@ export class EventFormPage {
     }
     this.store.put(e).then((res) => {
       console.log("event puted: ", res);
-      this.loadedDoc._rev = res.rev;
+      return this.load(res.id);
     }).catch((err) => {
       console.log("event puted failed: ", err);
     });
