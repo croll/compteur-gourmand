@@ -17,14 +17,14 @@
 
 
   <div class="commitment-list">
-    <button ion-button>
+    <button ion-button class="l" color="secondary" large>
       <ion-icon name="arrow-back"></ion-icon>
     </button>
     <ion-slides>
       <ion-slide>
         <div class="commitments">
           <!-- COMMITMENT -->
-          <div class="commitment">
+          <div class="commitment" (click)="openPopup()">
             <ion-card class="selected">
               <div class="title">
                   <p>Je ne gaspille plus mon pain rassis</p>
@@ -46,7 +46,34 @@
               <p>
                 Faites du pain perdu ou de lachapelure avec votre pain rassis !
               </p>
-              <a>En savoir plus</a>
+              <a color="secondary">En savoir plus</a>
+            </div>
+          </div>
+          <!-- END -->
+          <!-- COMMITMENT -->
+          <div class="commitment" (click)="openPopup()">
+            <ion-card>
+              <div class="title">
+                  <p>Je ne gaspille plus mon pain rassis</p>
+                  <ion-icon name="checkmark-circle" large></ion-icon>
+              </div>
+              <img src="assets/img/bread.jpg">
+              <ion-item>
+                <img src="assets/img/earth.png" item-left large>
+                <h2>33 m²</h2>
+                <p>Surface préservée</p>
+              </ion-item>
+              <ion-item>
+                <img src="assets/img/coins.png" item-left large>
+                <h2>8€</h2>
+                <p>Argent économisé</p>
+              </ion-item>
+            </ion-card>
+            <div class="caption">
+              <p>
+                Faites du pain perdu ou de lachapelure avec votre pain rassis !
+              </p>
+              <a color="secondary">En savoir plus</a>
             </div>
           </div>
           <!-- END -->
@@ -73,41 +100,14 @@
               <p>
                 Faites du pain perdu ou de lachapelure avec votre pain rassis !
               </p>
-              <a>En savoir plus</a>
-            </div>
-          </div>
-          <!-- END -->
-          <!-- COMMITMENT -->
-          <div class="commitment">
-            <ion-card>
-              <div class="title">
-                  <p>Je ne gaspille plus mon pain rassis</p>
-                  <ion-icon name="checkmark-circle" large></ion-icon>
-              </div>
-              <img src="assets/img/bread.jpg">
-              <ion-item>
-                <img src="assets/img/earth.png" item-left large>
-                <h2>33 m²</h2>
-                <p>Surface préservée</p>
-              </ion-item>
-              <ion-item>
-                <img src="assets/img/coins.png" item-left large>
-                <h2>8€</h2>
-                <p>Argent économisé</p>
-              </ion-item>
-            </ion-card>
-            <div class="caption">
-              <p>
-                Faites du pain perdu ou de lachapelure avec votre pain rassis !
-              </p>
-              <a>En savoir plus</a>
+              <a color="secondary">En savoir plus</a>
             </div>
           </div>
           <!-- END -->
         </div>
       </ion-slide>
     </ion-slides>
-    <button ion-button class="r">
+    <button ion-button class="r" color="secondary" large>
       <ion-icon name="arrow-forward"></ion-icon>
     </button>
   </div>
@@ -119,8 +119,6 @@
     <button ion-button color="light" (click)="goBack()">
       <ion-icon name="home"></ion-icon>
     </button>
-    <ion-buttons end>
-      <button ion-button end disabled="userCommitments.length">Suivant</button>
-    </ion-buttons>
+    <button style="float: right" primary ion-button large>Suivant</button>
   </ion-toolbar>
 </ion-footer>

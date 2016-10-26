@@ -31,17 +31,17 @@
       </div>
     </ion-row>
     <div class="button-container">
-      <button ion-button (click)="openPage(choosePage)">Commencer</button>
+      <button ion-button (click)="openPage(choosePage)" large>Commencer</button>
     </div>
   </ion-grid>
 </ion-content>
 
 <ion-footer>
   <ion-navbar>
-    <div class="flex" (click)="footprintPopover()">
+    <div class="flex" (click)="openPopup()">
       <div>
         <img src="assets/img/earth.png"/>
-        <div tinymce [bindTo]="'HOME>FOOTER_TEXT_LEFT'"><a>Surface de terre sauvée en 1 an grace à votre engagement</a></div>
+        <div tinymce [bindTo]="'HOME>FOOTER_TEXT_LEFT'"><a color="secondary">Surface de terre sauvée en 1 an grace à votre engagement</a></div>
       </div>
       <div>
         <img src="assets/img/coins.png"/>
