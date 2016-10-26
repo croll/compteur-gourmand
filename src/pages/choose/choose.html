@@ -1,3 +1,11 @@
+<ion-header padding>
+
+  <ion-navbar>
+    <ion-title tinymce bindTo="'CHOOSE.HEADING_QUESTION'">Prêt(e) à prendre 1, 2 ou 3 engagements sur les 12 prochains mois ?</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
 <ion-content padding>
 
   <div class="top">
@@ -7,7 +15,6 @@
   engagement sur le grand écran !</div>
   </div>
 
-  <h1 tinymce bindTo="'CHOOSE.HEADING_QUESTION'">Prêt(e) à prendre 1, 2 ou 3 engagements sur les 12 prochains mois ?</h1>
 
   <div class="commitment-list">
     <button ion-button>
@@ -18,10 +25,10 @@
         <div class="commitments">
           <!-- COMMITMENT -->
           <div class="commitment">
-            <ion-card>
+            <ion-card class="selected">
               <div class="title">
                   <p>Je ne gaspille plus mon pain rassis</p>
-                  <ion-icon name="checkmark-circle" large></ion-icon>
+                  <ion-icon name="checkmark-circle" large class="selected"></ion-icon>
               </div>
               <img src="assets/img/bread.jpg">
               <ion-item>
