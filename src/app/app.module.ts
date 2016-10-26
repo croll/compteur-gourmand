@@ -10,6 +10,7 @@ import { EventFormPage } from '../pages/event-form/event-form';
 import { CommitmentListPage } from '../pages/commitment-list/commitment-list';
 import { CommitmentFormPage } from '../pages/commitment-form/commitment-form';
 import { ConfigurationPage } from '../pages/configuration/configuration';
+import { CommitmentChoicePage } from '../pages/commitment-choice/commitment-choice';
 import { TinyMCE } from './tinymce.directive';
 import { Database } from './database.service';
 import { CgMiracast } from '../providers/cg-miracast';
@@ -21,6 +22,7 @@ import { StoredEvent } from '../db/event';
     CommitmentListPage,
     CommitmentFormPage,
     ConfigurationPage,
+    CommitmentChoicePage,
     HomePage,
     Presentation,
     FootprintPage,
@@ -40,6 +42,7 @@ import { StoredEvent } from '../db/event';
     CommitmentFormPage,
     CommitmentListPage,
     ConfigurationPage,
+    CommitmentChoicePage,
     HomePage,
     Presentation,
     FootprintPage,

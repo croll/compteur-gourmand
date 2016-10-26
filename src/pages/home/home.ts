@@ -16,7 +16,7 @@ export class HomePage {
     this.choosePage = ChoosePage;
   }
 
-  footprintPopover() {
+  openPopup() {
     let modal = this.modalCtrl.create(FootprintPage);
     modal.present();
   }

@@ -43,14 +43,16 @@ ion-footer {
   margin-top: 60px;
 }
 
-.modal-wrapper {
-     width: 80%;
-     left: 10%;
-     right: 10%;
-}
-
 .help {
   font-size: 1rem;
   font-style: italic;
   color: #444;
+}
+
+.modal-wrapper {
+   width: 80%;
+   top: 15%;
+   left: 10%;
+   right: 10%;
+   height: 70%;
 }

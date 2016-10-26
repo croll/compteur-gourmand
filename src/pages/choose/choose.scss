@@ -27,11 +27,14 @@ page-choose {
   .commitment-list {
     position: relative;
     button {
-      top: 200px;
+      top: 12rem;
       position: absolute;
-      &.r {
-        right: 0;
-      }
+    }
+    button.l {
+      left: 1.5rem;
+    }
+    button.r {
+      right: 1.5rem;
     }
     ion-slides {
       ion-slide {
