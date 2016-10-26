@@ -1,0 +1,2 @@
+ionic plugin add https://github.com/fraunhoferfokus/cordova-plugin-presentation.git
+ionic plugin add http://github.com/don/cordova-filechooser.git
