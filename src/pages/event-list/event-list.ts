@@ -10,10 +10,9 @@ import { StoredEvent } from '../../db/event';
 
 export class EventListPage {
 
-  eventList: {}[];
+  list: {}[];
 
   constructor(public navCtrl: NavController, private store: StoredEvent) {
-
   }
 
   ionViewDidLoad() {
@@ -24,7 +23,7 @@ export class EventListPage {
         list.push(elem.doc);
       });
       console.log("liste: ", list);
-      this.eventList = list;
+      this.list = list;
     }).catch((err) => {
       alert("erreur de recuperation de la liste: "+err);
     });
