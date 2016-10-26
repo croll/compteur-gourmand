@@ -4,6 +4,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 //import { Database } from '../../app/database.service';
 import { StoredCommitment, Commitment } from '../../db/commitment';
 import { AlertController } from 'ionic-angular';
+import {FileChooser} from 'ionic-native';
 
 /*
   Generated class for the CommitmentForm page.
@@ -22,7 +23,6 @@ export class CommitmentFormPage {
   loadedDoc: Commitment;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredCommitment, private alertCtrl: AlertController) {
-    console.log("paf");
     this.id = navParams.get('id') || null;
   }
 
@@ -119,5 +119,16 @@ export class CommitmentFormPage {
     confirm.present();
   }
 
+  fileChooserLogo() {
+    FileChooser.open().then((uri) => {
+        console.log(uri);
+        this.form.patchValue({
+          logo: uri,
+        });
+      }).catch((e) => {
+        console.log(e);
+      }
+    );
+  }
 
 }
