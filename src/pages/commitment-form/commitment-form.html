@@ -20,7 +20,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Logo</ion-label>
-      <ion-textarea type="text" formControlName="logo"></ion-textarea>
+      <ion-textarea type="text" formControlName="logo" (click)="fileChooserLogo()"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label>Demander combien de personnes composent le foyer</ion-label>
@@ -44,11 +44,11 @@
     </ion-item>
     <ion-item>
       <ion-label>Actif</ion-label>
-      <ion-toggle [checked]="form.active" formControlName="active"></ion-toggle>
+      <ion-toggle formControlName="active"></ion-toggle>
     </ion-item>
     <div class="button-container">
       <button [hidden]="!id" ion-button color="danger" (click)="showRemoveConfirm($event)">Supprimer</button>
-      <button ion-button type="submit" value="Valider" [disabled]="!form.valid">{{id ? "Modifier l'événement" : "Créer l'événement"}}</button>
+      <button ion-button type="submit" value="Valider" [disabled]="!form.valid">{{id ? "Modifier l'engagement" : "Créer l'engagement"}}</button>
     </div>
   </form>
 </ion-content>
