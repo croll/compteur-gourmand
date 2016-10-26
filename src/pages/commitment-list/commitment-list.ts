@@ -1,25 +1,39 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CommitmentFormPage } from '../commitment-form/commitment-form';
+import { StoredCommitment } from '../../db/commitment';
+//import { StoredEvent } from '../../db/event';
 
 @Component({
   selector: 'page-commitment-list',
   templateUrl: 'commitment-list.html'
 })
+
 export class CommitmentListPage {
 
-  commitmentList: any;
+  list: {}[];
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, private store: StoredCommitment) {
+  //constructor(public navCtrl: NavController, private store: StoredEvent) {
+    console.log("CommitmentListPage");
+  }
 
-  ionViewDidLoad() {
-
-    this.commitmentList = [
-        {_id: '1', name: "Je ne gaspille plus mon pain rassis", description: "La description", logo: ""},
-        {_id: '2', name: "Je ne jette plus mes yaourts périmés", description: "La description", logo: ""},
-        {_id: '3', name: "J’opte pour un repas végétarien plus souvent", description: "La description", logo: ""}
-    ];
-
+  //ionViewDidLoad() {
+  ionViewWillEnter() {
+    console.log("CommitmentListPage ");
+    /*
+    this.store.list().then((res) => {
+      console.log("res: ", res);
+      let list = []
+      res.rows.forEach((elem) => {
+        list.push(elem.doc);
+      });
+      console.log("liste: ", list);
+      this.list = list;
+    }).catch((err) => {
+      alert("erreur de recuperation de la liste: "+err);
+    });
+    */
   }
 
   add() {

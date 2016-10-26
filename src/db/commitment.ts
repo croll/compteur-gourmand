@@ -19,15 +19,12 @@ export class Commitment {
   order: number
   active: boolean
 
-  private static route = docuri.route("commitment/:name");
-
-  put() {
-    this._id = Commitment.route(this);
+  constructor(value = null) {
+    if (value != null) {
+      Object.assign(this, value);
+    }
   }
 
-  public static list() {
-
-  }
 }
 
 @Injectable()

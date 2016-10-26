@@ -11,9 +11,9 @@ export class EventConfiguration {
 }
 
 export class Event {
-
   _id: string
   _rev: string
+
   name: string
   description: string
   active: boolean = false
