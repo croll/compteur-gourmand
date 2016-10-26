@@ -69,7 +69,7 @@ export class EventFormPage {
     });
   }
 
-  remove(event) {
+  remove() {
     this.store.remove(this.loadedDoc);
     this.id=undefined;
     this.loadedDoc=undefined;
