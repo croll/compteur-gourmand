@@ -63,16 +63,22 @@ export class EventFormPage {
     }
     this.store.put(e).then((res) => {
       console.log("event puted: ", res);
-      return this.load(res.id);
+      return this.load(res.id).then((res) => {
+        this.navCtrl.pop();
+      })
     }).catch((err) => {
       console.log("event puted failed: ", err);
     });
   }
 
   remove() {
-    this.store.remove(this.loadedDoc);
-    this.id=undefined;
-    this.loadedDoc=undefined;
+    this.store.remove(this.loadedDoc).then((res) => {
+      this.id=undefined;
+      this.loadedDoc=undefined;
+      this.navCtrl.pop();
+    }).catch((err)=>{
+      alert("Impossible de supprmier : "+err);
+    })
   }
 
   showRemoveConfirm(event) {
