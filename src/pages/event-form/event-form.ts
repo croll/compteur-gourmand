@@ -30,7 +30,7 @@ export class EventFormPage {
       description: '',
       active: [false],
       start_date: ['', Validators.required],
-      end_date: ['']
+      end_date: ['', Validators.required]
     });
 
     if (this.id) {
