@@ -55,8 +55,13 @@ export class EventFormPage {
 
   save() {
     let e = new Event(this.eventForm.getRawValue());
+    if (this.loadedEvent) {
+      e._id = this.loadedEvent._id;
+      e._rev = this.loadedEvent._rev;
+    }
     this.store.put(e).then((res) => {
       console.log("event puted: ", res);
+      this.loadedEvent._rev = res.rev;
     }).catch((err) => {
       console.log("event puted failed: ", err);
     });
