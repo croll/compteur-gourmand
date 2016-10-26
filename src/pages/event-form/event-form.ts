@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 //import { Database } from '../../app/database.service';
 import { StoredEvent, Event } from '../../db/event';
+import { AlertController } from 'ionic-angular';
 
 /*
   Generated class for the EventForm page.
@@ -20,7 +21,7 @@ export class EventFormPage {
   id: string;
   loadedDoc: Event;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private alertCtrl: AlertController) {
     this.id = navParams.get('id') || null;
   }
 
@@ -66,6 +67,38 @@ export class EventFormPage {
     }).catch((err) => {
       console.log("event puted failed: ", err);
     });
+  }
+
+  remove(event) {
+    this.store.remove(this.loadedDoc);
+    this.id=undefined;
+    this.loadedDoc=undefined;
+  }
+
+  showRemoveConfirm(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    let self=this;
+
+    let confirm = this.alertCtrl.create({
+      title: 'Confirmation',
+      message: 'Voulez vous vraiment supprimer cet évènement ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Supprimer',
+          handler: () => {
+            self.remove();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

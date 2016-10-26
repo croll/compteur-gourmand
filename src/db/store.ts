@@ -41,4 +41,8 @@ export class Store {
   get(id: string) {
     return this.db.getDb().get(id);
   }
+
+  remove(doc) {
+    return this.db.getDb().remove(doc);
+  }
 }

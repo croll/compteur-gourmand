@@ -27,6 +27,7 @@
       <ion-datetime displayFormat="DD/MM/YYYY" formControlName="end_date"></ion-datetime>
     </ion-item>
     <div class="button-container">
+      <button [hidden]="!id" ion-button color="danger" (click)="showRemoveConfirm($event)">Supprimer</button>
       <button ion-button type="submit" value="Valider" [disabled]="!form.valid">{{id ? "Modifier l'événement" : "Créer l'événement"}}</button>
     </div>
   </form>
