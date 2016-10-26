@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Database } from '../app/database.service';
+import { Store } from './store';
 
 import docuri from 'docuri';
 
@@ -12,6 +13,7 @@ export class EventConfiguration {
 export class Event {
 
   _id: string
+  _rev: string
   name: string
   description: string
   active: boolean = false
@@ -28,26 +30,12 @@ export class Event {
 }
 
 @Injectable()
-export class StoredEvent {
-  private static route = docuri.route("event/:name");
-  constructor(private db: Database) {
+export class StoredEvent extends Store {
+  constructor(db: Database) {
+    super(db, docuri.route("event/:name"), "event/", "event0");
   }
 
-  list() {
-    return this.db.getDb().allDocs({
-      include_docs: true,
-      attachments: true,
-      startkey: 'event/',
-      endkey: 'event0',
-    })
-  }
-
-  put(event: any) {
-    event._id = StoredEvent.route(event);
-    return this.db.getDb().put(event);
-  }
-
-  get(id: string) {
-    return this.db.getDb().get(id);
+  put(doc: Event) {
+    return super.put(doc);
   }
 }
