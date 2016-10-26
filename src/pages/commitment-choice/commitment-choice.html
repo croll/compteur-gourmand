@@ -1,0 +1,57 @@
+<ion-header padding>
+  <ion-navbar>
+      <ion-title>
+      <div class="title">
+        <img src="assets/img/bread-icon.png" />
+        <div>Bravo vous avez choisi l'engagement</div>
+        <div style="margin-left: 20px;font-weight: bold">"Je ne gaspille plus de pain rassis"</div>
+      </div>
+    </ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="close()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="question">
+    <div class="label">Combien de fois <b>par semaines</b> souhaitez vous prendre cet engagement ?</div>
+    <div class="buttons">
+      <button ion-button color="secondary" large>
+        <ion-icon name="remove"></ion-icon>
+      </button>
+      <ion-input type="text" value="2"></ion-input>
+      <button ion-button color="secondary" large>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="label"><b>Au total</b>, combien de personnes vont s'engager dans votre foyer ?</div>
+    <div class="buttons">
+      <button ion-button disabled color="secondary" large>
+        <ion-icon name="remove"></ion-icon>
+      </button>
+      <ion-input type="text" value=""></ion-input>
+      <button ion-button color="secondary" large>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="action-buttons">
+    <ion-buttons>
+      <button ion-button color="danger" large>Annuler</button>
+    </ion-buttons>
+    <ion-buttons item-right>
+      <button ion-button large>Valider</button>
+    </ion-buttons>
+  </div>
+
+
+</ion-content>

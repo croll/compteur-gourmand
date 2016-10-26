@@ -1,0 +1,48 @@
+page-commitment-choice {
+
+  ion-navbar {
+    .title {
+      display: flex;
+      align-items: center;
+      div:nth-child(2) {
+        margin-left: 2rem;
+      }
+    }
+    img {
+      height: 3rem;
+    }
+  }
+
+  .question {
+    display: flex;
+    flex-wrap: true;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+    margin: 60px 20px 120px 20px;
+    &:first-child {
+      margin-top: 40px;
+    }
+    .buttons {
+      margin-left: 2rem;
+      margin-right: 2rem;
+      display: flex;
+      align-items: center;
+      ion-input {
+        font-size: 4rem;
+        padding-left: 30px;
+        width: 7rem;
+        height: 6rem;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .action-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+}
