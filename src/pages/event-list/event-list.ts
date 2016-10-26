@@ -15,7 +15,7 @@ export class EventListPage {
   constructor(public navCtrl: NavController, private store: StoredEvent) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.store.list().then((res) => {
       console.log("res: ", res);
       let list = []
