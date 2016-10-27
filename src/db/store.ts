@@ -1,21 +1,35 @@
 import { Database } from '../app/database.service';
 
-export interface Storable {
+export class Storable {
   _id: string
   _rev: string
+
+  constructor(value = null) {
+    console.log("keys", Event.prototype);
+    if (value != null) {
+      Object.assign(this, value);
+    }
+  }
+
 }
 
 export class Store<T extends Storable> {
+  TCreator: any
   db: Database
   route: any
   startkey: string
   endkey: string
 
-  constructor(db, route, startkey, endkey) {
+  constructor(TCreator: { new (): T; }, db, route, startkey, endkey) {
+    this.TCreator=TCreator;
     this.db=db;
     this.route=route;
     this.startkey=startkey;
     this.endkey=endkey;
+  }
+
+  create<T>(c: {new(d: any): T; }, data: any): T {
+    return new c(data);
   }
 
   list() {
@@ -24,6 +38,12 @@ export class Store<T extends Storable> {
       attachments: true,
       startkey: this.startkey,
       endkey: this.endkey,
+    }).then((res) => {
+      res.docs = [];
+      res.rows.forEach((elem) => {
+        res.docs.push(this.create(this.TCreator, elem.doc));
+      });
+      return res;
     });
   }
 
@@ -47,7 +67,7 @@ export class Store<T extends Storable> {
     return this.db.getDb().get(id);
   }
 
-  remove(doc) {
+  remove(doc: T) {
     return this.db.getDb().remove(doc);
   }
 }

@@ -4,7 +4,7 @@ import { Store, Storable } from './store';
 
 import docuri from 'docuri';
 
-export class Commitment implements Storable {
+export class Commitment extends Storable {
   _id: string
   _rev: string
 
@@ -18,18 +18,11 @@ export class Commitment implements Storable {
   euros_saved_by_unit: number
   order: number
   active: boolean
-
-  constructor(value = null) {
-    if (value != null) {
-      Object.assign(this, value);
-    }
-  }
-
 }
 
 @Injectable()
 export class StoredCommitment extends Store<Commitment> {
   constructor(db: Database) {
-    super(db, docuri.route("commitment/:name"), "commitment/", "commitment0");
+    super(Commitment, db, docuri.route("commitment/:name"), "commitment/", "commitment0");
   }
 }

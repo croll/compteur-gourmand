@@ -10,7 +10,7 @@ export class EventConfiguration {
   use_external_screen: boolean = true
 }
 
-export class Event implements Storable {
+export class Event extends Storable {
   _id: string
   _rev: string
 
@@ -20,19 +20,11 @@ export class Event implements Storable {
   start_date: Date
   end_date: Date
   configuration: EventConfiguration = new EventConfiguration()
-
-  constructor(value = null) {
-    console.log("keys", Event.prototype);
-    if (value != null) {
-      Object.assign(this, value);
-    }
-  }
-
 }
 
 @Injectable()
 export class StoredEvent extends Store<Event> {
   constructor(db: Database) {
-    super(db, docuri.route("event/:name"), "event/", "event0");
+    super(Event, db, docuri.route("event/:name"), "event/", "event0");
   }
 }
