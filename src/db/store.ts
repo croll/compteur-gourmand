@@ -35,7 +35,7 @@ export class Store<T extends Storable> {
     return new c(data);
   }
 
-  list() {
+  list() : Promise<any> {
     return this.db.getDb().allDocs({
       include_docs: true,
       attachments: true,
