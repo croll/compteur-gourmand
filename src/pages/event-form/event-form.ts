@@ -55,19 +55,16 @@ export class EventFormPage {
   }
 
   save() {
-    console.log("save...");
     let e = new Event(this.form.getRawValue());
     if (this.loadedDoc) {
       e._id = this.loadedDoc._id;
       e._rev = this.loadedDoc._rev;
     }
     this.store.put(e).then((res) => {
-      console.log("event puted: ", res);
-      return this.load(res.id).then((res) => {
-        this.navCtrl.pop();
-      })
+      this.navCtrl.pop();
     }).catch((err) => {
       console.log("event puted failed: ", err);
+      alert("Impossible de sauver : "+err);
     });
   }
 

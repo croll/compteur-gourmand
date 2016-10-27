@@ -27,7 +27,6 @@ export class CommitmentFormPage {
   }
 
   ionViewDidLoad() {
-    console.log("paf2");
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       short_description: ['', Validators.required],
@@ -67,19 +66,16 @@ export class CommitmentFormPage {
   }
 
   save() {
-    console.log("save...");
     let e = new Commitment(this.form.getRawValue());
     if (this.loadedDoc) {
       e._id = this.loadedDoc._id;
       e._rev = this.loadedDoc._rev;
     }
     this.store.put(e).then((res) => {
-      console.log("commitment puted: ", res);
-      return this.load(res.id).then((res) => {
-        this.navCtrl.pop();
-      })
+      this.navCtrl.pop();
     }).catch((err) => {
       console.log("commitment puted failed: ", err);
+      alert("Impossible de sauver : "+err);
     });
   }
 

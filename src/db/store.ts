@@ -4,11 +4,14 @@ export class Storable {
   _id: string
   _rev: string
 
-  constructor(value = null) {
-    console.log("keys", Event.prototype);
-    if (value != null) {
-      Object.assign(this, value);
+  constructor(values = null) {
+    if (values != null) {
+      this.setValues(values);
     }
+  }
+
+  setValues(values) {
+    Object.assign(this, values);
   }
 
 }
@@ -47,7 +50,7 @@ export class Store<T extends Storable> {
     });
   }
 
-  put(doc: T) {
+  put(doc: T) : Promise<any> {
     let db = this.db.getDb();
     let old_id = doc._id;
     let new_id = this.route(doc);
@@ -63,8 +66,10 @@ export class Store<T extends Storable> {
     }
   }
 
-  get(id: string) {
-    return this.db.getDb().get(id);
+  get(id: string) : Promise<T> {
+    return this.db.getDb().get(id).then((doc) => {
+      return this.create(this.TCreator, doc);
+    });
   }
 
   remove(doc: T) {
