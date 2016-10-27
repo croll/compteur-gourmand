@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Database } from '../app/database.service';
-import { Store } from './store';
+import { Store, Storable } from './store';
 
 import docuri from 'docuri';
 
@@ -10,7 +10,7 @@ export class EventConfiguration {
   use_external_screen: boolean = true
 }
 
-export class Event {
+export class Event implements Storable {
   _id: string
   _rev: string
 
@@ -22,6 +22,7 @@ export class Event {
   configuration: EventConfiguration = new EventConfiguration()
 
   constructor(value = null) {
+    console.log("keys", Event.prototype);
     if (value != null) {
       Object.assign(this, value);
     }
@@ -30,12 +31,8 @@ export class Event {
 }
 
 @Injectable()
-export class StoredEvent extends Store {
+export class StoredEvent extends Store<Event> {
   constructor(db: Database) {
     super(db, docuri.route("event/:name"), "event/", "event0");
-  }
-
-  put(doc: Event) {
-    return super.put(doc);
   }
 }

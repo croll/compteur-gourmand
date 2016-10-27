@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Database } from '../app/database.service';
-import { Store } from './store';
+import { Store, Storable } from './store';
 
 import docuri from 'docuri';
 
-export class Commitment {
+export class Commitment implements Storable {
   _id: string
   _rev: string
 
@@ -28,12 +28,8 @@ export class Commitment {
 }
 
 @Injectable()
-export class StoredCommitment extends Store {
+export class StoredCommitment extends Store<Commitment> {
   constructor(db: Database) {
     super(db, docuri.route("commitment/:name"), "commitment/", "commitment0");
-  }
-
-  put(doc: Commitment) {
-    return super.put(doc);
   }
 }

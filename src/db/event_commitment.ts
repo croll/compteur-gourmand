@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Database } from '../app/database.service';
-import { Store } from './store';
+import { Store, Storable } from './store';
 
 import docuri from 'docuri';
 
-export class Event_Commitment {
+export class Event_Commitment implements Storable {
   _id: string
+  _rev: string
   id_event: string
   id_commitment: string
 
@@ -18,12 +19,8 @@ export class Event_Commitment {
 }
 
 @Injectable()
-export class StoredEvent_Commitment extends Store {
+export class StoredEvent_Commitment extends Store<Event_Commitment> {
   constructor(db: Database) {
     super(db, docuri.route("event_commitment/:id_event/:id_commitment"), "event_commitment/", "event_commitment0");
-  }
-
-  put(doc: Event) {
-    return super.put(doc);
   }
 }
