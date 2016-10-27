@@ -1,6 +1,11 @@
 import { Database } from '../app/database.service';
 
-export class Store {
+export interface Storable {
+  _id: string
+  _rev: string
+}
+
+export class Store<T extends Storable> {
   db: Database
   route: any
   startkey: string
@@ -22,7 +27,7 @@ export class Store {
     });
   }
 
-  put(doc: any) {
+  put(doc: T) {
     let db = this.db.getDb();
     let old_id = doc._id;
     let new_id = this.route(doc);
