@@ -65,7 +65,7 @@ export class CommitmentFormPage {
       this.cg_event.commitments = [ e ];
     }
 
-    this.store.put(this.cg_event).then((res) => {
+    return this.store.put(this.cg_event).then((res) => {
       console.log("saved commitment !");
       this.navCtrl.pop();
     }).catch((err) => {
@@ -78,15 +78,15 @@ export class CommitmentFormPage {
     event.preventDefault();
     event.stopPropagation();
 
-    /*
-    this.store.remove(this.commitment).then((res) => {
-      this.id=undefined;
-      this.commitment=undefined;
+    this.cg_event.commitments.splice(this.index, 1);
+
+    return this.store.put(this.cg_event).then((res) => {
+      console.log("saved commitment !");
       this.navCtrl.pop();
-    }).catch((err)=>{
-      alert("Impossible de supprmier : "+err);
-    })
-    */
+    }).catch((err) => {
+      console.log("commitment puted failed: ", err);
+      alert("Impossible de sauver : "+err);
+    });
   }
 
   showRemoveConfirm(event) {
