@@ -29,7 +29,6 @@ export class Event extends Storable {
 
   name: string
   description: string
-  active: boolean = false
   start_date: Date
   end_date: Date
   configuration: EventConfiguration = new EventConfiguration()

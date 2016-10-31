@@ -21,7 +21,7 @@ export class CommitmentListPage {
   //ionViewDidLoad() {
   ionViewWillEnter() {
     // load general confifuration to take the active event id
-    this.store_config.get("configuration").then((configuration) => {
+    this.store_config.get("configuration/main").then((configuration) => {
       this.configuration = configuration;
 
       this.store_event.get(this.configuration.id_active_event).then((event) => {

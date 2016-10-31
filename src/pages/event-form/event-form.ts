@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 //import { Database } from '../../app/database.service';
+import { StoredConfiguration, Configuration } from '../../db/configuration';
 import { StoredEvent, Event } from '../../db/event';
 import { AlertController } from 'ionic-angular';
 
@@ -16,16 +17,23 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'event-form.html'
 })
 export class EventFormPage {
-
+  configuration: Configuration;
   form: FormGroup;
   id: string;
   loadedDoc: Event;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private store_config: StoredConfiguration, private alertCtrl: AlertController) {
     this.id = navParams.get('id') || null;
   }
 
   ionViewDidLoad() {
+    this.store_config.get("configuration/main").then((configuration) => {
+      this.configuration = configuration;
+    }).catch((err) => {
+        alert("immpossible de charger la configuration general: "+err);
+    });
+
+
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       description: '',
@@ -46,7 +54,6 @@ export class EventFormPage {
       let e = {
         name: doc.name,
         description: doc.description,
-        active: doc.active,
         start_date: doc.start_date,
         end_date: doc.end_date,
       };
@@ -61,7 +68,11 @@ export class EventFormPage {
       e._rev = this.loadedDoc._rev;
     }
     this.store.put(e).then((res) => {
-      this.navCtrl.pop();
+      return this.store_config.put(this.configuration).then((res) => {
+        this.navCtrl.pop();
+      }).catch((err) => {
+        alert("Impossible de sauver l'evenement actif : "+err);
+      });
     }).catch((err) => {
       console.log("event puted failed: ", err);
       alert("Impossible de sauver : "+err);

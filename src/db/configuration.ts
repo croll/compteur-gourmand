@@ -16,6 +16,8 @@ export class Configuration extends Storable {
   city_is_mandatory: boolean = false;
 */
 
+  section: string;
+
   enable_physical_button: boolean;
   use_external_screen: boolean;
   lastname_is_mandatory: boolean;
@@ -31,15 +33,17 @@ export class StoredConfiguration extends Store<Configuration> {
   main: Configuration;
 
   constructor(db: Database) {
-    super(Configuration, db, docuri.route("configuration"), "configuration/", "configuration0");
+    super(Configuration, db, docuri.route("configuration/:section"), "configuration/", "configuration0");
   }
 
+/*
   get(id: string) : Promise<Configuration> {
-    if (id == "main") {
+    if (id == "configuration:main") {
       return super.get(id).then((m) => {
            this.main = m;
            return m;
       });
     } else return super.get(id);
   }
+  */
 }

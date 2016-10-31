@@ -14,7 +14,6 @@ export class ConfigurationPage {
   loadedDoc: Configuration;
 
   constructor(public navCtrl: NavController, private formBuilder: FormBuilder, private db: Database, private store: StoredConfiguration) {
-    this.load();
   }
 
   ionViewDidLoad() {
@@ -25,10 +24,11 @@ export class ConfigurationPage {
       contact_is_mandatory: [false, Validators.required],
       city_is_mandatory: [false, Validators.required]
     });
+    this.load();
   }
 
   load() {
-    return this.store.get("configuration").then((doc) => {
+    return this.store.get("configuration/main").then((doc) => {
       console.log("config loaded...", doc);
       this.loadedDoc = doc;
       let e = {
@@ -39,7 +39,9 @@ export class ConfigurationPage {
         city_is_mandatory: doc.city_is_mandatory,
       };
       this.form.setValue(e);
-    });
+    }).catch((err) => {
+      alert("failed to load main configuration");
+    })
   }
 
   save() {
@@ -49,6 +51,7 @@ export class ConfigurationPage {
       e._id = this.loadedDoc._id;
       e._rev = this.loadedDoc._rev;
     }
+    e.section="main";
     this.store.put(e).then((res) => {
       console.log("config saved...", res);
       this.navCtrl.pop();
