@@ -19,12 +19,13 @@ import {FileChooser} from 'ionic-native';
 export class CommitmentFormPage {
 
   form: FormGroup;
-  id: string;
-  loadedEvent: Event;
-  loadedDoc: Commitment;
+  index: number;
+  cg_event: Event;
+  commitment: Commitment;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private alertCtrl: AlertController) {
-    this.id = navParams.get('id') || null;
+    this.cg_event=navParams.get('cg_event') || null
+    this.index = navParams.get('index') || null;
   }
 
   ionViewDidLoad() {
@@ -41,55 +42,53 @@ export class CommitmentFormPage {
       active: [false]
     });
 
-    if (this.id) {
-      this.load(this.id);
+    if (this.index !== null) {
+      this.load(this.index);
     }
   }
 
 
-  load(id: string) {
-    /*
-    return this.store.get(id).then((doc) => {
-      this.loadedDoc = doc;
-      this.id = this.loadedDoc._id;
-      let e = {
-        name: doc.name,
-        short_description: doc.short_description,
-        description: doc.description,
-        logo: doc.logo,
-        ask_for_persons: doc.ask_for_persons,
-        ask_for_periodicity: doc.ask_for_periodicity,
-        m2_saved_by_unit: doc.m2_saved_by_unit,
-        euros_saved_by_unit: doc.euros_saved_by_unit,
-        order: doc.order,
-        active: doc.active,
-      };
-      this.form.setValue(e);
-    });
-    */
+  load(index: number) {
+    this.commitment = this.cg_event.commitments[index];
   }
 
   save() {
-    /*
+    console.log("save0...");
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    console.log("save...");
+
     let e = new Commitment(this.form.getRawValue());
-    if (this.loadedDoc) {
-      e._id = this.loadedDoc._id;
-      e._rev = this.loadedDoc._rev;
+    console.log("save1...");
+    if (this.index !== null) {
+      console.log("save1.1...");
+      this.cg_event.commitments[this.index] = e;
+    } else {
+      console.log("save1.2...", this.cg_event);
+      this.cg_event.commitments = [ e ];
     }
-    this.store.put(e).then((res) => {
-      this.navCtrl.pop();
+
+    console.log("save2...", this.cg_event);
+
+    this.store.put(this.cg_event).then((res) => {
+      console.log("saved commitment !");
+      //this.navCtrl.pop();
     }).catch((err) => {
       console.log("commitment puted failed: ", err);
       alert("Impossible de sauver : "+err);
     });
-    */
   }
 
   remove() {
+    event.preventDefault();
+    event.stopPropagation();
+
     /*
-    this.store.remove(this.loadedDoc).then((res) => {
+    this.store.remove(this.commitment).then((res) => {
       this.id=undefined;
-      this.loadedDoc=undefined;
+      this.commitment=undefined;
       this.navCtrl.pop();
     }).catch((err)=>{
       alert("Impossible de supprmier : "+err);

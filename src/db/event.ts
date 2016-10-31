@@ -21,6 +21,21 @@ export class Commitment {
   euros_saved_by_unit: number
   order: number
   active: boolean
+
+  constructor(data = null) {
+    if (data != null) {
+      this.name=data.name;
+      this.short_description = data.short_description;
+      this.description = data.description;
+      this.logo = data.logo;
+      this.ask_for_persons = data.ask_for_persons;
+      this.ask_for_periodicity = data.ask_for_periodicity;
+      this.m2_saved_by_unit = data.m2_saved_by_unit;
+      this.euros_saved_by_unit = data.euros_saved_by_unit;
+      this.order = data.order;
+      this.active = data.active;
+    }
+  }
 }
 
 export class Event extends Storable {
