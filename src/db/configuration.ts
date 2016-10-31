@@ -29,21 +29,7 @@ export class Configuration extends Storable {
 
 @Injectable()
 export class StoredConfiguration extends Store<Configuration> {
-
-  main: Configuration;
-
   constructor(db: Database) {
     super(Configuration, db, docuri.route("configuration/:section"), "configuration/", "configuration0");
   }
-
-/*
-  get(id: string) : Promise<Configuration> {
-    if (id == "configuration:main") {
-      return super.get(id).then((m) => {
-           this.main = m;
-           return m;
-      });
-    } else return super.get(id);
-  }
-  */
 }

@@ -6,8 +6,8 @@ import docuri from 'docuri';
 
 export class EventConfiguration {
   mandatory_fields: string[] = []
-  enable_physical_button: boolean = true
-  use_external_screen: boolean = true
+  enable_physical_button: boolean
+  use_external_screen: boolean
 }
 
 export class Commitment {
@@ -46,8 +46,8 @@ export class Event extends Storable {
   description: string
   start_date: Date
   end_date: Date
-  configuration: EventConfiguration = new EventConfiguration()
-  commitments: Commitment[] = []
+  configuration: EventConfiguration
+  commitments: Commitment[]
 }
 
 @Injectable()

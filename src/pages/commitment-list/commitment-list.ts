@@ -27,6 +27,7 @@ export class CommitmentListPage {
       this.store_event.get(this.configuration.id_active_event).then((cg_event) => {
         this.cg_event = cg_event;
         this.list = cg_event.commitments;
+        console.log("cg_e: ", this.cg_event);
       }).catch((err) => {
         alert("erreur de recuperation l'evenement actif: "+err);
       });
