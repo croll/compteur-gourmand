@@ -21,6 +21,7 @@ export class EventFormPage {
   form: FormGroup;
   id: string;
   loadedDoc: Event;
+  wasActive = false;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private store_config: StoredConfiguration, private alertCtrl: AlertController) {
     this.id = navParams.get('id') || null;
@@ -51,23 +52,34 @@ export class EventFormPage {
     return this.store.get(id).then((doc) => {
       this.loadedDoc = doc;
       this.id = this.loadedDoc._id;
+      this.wasActive = this.configuration.id_active_event == doc._id;
       let e = {
         name: doc.name,
         description: doc.description,
         start_date: doc.start_date,
         end_date: doc.end_date,
+        active: this.wasActive,
       };
       this.form.setValue(e);
     });
   }
 
   save() {
-    let e = new Event(this.form.getRawValue());
+    let values = this.form.getRawValue();
+    let e = new Event(values);
     if (this.loadedDoc) {
       e._id = this.loadedDoc._id;
       e._rev = this.loadedDoc._rev;
     }
     this.store.put(e).then((res) => {
+
+      // update active event in configuration object
+      if (this.wasActive && values['active'] == false) {
+        this.configuration.id_active_event = null;
+      } else if (values['active'] == true) {
+        this.configuration.id_active_event = res.id;
+      }
+
       return this.store_config.put(this.configuration).then((res) => {
         this.navCtrl.pop();
       }).catch((err) => {
