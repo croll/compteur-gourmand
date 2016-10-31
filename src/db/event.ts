@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Database } from '../app/database.service';
 import { Store, Storable } from './store';
 
-//import docuri from 'docuri';
-
 export class EventConfiguration {
   mandatory_fields: string[] = []
   enable_physical_button: boolean
@@ -53,13 +51,6 @@ export class Event extends Storable {
 @Injectable()
 export class StoredEvent extends Store<Event> {
   constructor(db: Database) {
-    //super(Event, db, docuri.route("event/:name"), "event/", "event0");
-    super(Event, db, function(obj) {
-      if (('_id' in obj) && (obj._id.length > 0)) {
-        return obj._id;
-      } else {
-        return "event/"+(new Date().getTime());
-      }
-    }, "event/", "event0");
+    super(Event, db, Store.milliroute("event/"), "event/", "event0");
   }
 }

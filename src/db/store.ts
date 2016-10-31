@@ -31,6 +31,16 @@ export class Store<T extends Storable> {
     this.endkey=endkey;
   }
 
+  public static milliroute(path : string) {
+    return (obj) => {
+      if (('_id' in obj) && (obj._id.length > 0)) {
+        return obj._id;
+      } else {
+        return path+(new Date().getTime());
+      }
+    }
+  }
+
   create<T>(c: {new(d: any): T; }, data: any): T {
     return new c(data);
   }
