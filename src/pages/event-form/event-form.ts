@@ -45,6 +45,8 @@ export class EventFormPage {
 
     if (this.id) {
       this.load(this.id);
+    } else {
+      this.loadedDoc = new Event();
     }
   }
 
@@ -66,12 +68,8 @@ export class EventFormPage {
 
   save() {
     let values = this.form.getRawValue();
-    let e = new Event(values);
-    if (this.loadedDoc) {
-      e._id = this.loadedDoc._id;
-      e._rev = this.loadedDoc._rev;
-    }
-    this.store.put(e).then((res) => {
+    this.loadedDoc.setValues(values);
+    this.store.put(this.loadedDoc).then((res) => {
 
       // update active event in configuration object
       if (this.wasActive && values['active'] == false) {

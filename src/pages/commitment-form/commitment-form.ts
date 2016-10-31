@@ -25,7 +25,7 @@ export class CommitmentFormPage {
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private alertCtrl: AlertController) {
     this.cg_event=navParams.get('cg_event') || null
-    this.index = navParams.get('index') || null;
+    this.index = navParams.get('index');
   }
 
   ionViewDidLoad() {
@@ -42,6 +42,7 @@ export class CommitmentFormPage {
       active: [false]
     });
 
+    console.log("this.index : ", this.index);
     if (this.index !== null) {
       this.load(this.index);
     }
@@ -50,6 +51,7 @@ export class CommitmentFormPage {
 
   load(index: number) {
     this.commitment = this.cg_event.commitments[index];
+    this.form.setValue(this.commitment);
   }
 
   save() {
