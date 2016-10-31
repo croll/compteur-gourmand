@@ -10,6 +10,19 @@ export class EventConfiguration {
   use_external_screen: boolean = true
 }
 
+export class Commitment {
+  name: string
+  short_description : string
+  description : string
+  logo: string
+  ask_for_persons: boolean
+  ask_for_periodicity: boolean
+  m2_saved_by_unit: number
+  euros_saved_by_unit: number
+  order: number
+  active: boolean
+}
+
 export class Event extends Storable {
   _id: string
   _rev: string
@@ -20,6 +33,7 @@ export class Event extends Storable {
   start_date: Date
   end_date: Date
   configuration: EventConfiguration = new EventConfiguration()
+  commitments: Commitment[] = []
 }
 
 @Injectable()
