@@ -7,7 +7,7 @@ import { FootprintPage } from '../pages/footprint/footprint';
 import { ChoosePage } from '../pages/choose/choose';
 import { EventListPage } from '../pages/event-list/event-list';
 import { EventFormPage } from '../pages/event-form/event-form';
-import { CommitmentListPage } from '../pages/commitment-list/commitment-list';
+import { CommitmentListPage, CommitmentAddModal } from '../pages/commitment-list/commitment-list';
 import { CommitmentFormPage } from '../pages/commitment-form/commitment-form';
 import { ConfigurationPage } from '../pages/configuration/configuration';
 import { CommitmentChoicePage } from '../pages/commitment-choice/commitment-choice';
@@ -30,6 +30,7 @@ import { StoredConfiguration } from '../db/configuration';
     ChoosePage,
     EventListPage,
     EventFormPage,
+    CommitmentAddModal,
     TinyMCE
   ],
   imports: [
@@ -47,7 +48,8 @@ import { StoredConfiguration } from '../db/configuration';
     HomePage,
     Presentation,
     FootprintPage,
-    ChoosePage
+    ChoosePage,
+    CommitmentAddModal,
   ],
   providers: [
     Database,

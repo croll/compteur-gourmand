@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ajouter un engagement...</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list radio-group [(ngModel)]="new_type">
+    <ion-item>
+      <ion-label>Nouvel engagement vierge</ion-label>
+      <ion-radio value="new" checked></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nouvel engagement à partir d'un engagement existant</ion-label>
+      <ion-radio value="import"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <ion-list [hidden]="new_type != 'import'">
+    <ion-item>
+      <ion-label>Choisissez un évenement pour l'import</ion-label>
+      <ion-select [(ngModel)]="index_cur_event" (ngModelChange)="updateCurEvent()">
+        <ion-option *ngFor="let e of events; let i=index" value="{{i}}">{{e.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Choisissez un engagement pour l'import</ion-label>
+      <ion-select [(ngModel)]="index_cur_commitment" (ngModelChange)="updateCurCommitment()">
+        <ion-option *ngFor="let c of commitments; let i=index" value="{{i}}">{{c.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+    <button ion-button color="secondary" block (click)="go()">Ok</button>
+</ion-content>

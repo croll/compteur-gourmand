@@ -22,10 +22,15 @@ export class CommitmentFormPage {
   index: number;
   cg_event: Event;
   commitment: Commitment;
+  copyFrom: Commitment;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private alertCtrl: AlertController) {
-    this.cg_event=navParams.get('cg_event') || null
+    this.cg_event=navParams.get('cg_event') || null;
     this.index = navParams.get('index');
+    if (typeof(this.index) != "number")
+      this.index=null;
+    this.copyFrom = navParams.get('copy_from');
+    console.log("this.copyFrom: ", this.copyFrom);
   }
 
   ionViewDidLoad() {
@@ -43,8 +48,13 @@ export class CommitmentFormPage {
     });
 
     console.log("this.index : ", this.index);
-    if (this.index !== null) {
+    if (typeof(this.index) == 'number') {
       this.load(this.index);
+    }
+
+    if (this.copyFrom) {
+      console.log("copying from : ", this.copyFrom);
+      this.form.setValue(this.copyFrom);
     }
   }
 
@@ -59,11 +69,15 @@ export class CommitmentFormPage {
     event.stopPropagation();
 
     let e = new Commitment(this.form.getRawValue());
-    if (this.index !== null) {
+    if (typeof(this.index) == "number") {
+      console.log("editing one");
       this.cg_event.commitments[this.index] = e;
     } else {
-      this.cg_event.commitments = [ e ];
+      console.log("adding one");
+      this.cg_event.commitments.push(e);
     }
+
+    console.log("saving: ", this.cg_event);
 
     return this.store.put(this.cg_event).then((res) => {
       console.log("saved commitment !");

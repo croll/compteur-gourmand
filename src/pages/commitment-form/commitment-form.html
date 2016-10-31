@@ -48,7 +48,7 @@
     </ion-item>
     <div class="button-container">
       <button [hidden]="index === null" ion-button color="danger" (click)="showRemoveConfirm($event)">Supprimer</button>
-      <button ion-button type="submit" value="Valider" [disabled]="!form.valid">{{(index !== null) ? "Modifier l'engagement" : "Créer l'engagement"}}</button>
+      <button ion-button type="submit" value="Valider" [disabled]="!form.valid">{{index !== null ?  "Modifier l'engagement" : "Créer l'engagement"}}</button>
     </div>
   </form>
 </ion-content>

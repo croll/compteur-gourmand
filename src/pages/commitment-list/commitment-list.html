@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Liste des engagements</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="add()">
+      <button ion-button (click)="addFromOther()">
         <ion-icon name="add-circle"></ion-icon>
       </button>
     </ion-buttons>
@@ -10,7 +10,6 @@
 </ion-header>
 
 <ion-content padding>
-
   <ion-list>
    <ion-item-sliding *ngFor="let item of list; let i=index">
       <ion-item>
