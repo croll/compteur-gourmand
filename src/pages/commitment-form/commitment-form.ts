@@ -55,28 +55,19 @@ export class CommitmentFormPage {
   }
 
   save() {
-    console.log("save0...");
-
     event.preventDefault();
     event.stopPropagation();
 
-    console.log("save...");
-
     let e = new Commitment(this.form.getRawValue());
-    console.log("save1...");
     if (this.index !== null) {
-      console.log("save1.1...");
       this.cg_event.commitments[this.index] = e;
     } else {
-      console.log("save1.2...", this.cg_event);
       this.cg_event.commitments = [ e ];
     }
 
-    console.log("save2...", this.cg_event);
-
     this.store.put(this.cg_event).then((res) => {
       console.log("saved commitment !");
-      //this.navCtrl.pop();
+      this.navCtrl.pop();
     }).catch((err) => {
       console.log("commitment puted failed: ", err);
       alert("Impossible de sauver : "+err);
