@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 //import { Database } from '../../app/database.service';
-import { StoredCommitment, Commitment } from '../../db/commitment';
+import { StoredEvent, Event, Commitment } from '../../db/event';
 import { AlertController } from 'ionic-angular';
 import {FileChooser} from 'ionic-native';
 
@@ -20,9 +20,10 @@ export class CommitmentFormPage {
 
   form: FormGroup;
   id: string;
+  loadedEvent: Event;
   loadedDoc: Commitment;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredCommitment, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private alertCtrl: AlertController) {
     this.id = navParams.get('id') || null;
   }
 
@@ -45,7 +46,9 @@ export class CommitmentFormPage {
     }
   }
 
+
   load(id: string) {
+    /*
     return this.store.get(id).then((doc) => {
       this.loadedDoc = doc;
       this.id = this.loadedDoc._id;
@@ -63,9 +66,11 @@ export class CommitmentFormPage {
       };
       this.form.setValue(e);
     });
+    */
   }
 
   save() {
+    /*
     let e = new Commitment(this.form.getRawValue());
     if (this.loadedDoc) {
       e._id = this.loadedDoc._id;
@@ -77,9 +82,11 @@ export class CommitmentFormPage {
       console.log("commitment puted failed: ", err);
       alert("Impossible de sauver : "+err);
     });
+    */
   }
 
   remove() {
+    /*
     this.store.remove(this.loadedDoc).then((res) => {
       this.id=undefined;
       this.loadedDoc=undefined;
@@ -87,6 +94,7 @@ export class CommitmentFormPage {
     }).catch((err)=>{
       alert("Impossible de supprmier : "+err);
     })
+    */
   }
 
   showRemoveConfirm(event) {
