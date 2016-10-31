@@ -25,6 +25,19 @@ export class Configuration extends Storable {
   city_is_mandatory: boolean;
 
   id_active_event: string;
+
+  setValues(values) {
+    super.copyHelper(['_id',
+      '_rev',
+      'section',
+      'enable_physical_button',
+      'use_external_screen',
+      'lastname_is_mandatory',
+      'contact_is_mandatory',
+      'city_is_mandatory',
+      'id_active_event'
+    ], values);
+  }
 }
 
 @Injectable()

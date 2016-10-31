@@ -1,6 +1,6 @@
 import { Database } from '../app/database.service';
 
-export class Storable {
+export abstract class Storable {
   _id: string
   _rev: string
 
@@ -10,10 +10,13 @@ export class Storable {
     }
   }
 
-  setValues(values) {
-    Object.assign(this, values);
-  }
+  abstract setValues(values);
 
+  protected copyHelper(list, values) {
+    list.forEach((param) => {
+        if (param in values) this[param] = values[param];
+    });
+  }
 }
 
 export class Store<T extends Storable> {

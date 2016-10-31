@@ -8,7 +8,7 @@ export class EventConfiguration {
   use_external_screen: boolean
 }
 
-export class Commitment {
+export class Commitment extends Storable {
   name: string
   short_description : string
   description : string
@@ -20,19 +20,18 @@ export class Commitment {
   order: number
   active: boolean
 
-  constructor(data = null) {
-    if (data != null) {
-      this.name=data.name;
-      this.short_description = data.short_description;
-      this.description = data.description;
-      this.logo = data.logo;
-      this.ask_for_persons = data.ask_for_persons;
-      this.ask_for_periodicity = data.ask_for_periodicity;
-      this.m2_saved_by_unit = data.m2_saved_by_unit;
-      this.euros_saved_by_unit = data.euros_saved_by_unit;
-      this.order = data.order;
-      this.active = data.active;
-    }
+  setValues(values) {
+    super.copyHelper(['name',
+      'short_description',
+      'description',
+      'logo',
+      'ask_for_persons',
+      'ask_for_periodicity',
+      'm2_saved_by_unit',
+      'euros_saved_by_unit',
+      'order',
+      'active',
+    ], values);
   }
 }
 
@@ -46,6 +45,18 @@ export class Event extends Storable {
   end_date: Date
   configuration: EventConfiguration
   commitments: Commitment[]
+
+  setValues(values) {
+    super.copyHelper(['_id',
+      '_rev',
+      'name',
+      'description',
+      'start_date',
+      'end_date',
+      'configuration',
+      'commitments'
+    ], values);
+  }
 }
 
 @Injectable()
