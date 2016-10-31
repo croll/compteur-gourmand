@@ -8,7 +8,7 @@
 
 <ion-content padding>
 
-  <form [formGroup]="configuration" (ngSubmit)="save()">
+  <form [formGroup]="form" (ngSubmit)="save()">
     <ion-list>
       <ion-list-header>
         Périphériques
@@ -36,6 +36,10 @@
         <ion-label>Ville</ion-label>
         <ion-toggle [checked]="true" formControlName="city_is_mandatory"></ion-toggle>
       </ion-item>
+
+      <div class="button-container">
+        <button ion-button type="submit" value="Valider" [disabled]="!form.valid">Enregistrer la configuration</button>
+      </div>
     </ion-list>
   </form>
 
