@@ -1,9 +1,11 @@
-import docuri from 'docuri';
+import { Injectable } from '@angular/core';
+import { Database } from '../app/database.service';
+import { Store, Storable } from './store';
 
-export class User {
-  private static route = docuri.route("user/:lastname|:firstname");
-
+export class User extends Storable {
   _id: string
+  _rev: string
+
   firstname: string
   lastname: string
   email: string
@@ -11,8 +13,22 @@ export class User {
   city: string
   photo: string
 
-  make_id() {
-    this._id = User.route(this);
+  setValues(values) {
+    super.copyHelper(['_id',
+      '_rev',
+      'firstname',
+      'lastname',
+      'email',
+      'phone',
+      'city',
+      'photo',
+    ], values);
   }
+}
 
+@Injectable()
+export class StoredUser extends Store<User> {
+  constructor(db: Database) {
+    super(User, db, Store.milliroute("user/"), "user/", "user0");
+  }
 }
