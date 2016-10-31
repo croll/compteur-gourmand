@@ -15,7 +15,7 @@ import { TinyMCE } from './tinymce.directive';
 import { Database } from './database.service';
 import { CgMiracast } from '../providers/cg-miracast';
 import { StoredEvent } from '../db/event';
-import { StoredCommitment } from '../db/commitment';
+import { StoredConfiguration } from '../db/configuration';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { StoredCommitment } from '../db/commitment';
     Database,
     CgMiracast,
     StoredEvent,
-    StoredCommitment,
+    StoredConfiguration,
   ]
 })
 export class AppModule {}
