@@ -17,6 +17,7 @@ import { Database } from './database.service';
 import { CgMiracast } from '../providers/cg-miracast';
 import { StoredEvent } from '../db/event';
 import { StoredConfiguration } from '../db/configuration';
+import { StoredContribution } from '../db/contribution';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { StoredConfiguration } from '../db/configuration';
     CgMiracast,
     StoredEvent,
     StoredConfiguration,
+    StoredContribution,
   ]
 })
 export class AppModule {}
