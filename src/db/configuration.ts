@@ -8,22 +8,13 @@ export class Configuration extends Storable {
   _id: string
   _rev: string
 
-/*
+  section: string;
+
   enable_physical_button: boolean = true;
   use_external_screen: boolean = true;
   lastname_is_mandatory: boolean = false;
   contact_is_mandatory: boolean = false;
   city_is_mandatory: boolean = false;
-*/
-
-  section: string;
-
-  enable_physical_button: boolean;
-  use_external_screen: boolean;
-  lastname_is_mandatory: boolean;
-  contact_is_mandatory: boolean;
-  city_is_mandatory: boolean;
-
   id_active_event: string;
 
   setValues(values) {
@@ -37,6 +28,13 @@ export class Configuration extends Storable {
       'city_is_mandatory',
       'id_active_event'
     ], values);
+  }
+
+  // if we want setting defauts to values, we must write this constructor
+  constructor(values = null) {
+    super();
+    if (values)
+      this.setValues(values);
   }
 }
 
