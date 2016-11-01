@@ -7,6 +7,7 @@ import { CgMiracast } from '../providers/cg-miracast';
 import { ConfigurationPage } from '../pages/configuration/configuration';
 import { EventListPage } from '../pages/event-list/event-list';
 import { CommitmentListPage } from '../pages/commitment-list/commitment-list';
+import { UpgradePage } from '../pages/upgrade/upgrade';
 
 @Component({
   templateUrl: 'app.component.html'
@@ -25,6 +26,7 @@ export class CompteurGourmand {
       {title: 'Configuration', component: ConfigurationPage},
       {title: 'Liste des événements', component: EventListPage},
       {title: 'Liste des engagements', component: CommitmentListPage},
+      {title: "Mise à jour de l'app", component: UpgradePage},
     ];
 
     platform.ready().then(() => {

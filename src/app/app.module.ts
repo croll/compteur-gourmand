@@ -11,6 +11,7 @@ import { CommitmentListPage, CommitmentAddModal } from '../pages/commitment-list
 import { CommitmentFormPage } from '../pages/commitment-form/commitment-form';
 import { ConfigurationPage } from '../pages/configuration/configuration';
 import { CommitmentChoicePage } from '../pages/commitment-choice/commitment-choice';
+import { UpgradePage } from '../pages/upgrade/upgrade';
 import { TinyMCE } from './tinymce.directive';
 import { Database } from './database.service';
 import { CgMiracast } from '../providers/cg-miracast';
@@ -31,6 +32,7 @@ import { StoredConfiguration } from '../db/configuration';
     EventListPage,
     EventFormPage,
     CommitmentAddModal,
+    UpgradePage,
     TinyMCE
   ],
   imports: [
@@ -50,6 +52,7 @@ import { StoredConfiguration } from '../db/configuration';
     FootprintPage,
     ChoosePage,
     CommitmentAddModal,
+    UpgradePage,
   ],
   providers: [
     Database,
