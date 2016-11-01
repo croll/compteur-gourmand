@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { CommitmentFormPage } from '../commitment-form/commitment-form';
 import { StoredConfiguration, Configuration } from '../../db/configuration';
 import { StoredEvent, Event, Commitment } from '../../db/event';
-import { ModalController, ViewController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 
 @Component({
   selector: 'page-commitment-list',
