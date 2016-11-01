@@ -68,6 +68,10 @@ export class CommitmentFormPage {
     event.preventDefault();
     event.stopPropagation();
 
+    if (!('commitments' in this.cg_event) || !this.cg_event.commitments) {
+      this.cg_event.commitments = [];
+    }
+
     let e = new Commitment(this.form.getRawValue());
     if (typeof(this.index) == "number") {
       console.log("editing one");
