@@ -22,7 +22,8 @@ export class HomePage {
   }
 
   openPage(p) {
-      this.navCtrl.push(p);
+      // Temporary hack to disable animations
+      this.navCtrl.push(p, {}, {animate: false});
   }
 
 }
