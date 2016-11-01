@@ -32,6 +32,8 @@ export class CompteurGourmand {
     platform.ready().then(() => {
       StatusBar.styleDefault();
       miracast.init();
+      // Temporary hack to disable animations
+
 
       switch (miracast.mode) {
         case "tablette":
@@ -44,13 +46,15 @@ export class CompteurGourmand {
           console.error("Pas de cg-part !");
           this.rootPage = HomePage;
       }
+          // this.nav.setRoot(HomePage, {}, {animate: false});
     });
 
   }
 
   openPage(page) {
     this.menu.close();
-    this.nav.push(page.component);
+    // Temporary hack to disable animations
+    this.nav.push(page.component, {}, {animate: false});
     // this.nav.setRoot(page.component);
   }
 

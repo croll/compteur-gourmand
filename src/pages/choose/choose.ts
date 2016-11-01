@@ -17,11 +17,10 @@ export class ChoosePage {
   }
 
   goBack() {
-    this.navCtrl.pop();
+    this.navCtrl.pop({animate: false});
   }
 
   openPopup() {
-    console.log("ICI");
     let modal = this.modalCtrl.create(CommitmentChoicePage);
     modal.present();
   }
