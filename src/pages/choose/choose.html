@@ -10,13 +10,13 @@
 
   <div class="top">
       <div tinymce bindTo="'CHOOSE.YOUR_FIRSTNAME'">Indiquez votre prénom</div>
-      <div><input type="text" name="firstname" [(value)]="firstname" /></div>
+      <div><input type="text" name="firstname" [(ngModel)]="userContributions.user.firstname" /></div>
       <div tinymce bindTo="'CHOOSE.YOUR_FIRSTNAME_HELP'" class="help">Cela nous permettra d'afficher votre
   engagement sur le grand écran !</div>
   </div>
 
 
-  <div class="commitment-list">
+  <div class="commitment-list" [hidden]="!userContributions.user.firstname">
     <button ion-button class="l" color="secondary" large>
       <ion-icon name="arrow-back"></ion-icon>
     </button>
@@ -24,81 +24,27 @@
       <ion-slide>
         <div class="commitments">
           <!-- COMMITMENT -->
-          <div class="commitment" (click)="openPopup()">
+          <div class="commitment" (click)="choose(item)" *ngFor="let item of list">
             <ion-card class="selected">
               <div class="title">
-                  <p>Je ne gaspille plus mon pain rassis</p>
-                  <ion-icon name="checkmark-circle" large class="selected"></ion-icon>
-              </div>
-              <img src="assets/img/bread.jpg">
-              <ion-item>
-                <img src="assets/img/earth.png" item-left large>
-                <h2>33 m²</h2>
-                <p>Surface préservée</p>
-              </ion-item>
-              <ion-item>
-                <img src="assets/img/coins.png" item-left large>
-                <h2>8€</h2>
-                <p>Argent économisé</p>
-              </ion-item>
-            </ion-card>
-            <div class="caption">
-              <p>
-                Faites du pain perdu ou de lachapelure avec votre pain rassis !
-              </p>
-              <a color="secondary">En savoir plus</a>
-            </div>
-          </div>
-          <!-- END -->
-          <!-- COMMITMENT -->
-          <div class="commitment" (click)="openPopup()">
-            <ion-card>
-              <div class="title">
-                  <p>Je ne gaspille plus mon pain rassis</p>
+                  <p>{{item.name}}</p>
                   <ion-icon name="checkmark-circle" large></ion-icon>
               </div>
-              <img src="assets/img/bread.jpg">
+              <img [src]="item.image">
               <ion-item>
                 <img src="assets/img/earth.png" item-left large>
-                <h2>33 m²</h2>
+                <h2>{{item.m2_saved_by_unit}} m²</h2>
                 <p>Surface préservée</p>
               </ion-item>
               <ion-item>
                 <img src="assets/img/coins.png" item-left large>
-                <h2>8€</h2>
+                <h2>{{item.euros_saved_by_unit}}€</h2>
                 <p>Argent économisé</p>
               </ion-item>
             </ion-card>
             <div class="caption">
               <p>
-                Faites du pain perdu ou de lachapelure avec votre pain rassis !
-              </p>
-              <a color="secondary">En savoir plus</a>
-            </div>
-          </div>
-          <!-- END -->
-          <!-- COMMITMENT -->
-          <div class="commitment">
-            <ion-card>
-              <div class="title">
-                  <p>Je ne gaspille plus mon pain rassis</p>
-                  <ion-icon name="checkmark-circle" large></ion-icon>
-              </div>
-              <img src="assets/img/bread.jpg">
-              <ion-item>
-                <img src="assets/img/earth.png" item-left large>
-                <h2>33 m²</h2>
-                <p>Surface préservée</p>
-              </ion-item>
-              <ion-item>
-                <img src="assets/img/coins.png" item-left large>
-                <h2>8€</h2>
-                <p>Argent économisé</p>
-              </ion-item>
-            </ion-card>
-            <div class="caption">
-              <p>
-                Faites du pain perdu ou de lachapelure avec votre pain rassis !
+                {{item.short_description}}
               </p>
               <a color="secondary">En savoir plus</a>
             </div>
@@ -116,7 +62,7 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button color="light" (click)="goBack()" large>
+    <button ion-button color="light" (click)="showCancelConfirm($event)" large>
       <ion-icon name="home"></ion-icon>
     </button>
     <button style="float: right" primary ion-button large>Suivant</button>

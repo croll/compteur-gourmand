@@ -8,7 +8,7 @@
       </div>
     </ion-title>
       <ion-buttons end>
-        <button ion-button (click)="close()">
+        <button ion-button (click)="cancel()">
           <ion-icon name="close"></ion-icon>
         </button>
       </ion-buttons>
@@ -18,27 +18,27 @@
 
 <ion-content padding>
 
-  <div class="question">
+  <div class="question" [hidden]="!commitment.ask_for_periodicity">
     <div class="label">Combien de fois <b>par semaines</b> souhaitez vous prendre cet engagement ?</div>
     <div class="buttons">
-      <button ion-button color="secondary" large>
+      <button ion-button color="secondary" large [disabled]="currentContribution.nb_of_unit < 2" (click)="decrement('nb_of_unit')">
         <ion-icon name="remove"></ion-icon>
       </button>
-      <ion-input type="text" value="2"></ion-input>
-      <button ion-button color="secondary" large>
+      <ion-input type="text" [(ngModel)]="currentContribution.nb_of_unit"></ion-input>
+      <button ion-button color="secondary" large (click)="increment('nb_of_unit')">
         <ion-icon name="add"></ion-icon>
       </button>
     </div>
   </div>
 
-  <div class="question">
+  <div class="question" [hidden]="!commitment.ask_for_persons">
     <div class="label"><b>Au total</b>, combien de personnes vont s'engager dans votre foyer ?</div>
     <div class="buttons">
-      <button ion-button disabled color="secondary" large>
+      <button ion-button [disabled] color="secondary" large [disabled]="currentContribution.nb_of_person < 2" (click)="decrement('nb_of_person')">
         <ion-icon name="remove"></ion-icon>
       </button>
-      <ion-input type="text" value=""></ion-input>
-      <button ion-button color="secondary" large>
+      <ion-input type="text" [(ngModel)]="currentContribution.nb_of_person"></ion-input>
+      <button ion-button color="secondary" large (click)="increment('nb_of_person')">
         <ion-icon name="add"></ion-icon>
       </button>
     </div>
@@ -46,10 +46,10 @@
 
   <div class="action-buttons">
     <ion-buttons>
-      <button ion-button color="danger" large>Annuler</button>
+      <button ion-button color="danger" large (click)="cancel()">Annuler</button>
     </ion-buttons>
     <ion-buttons item-right>
-      <button ion-button large>Valider</button>
+      <button ion-button large (click)="submit()">Valider</button>
     </ion-buttons>
   </div>
 

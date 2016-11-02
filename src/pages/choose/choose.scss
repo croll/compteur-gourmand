@@ -45,11 +45,9 @@ page-choose {
           align-items: center;
           justify-content: space-around;
           .commitment {
+            cursor: pointer;
             max-width: 400px;
             ion-card {
-              &.selected {
-                  box-shadow: -3px -3px 4px 3px rgba(50, 219, 100, 0.34), 1px 0px 0px 5px rgba(50, 219, 100, 0.2), 5px 3px 7px 3px rgba(50, 219, 100, 0.22) !important;
-              }
               .title {
                 display: flex;
                 text-align: left;
@@ -63,9 +61,6 @@ page-choose {
                   flex-grow: 0;
                   font-size: 3em;
                   color: #d0d0d0;
-                  &.selected {
-                    color: rgb(50, 219, 100);
-                  }
                 }
               }
               ion-item {
@@ -78,6 +73,12 @@ page-choose {
                 p {
                   font-size: 1.1rem;
                 }
+              }
+              &.selected {
+                  box-shadow: -3px -3px 4px 3px rgba(50, 219, 100, 0.34), 1px 0px 0px 5px rgba(50, 219, 100, 0.2), 5px 3px 7px 3px rgba(50, 219, 100, 0.22) !important;
+                  ion-icon {
+                    color: rgb(50, 219, 100);
+                  }
               }
             }
             .caption {
