@@ -25,7 +25,7 @@
         <div class="commitments">
           <!-- COMMITMENT -->
           <div class="commitment" (click)="choose(item)" *ngFor="let item of list">
-            <ion-card class="selected">
+            <ion-card class.selected="userContributions.has(item)">
               <div class="title">
                   <p>{{item.name}}</p>
                   <ion-icon name="checkmark-circle" large></ion-icon>
@@ -62,9 +62,25 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button color="light" (click)="showCancelConfirm($event)" large>
-      <ion-icon name="home"></ion-icon>
-    </button>
-    <button style="float: right" primary ion-button large>Suivant</button>
+    <div>
+      <button ion-button color="light" (click)="showCancelConfirm($event)" large>
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </div>
+    <div class="resume-container" [hidden]="!userContributions.savedMoney">
+      <div class="sub">
+        <div>
+          <img src="assets/img/earth.png"/>
+          <div>{{userContributions.savedM2}}m² sauvés</div>
+        </div>
+        <div>
+          <img src="assets/img/coins.png"/>
+          <div>{{userContributions.savedMoney}}€ économisés</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button primary ion-button large (click)="saveContribution()">Suivant</button>
+    </div>
   </ion-toolbar>
 </ion-footer>

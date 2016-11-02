@@ -43,6 +43,7 @@ export class CommitmentChoicePage {
 
   submit() {
     this.userContributions.addContribution(this.currentContribution);
+    this.viewCtrl.dismiss();
   }
 
 }

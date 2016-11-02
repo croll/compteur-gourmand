@@ -97,4 +97,37 @@ page-choose {
     }
   }
 
+  ion-footer {
+    .toolbar-content {
+      display: flex;
+      justify-content: space-between;
+      & > div {
+        flex-grow: 0;
+        justify-content: space-around;
+        align-items: center;
+        &.resume-container {
+          display: flex;
+          flex-grow: 1;
+          .sub {
+            display: flex;
+            text-align: center;
+            & > div {
+              align-items: center;
+              &:last-child {
+                margin-left: 5rem;
+              }
+              display: flex;
+              img {
+                width: 3rem;
+              }
+              div {
+                margin-left: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
 }

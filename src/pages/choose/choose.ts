@@ -61,9 +61,46 @@ export class ChoosePage {
     }).present();
   }
 
+  showRemoveConfirm(commitment) {
+
+    this.alertCtrl.create({
+      title: 'Confirmation',
+      message: 'Souhaitez-vous vraiment retirer l\'engagement "'+commitment.name+'" de vos choix ?',
+      buttons: [
+        {
+          text: 'Conserver',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Supprimer',
+          handler: () => {
+            this.userContributions.removeContribution(commitment);
+          }
+        }
+      ]
+    }).present();
+  }
+
   choose(commitment) {
-    let modal = this.modalCtrl.create(CommitmentChoicePage, {commitment: commitment});
-    modal.present();
+    if (this.userContributions.has(commitment._id)) {
+      this.showRemoveConfirm(commitment);
+    } else {
+      let modal = this.modalCtrl.create(CommitmentChoicePage, {commitment: commitment});
+      modal.present();
+    }
+  }
+
+  saveContribution() {
+    console.log("Save contribution !");
+    this.userContributions.save().then(function() {
+      console.log("Contribution saved !");
+      alert("TODO: Form infos user")
+    }, function(err) {
+      console.log(err);
+      alert("Erreur lors de la sauvegarde !");
+    })
   }
 
 }
