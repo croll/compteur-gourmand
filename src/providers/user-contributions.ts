@@ -16,6 +16,7 @@ export class UserContributions {
   }
 
   init() {
+    console.log("INIT contrib");
     return new Promise((resolve, reject) => {
       this.user = new User();
       this.contributions = [];
@@ -30,6 +31,7 @@ export class UserContributions {
   }
 
   cancel() {
+    this.user = new User();
     this.contributions = undefined;
   }
 
@@ -82,6 +84,7 @@ export class UserContributions {
   }
 
   has(commitment: Commitment) {
+    if (typeof(this.contributions) != 'object') return;
     let ret = false;
     this.contributions.forEach((c) => {
       if (c.id_commitment == commitment.id) {
