@@ -9,6 +9,7 @@ export class EventConfiguration {
 }
 
 export class Commitment extends Storable {
+  id: string = 'commitment/'+Store.guid()
   name: string
   short_description : string
   description : string
@@ -32,6 +33,13 @@ export class Commitment extends Storable {
       'order',
       'active',
     ], values);
+  }
+
+  // if we want setting defauts to values, we must write this constructor
+  constructor(values = null) {
+    super();
+    if (values)
+      this.setValues(values);
   }
 }
 

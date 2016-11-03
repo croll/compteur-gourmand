@@ -34,6 +34,7 @@ export class Store<T extends Storable> {
     this.endkey=endkey;
   }
 
+  // build a milliroute function
   public static milliroute(path : string) {
     return (obj) => {
       if (('_id' in obj) && (obj._id.length > 0)) {
@@ -42,6 +43,17 @@ export class Store<T extends Storable> {
         return path+(new Date().getTime());
       }
     }
+  }
+
+  // build a random guid
+  public static guid() {
+    let s4 = () => {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    };
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
   }
 
   create<T>(c: {new(d: any): T; }, data: any): T {
