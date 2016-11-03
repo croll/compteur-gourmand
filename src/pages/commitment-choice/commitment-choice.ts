@@ -25,7 +25,7 @@ export class CommitmentChoicePage {
 
     this.currentContribution.nb_of_unit = 1;
     this.currentContribution.nb_of_person = 1;
-    this.currentContribution.id_commitment = this.commitment._id;
+    this.currentContribution.id_commitment = this.commitment.id;
 
   }
 

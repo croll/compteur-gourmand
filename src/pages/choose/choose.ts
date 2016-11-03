@@ -88,7 +88,7 @@ export class ChoosePage {
   }
 
   choose(commitment) {
-    if (this.userContributions.has(commitment._id)) {
+    if (this.userContributions.has(commitment)) {
       this.showRemoveConfirm(commitment);
     } else {
       let modal = this.modalCtrl.create(CommitmentChoicePage, {commitment: commitment});
