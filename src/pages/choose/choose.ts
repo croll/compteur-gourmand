@@ -19,7 +19,7 @@ export class ChoosePage {
 
   ionViewDidLoad() {
     if (typeof(this.userContributions.user) == 'undefined') {
-      this.userContributions.init().then((cmts: Commitments[]) => {
+      this.userContributions.init().then((cmts: Commitment[]) => {
           this.list = cmts;
       }, (err) => {
         console.log(err);
