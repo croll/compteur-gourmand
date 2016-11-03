@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Database } from '../app/database.service';
 import { Store, Storable } from './store';
+import { StoredConfiguration } from './configuration';
 
 export class EventConfiguration {
   mandatory_fields: string[] = []
@@ -65,11 +66,49 @@ export class Event extends Storable {
       'commitments'
     ], values);
   }
+
+  getActiveCommitments() {
+    let cmts: Commitment[] = [];
+    this.commitments.forEach((c) => {
+      if (c.active === true) {
+        cmts.push(c);
+      }
+    });
+    return cmts;
+  }
+
+  getCommitmentById(id) {
+    var cmt: Commitment;
+    this.commitments.forEach((c) => {
+      if (c.id == id) {
+        cmt = c;
+      }
+    });
+    return cmt;
+  }
+
 }
 
 @Injectable()
 export class StoredEvent extends Store<Event> {
-  constructor(db: Database) {
+  constructor(db: Database, private stored_config: StoredConfiguration) {
     super(Event, db, Store.milliroute("event/"), "event/", "event0");
   }
+
+  getActiveEvent() {
+    return new Promise((resolve, reject) => {
+      this.stored_config.get("configuration/main").then((configuration) => {
+        this.get(configuration.id_active_event).then((cg_event) => {
+          resolve(cg_event);
+        }).catch((err) => {
+          reject(err);
+          alert("erreur de recuperation l'evenement actif: "+err);
+        });
+      }).catch((err) => {
+          reject(err);
+          alert("immpossible de charger la configuration generale: "+err);
+      });
+    });
+  }
+
 }
