@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import { CommitmentChoicePage } from '../commitment-choice/commitment-choice';
 import { EngagementConfirmPage } from '../engagement-confirm/engagement-confirm';
-import { StoredConfiguration, Configuration } from '../../db/configuration';
-import { StoredEvent, Commitment } from '../../db/event';
+import { Commitment } from '../../db/event';
 import { UserContributions } from '../../providers/user-contributions';
 
 @Component({
@@ -13,30 +12,18 @@ import { UserContributions } from '../../providers/user-contributions';
 export class ChoosePage {
 
   list: Commitment[];
-  configuration: Configuration;
   engagementConfirmPage: any = EngagementConfirmPage;
 
-  constructor(public navCtrl: NavController, private modalCtrl: ModalController, private store_config: StoredConfiguration, private store_event: StoredEvent, public userContributions: UserContributions, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private modalCtrl: ModalController, public userContributions: UserContributions, private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
-
-
-    this.store_config.get("configuration/main").then((configuration) => {
-      this.configuration = configuration;
-
-      this.store_event.get(this.configuration.id_active_event).then((cg_event) => {
-        this.list = cg_event.commitments;
-      }).catch((err) => {
-        alert("erreur de recuperation l'evenement actif: "+err);
-      });
-
-    }).catch((err) => {
-        alert("immpossible de charger la configuration generale: "+err);
-    });
-
     if (typeof(this.userContributions.user) == 'undefined') {
-      this.userContributions.init();
+      this.userContributions.init().then((cmts: Commitments[]) => {
+          this.list = cmts;
+      }, (err) => {
+        console.log(err);
+      });
     }
   }
 

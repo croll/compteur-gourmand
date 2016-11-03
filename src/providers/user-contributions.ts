@@ -1,21 +1,36 @@
 import { Injectable } from '@angular/core';
 import { StoredContribution, Contribution } from '../db/contribution';
 import { StoredUser, User } from '../db/user';
-import { Commitment } from '../db/event';
+import { Event, StoredEvent, Commitment } from '../db/event';
 
 @Injectable()
 export class UserContributions {
 
   user: User;
   contributions: Contribution[];
+  activeCommitments: Commitment[];
   savedMoney = 0;
   savedM2 = 0;
 
-  constructor(private storedUser: StoredUser, private storedContribution: StoredContribution) {}
+  constructor(private storedUser: StoredUser, private storedContribution: StoredContribution, private storedEvent: StoredEvent) {
+  }
 
   init() {
-    this.user = new User();
-    this.contributions = [];
+    return new Promise((resolve, reject) => {
+      this.user = new User();
+      this.contributions = [];
+      this.storedEvent.getActiveEvent().then((e: Event) => {
+        this.activeCommitments = e.getActiveCommitments();
+        resolve(this.activeCommitments);
+      }, () => {
+          console.log("ERROR gettings active commitments list");
+          resolve(false);
+      });
+    })
+  }
+
+  cancel() {
+    this.contributions = undefined;
   }
 
   save() {

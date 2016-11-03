@@ -24,8 +24,8 @@
       <ion-slide>
         <div class="commitments">
           <!-- COMMITMENT -->
-          <div class="commitment" (click)="choose(item)" *ngFor="let item of list">
-            <ion-card class.selected="userContributions.has(item)">
+          <div class="commitment" *ngFor="let item of list">
+            <ion-card [class.selected]="userContributions.has(item)" (click)="choose(item)">
               <div class="title">
                   <p>{{item.name}}</p>
                   <ion-icon name="checkmark-circle" large></ion-icon>
