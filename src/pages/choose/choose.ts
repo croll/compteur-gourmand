@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import { CommitmentChoicePage } from '../commitment-choice/commitment-choice';
+import { EngagementConfirmPage } from '../engagement-confirm/engagement-confirm';
 import { StoredConfiguration, Configuration } from '../../db/configuration';
 import { StoredEvent, Commitment } from '../../db/event';
 import { UserContributions } from '../../providers/user-contributions';
@@ -13,10 +14,13 @@ export class ChoosePage {
 
   list: Commitment[];
   configuration: Configuration;
+  engagementConfirmPage: any = EngagementConfirmPage;
 
-  constructor(public navCtrl: NavController, private modalCtrl: ModalController, private store_config: StoredConfiguration, private store_event: StoredEvent, public userContributions: UserContributions, private alertCtrl: AlertController) {}
+  constructor(public navCtrl: NavController, private modalCtrl: ModalController, private store_config: StoredConfiguration, private store_event: StoredEvent, public userContributions: UserContributions, private alertCtrl: AlertController) {
+  }
 
   ionViewDidLoad() {
+
 
     this.store_config.get("configuration/main").then((configuration) => {
       this.configuration = configuration;

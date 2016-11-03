@@ -11,6 +11,7 @@ import { CommitmentListPage, CommitmentAddModal } from '../pages/commitment-list
 import { CommitmentFormPage } from '../pages/commitment-form/commitment-form';
 import { ConfigurationPage } from '../pages/configuration/configuration';
 import { CommitmentChoicePage } from '../pages/commitment-choice/commitment-choice';
+import { EngagementConfirmPage } from '../pages/engagement-confirm/engagement-confirm';
 import { UpgradePage } from '../pages/upgrade/upgrade';
 import { TinyMCE } from './tinymce.directive';
 import { Database } from './database.service';
@@ -34,6 +35,7 @@ import { UserContributions } from '../providers/user-contributions';
     ChoosePage,
     EventListPage,
     EventFormPage,
+    EngagementConfirmPage,
     CommitmentAddModal,
     UpgradePage,
     TinyMCE
@@ -50,6 +52,7 @@ import { UserContributions } from '../providers/user-contributions';
     CommitmentListPage,
     ConfigurationPage,
     CommitmentChoicePage,
+    EngagementConfirmPage,
     HomePage,
     Presentation,
     FootprintPage,

@@ -80,7 +80,7 @@
       </div>
     </div>
     <div>
-      <button primary ion-button large (click)="saveContribution()">Suivant</button>
+      <button primary ion-button large [navPush]="engagementConfirmPage" [disabled]="!userContributions.savedMoney">Suivant</button>
     </div>
   </ion-toolbar>
 </ion-footer>
