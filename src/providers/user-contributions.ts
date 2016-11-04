@@ -46,7 +46,8 @@ export class UserContributions {
       if (typeof(this.user._id) == 'undefined') {
         userPromise = new Promise((resolve, reject) => {
             this.storedUser.put(this.user).then((res) => {
-              this.user._id = res._id;
+              console.log("Ssaved user: ", res)
+              this.user._id = res.id;
               resolve(this.user._id);
             }).catch((err) => {
               reject(err)
@@ -65,6 +66,7 @@ export class UserContributions {
           this.contributions.forEach((c) => {
             console.log("Push contribution !")
             c.id_user = this.user._id;
+            console.log("ID user", this.user._id);
             promises.push(this.storedContribution.put(c));
           });
 
