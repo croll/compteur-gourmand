@@ -24,7 +24,7 @@
       <ion-slide>
         <div class="commitments">
           <!-- COMMITMENT -->
-          <div class="commitment" *ngFor="let item of list">
+          <div class="commitment" *ngFor="let item of list; let num = index">
             <ion-card [class.selected]="userContributions.has(item)" (click)="choose(item)">
               <div class="title">
                   <p>{{item.name}}</p>

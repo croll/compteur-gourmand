@@ -10,10 +10,9 @@ import { ChoosePage } from '../choose/choose';
 })
 export class HomePage {
 
-  choosePage;
+  choosePage:any = ChoosePage;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
-    this.choosePage = ChoosePage;
   }
 
   openPopup() {

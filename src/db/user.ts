@@ -18,10 +18,9 @@ export class User extends Storable {
       '_rev',
       'firstname',
       'lastname',
-      'email',
-      'phone',
+      'contact',
       'city',
-      'photo',
+      'newsletter'
     ], values);
   }
 }

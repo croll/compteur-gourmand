@@ -1,3 +1,22 @@
 page-contact {
 
+  form {
+    margin: 4rem auto 0 auto;
+    max-width: 75%;
+
+    .item-block {
+      margin: 2rem;
+    }
+  }
+
+  ion-footer {
+    button {
+      float: right;
+      &:last-child {
+        margin-right: 3rem;
+      }
+    }
+
+  }
+
 }

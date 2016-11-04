@@ -8,7 +8,7 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
 import { EventListPage } from '../pages/event-list/event-list';
 import { CommitmentListPage } from '../pages/commitment-list/commitment-list';
 import { UpgradePage } from '../pages/upgrade/upgrade';
-import { EngagementConfirmPage } from '../pages/engagement-confirm/engagement-confirm';
+// import { ContactPage } from '../pages/contact/contact';
 
 @Component({
   templateUrl: 'app.component.html'
@@ -33,12 +33,9 @@ export class CompteurGourmand {
     platform.ready().then(() => {
       StatusBar.styleDefault();
       miracast.init();
-      // Temporary hack to disable animations
-
 
       switch (miracast.mode) {
         case "tablette":
-          // this.rootPage = EngagementConfirmPage;
           this.rootPage = HomePage;
         break;
         case "presentation":
@@ -56,7 +53,7 @@ export class CompteurGourmand {
   openPage(page) {
     this.menu.close();
     // Temporary hack to disable animations
-    this.nav.push(page.component, {}, {animate: false});
+    this.nav.push(page.component, {});
     // this.nav.setRoot(page.component);
   }
 

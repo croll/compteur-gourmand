@@ -17,7 +17,6 @@ export class UserContributions {
   }
 
   init() {
-    console.log("INIT contrib");
     return new Promise((resolve, reject) => {
       this.user = new User();
       this.contributions = [];
@@ -39,6 +38,18 @@ export class UserContributions {
     this.contributions = undefined;
   }
 
+  saveUser() {
+    return new Promise((resolve, reject) => {
+        this.storedUser.put(this.user).then((res) => {
+        this.user._id = res.id;
+        resolve(this.user._id);
+      }).catch((err) => {
+        reject(err)
+      });
+      }
+    );
+  }
+
   save() {
     // Save the user
     return new Promise((resolve, reject) => {
@@ -46,15 +57,7 @@ export class UserContributions {
       let userPromise;
 
       if (typeof(this.user._id) == 'undefined') {
-        userPromise = new Promise((resolve, reject) => {
-            this.storedUser.put(this.user).then((res) => {
-              this.user._id = res.id;
-              resolve(this.user._id);
-            }).catch((err) => {
-              reject(err)
-            });
-          }
-        );
+        userPromise = this.saveUser();
       } else {
         userPromise =  new Promise(() => {
           resolve(this.user._id);
