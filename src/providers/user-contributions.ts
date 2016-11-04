@@ -46,7 +46,8 @@ export class UserContributions {
       if (typeof(this.user._id) == 'undefined') {
         userPromise = new Promise((resolve, reject) => {
             this.storedUser.put(this.user).then((res) => {
-              this.user._id = res._id;
+              console.log("Ssaved user: ", res)
+              this.user._id = res.id;
               resolve(this.user._id);
             }).catch((err) => {
               reject(err)
@@ -65,6 +66,7 @@ export class UserContributions {
           this.contributions.forEach((c) => {
             console.log("Push contribution !")
             c.id_user = this.user._id;
+            console.log("ID user", this.user._id);
             promises.push(this.storedContribution.put(c));
           });
 
@@ -103,7 +105,6 @@ export class UserContributions {
     let commitment = this.activeEvent.getCommitmentById(contribution.id_commitment);
     this.savedM2 += contribution.nb_of_unit * contribution.nb_of_person * commitment.m2_saved_by_unit;
     this.savedMoney += contribution.nb_of_unit * contribution.nb_of_person * commitment.euros_saved_by_unit;
-    // Hack to have numbers
   }
 
   removeContribution(userCommitment: Commitment) {
