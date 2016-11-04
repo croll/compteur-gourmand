@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController } from 'ionic-angular';
+import { Keyboard } from 'ionic-native';
 
 @Component({
   selector: 'page-footprint',
@@ -7,7 +8,18 @@ import { NavController, ViewController } from 'ionic-angular';
 })
 export class FootprintPage {
 
-  constructor(public navCtrl: NavController, private viewCtrl: ViewController) {}
+  keyboardopened: boolean = false
+
+  constructor(public navCtrl: NavController, private viewCtrl: ViewController) {
+    Keyboard.onKeyboardShow().subscribe(() => {
+      console.log("onKeyboardShow");
+      this.keyboardopened=true;
+    });
+    Keyboard.onKeyboardHide().subscribe(() => {
+      console.log("onKeyboardHide");
+      this.keyboardopened=false;
+    });
+  }
 
   ionViewDidLoad() {
   }
