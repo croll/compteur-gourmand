@@ -10,7 +10,7 @@ export class EventConfiguration {
 }
 
 export class Commitment extends Storable {
-  id: string = 'commitment/'+Store.guid()
+  id: string
   name: string
   short_description : string
   description : string
@@ -23,7 +23,8 @@ export class Commitment extends Storable {
   active: boolean
 
   setValues(values) {
-    super.copyHelper(['name',
+    super.copyHelper(['id',
+      'name',
       'short_description',
       'description',
       'logo',
@@ -41,6 +42,9 @@ export class Commitment extends Storable {
     super();
     if (values)
       this.setValues(values);
+    else {
+      this.id = 'commitment/'+Store.guid();
+    }
   }
 }
 

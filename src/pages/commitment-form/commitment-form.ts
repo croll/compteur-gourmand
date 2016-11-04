@@ -35,6 +35,7 @@ export class CommitmentFormPage {
 
   ionViewDidLoad() {
     this.form = this.formBuilder.group({
+      id: '',
       name: ['', Validators.required],
       short_description: ['', Validators.required],
       description: ['', Validators.required],
