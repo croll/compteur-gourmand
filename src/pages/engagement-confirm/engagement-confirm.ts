@@ -14,7 +14,7 @@ export class EngagementConfirmPage {
   contributionList: Contribution[];
   commitments: {} = {};
 
-  constructor(public navCtrl: NavController, private userContributions: UserContributions) {}
+  constructor(public navCtrl: NavController, public userContributions: UserContributions) {}
 
   ionViewDidLoad() {
     this.contributionList = this.userContributions.contributions;
