@@ -17,15 +17,16 @@
   <div class="main-container">
     <!-- Left container -->
     <div class="left-cont">
-      <!-- Engegement block -->
-
-      <ion-card padding>
-        <div class="icon">
-          <img src="assets/img/bread-icon.png" />
-        </div>
-        <div class="desc">
-          <div>1x / sem</div>
-          <ion-icon name="person" big></ion-icon>
+      <!-- Engagement block -->
+      <ion-card padding *ngFor="let item of contributionList">
+        <div class="content">
+          <div class="icon">
+            <img src="assets/img/bread-icon.png" />
+          </div>
+          <div class="desc">
+            <div>{{item.nb_of_unit}}x / semaine</div>
+            <ion-icon name="person" big *ngFor="let pnum of getNbAsArray(item.nb_of_person)"></ion-icon>
+          </div>
         </div>
       </ion-card>
 
@@ -38,11 +39,11 @@
         </ion-card-header>
         <ion-item>
           <img src="/assets/img/earth.png" item-left />
-          10000 m² sauvés
+          {{userContributions.savedM2}} m² sauvés
         </ion-item>
         <ion-item>
           <img src="/assets/img/coins.png" item-left />
-          1500€ économisés
+          {{userContributions.savedMoney}} économisés
         </ion-item>
       </ion-card>
     </div>

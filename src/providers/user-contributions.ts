@@ -33,6 +33,8 @@ export class UserContributions {
   }
 
   cancel() {
+    this.savedMoney = 0;
+    this.savedM2 = 0;
     this.user = new User();
     this.contributions = undefined;
   }
@@ -46,7 +48,6 @@ export class UserContributions {
       if (typeof(this.user._id) == 'undefined') {
         userPromise = new Promise((resolve, reject) => {
             this.storedUser.put(this.user).then((res) => {
-              console.log("Ssaved user: ", res)
               this.user._id = res.id;
               resolve(this.user._id);
             }).catch((err) => {
@@ -66,7 +67,6 @@ export class UserContributions {
           this.contributions.forEach((c) => {
             console.log("Push contribution !")
             c.id_user = this.user._id;
-            console.log("ID user", this.user._id);
             promises.push(this.storedContribution.put(c));
           });
 
@@ -101,21 +101,42 @@ export class UserContributions {
 
   addContribution(contribution: Contribution) {
     this.contributions.push(contribution);
-
-    let commitment = this.activeEvent.getCommitmentById(contribution.id_commitment);
-    this.savedM2 += contribution.nb_of_unit * contribution.nb_of_person * commitment.m2_saved_by_unit;
-    this.savedMoney += contribution.nb_of_unit * contribution.nb_of_person * commitment.euros_saved_by_unit;
+    this.updateTotal(contribution, contribution.id_commitment, '+');
   }
 
   removeContribution(userCommitment: Commitment) {
     this.contributions.forEach((contribution, i) => {
-        let commitment = this.activeEvent.getCommitmentById(userCommitment.id);
-        this.savedM2 -= contribution.nb_of_unit * contribution.nb_of_person * commitment.m2_saved_by_unit;
-        this.savedMoney -= contribution.nb_of_unit * contribution.nb_of_person * commitment.euros_saved_by_unit;
         if (contribution.id_commitment == userCommitment.id) {
           this.contributions.splice(i, 1);
+          this.updateTotal(contribution, userCommitment.id, '-');
         }
     });
+  }
+
+  updateTotal(contribution: Contribution, id_commitment: string, action: string) {
+
+    let commitment = this.activeEvent.getCommitmentById(id_commitment);
+    let totalM2 = commitment.m2_saved_by_unit;
+    let totalMoney = commitment.m2_saved_by_unit;
+
+    if (commitment.ask_for_persons) {
+      totalM2 *= contribution.nb_of_person;
+      totalMoney *= contribution.nb_of_person;
+    }
+
+    if (commitment.ask_for_periodicity) {
+      totalM2 *= contribution.nb_of_unit;
+      totalMoney *= contribution.nb_of_unit;
+    }
+
+    if (action == '+') {
+      this.savedM2 += totalM2 ;
+      this.savedMoney += totalMoney;
+    } else {
+      this.savedM2 -= totalM2 ;
+      this.savedMoney -= totalMoney;
+    }
+
   }
 
 }
