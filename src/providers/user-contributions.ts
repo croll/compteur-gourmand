@@ -8,6 +8,7 @@ export class UserContributions {
 
   user: User;
   contributions: Contribution[];
+  activeEvent: Event;
   activeCommitments: Commitment[];
   savedMoney = 0;
   savedM2 = 0;
@@ -21,6 +22,7 @@ export class UserContributions {
       this.user = new User();
       this.contributions = [];
       this.storedEvent.getActiveEvent().then((e: Event) => {
+        this.activeEvent = e;
         this.activeCommitments = e.getActiveCommitments();
         resolve(this.activeCommitments);
       }, () => {
@@ -97,14 +99,19 @@ export class UserContributions {
 
   addContribution(contribution: Contribution) {
     this.contributions.push(contribution);
+
+    let commitment = this.activeEvent.getCommitmentById(contribution.id_commitment);
+    this.savedM2 += contribution.nb_of_unit * contribution.nb_of_person * commitment.m2_saved_by_unit;
+    this.savedMoney += contribution.nb_of_unit * contribution.nb_of_person * commitment.euros_saved_by_unit;
     // Hack to have numbers
-    this.savedMoney += contribution.nb_of_unit * contribution.nb_of_person;
-    this.savedM2 += contribution.nb_of_unit * contribution.nb_of_person;
   }
 
-  removeContribution(commitment: Commitment) {
-    this.contributions.forEach((c, i) => {
-        if (c.id_commitment == commitment.id) {
+  removeContribution(userCommitment: Commitment) {
+    this.contributions.forEach((contribution, i) => {
+        let commitment = this.activeEvent.getCommitmentById(userCommitment.id);
+        this.savedM2 -= contribution.nb_of_unit * contribution.nb_of_person * commitment.m2_saved_by_unit;
+        this.savedMoney -= contribution.nb_of_unit * contribution.nb_of_person * commitment.euros_saved_by_unit;
+        if (contribution.id_commitment == userCommitment.id) {
           this.contributions.splice(i, 1);
         }
     });
