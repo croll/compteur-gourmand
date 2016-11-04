@@ -17,6 +17,9 @@ export class ContactPage {
   lastnamePH: string = 'Nom de famille';
   contactPH: string = 'E-mail ou numéro de téléphone';
   cityPH: string = 'Ville';
+  lastnameM: boolean = false;
+  cityM: boolean = false;
+  contactM: boolean = false;
 
   constructor(public navCtrl: NavController, public userContributions: UserContributions, private formBuilder: FormBuilder, private storedConfiguration: StoredConfiguration) {}
 
@@ -29,12 +32,15 @@ export class ContactPage {
       this.configuration = configuration;
       if (configuration.lastname_is_mandatory) {
         this.lastnamePH+=' *';
+        this.lastnameM = true;
       }
       if (configuration.city_is_mandatory) {
         this.cityPH+=' *';
+        this.cityM = true;
       }
       if (configuration.contact_is_mandatory) {
         this.contactPH+=' *';
+        this.contactM = true;
       }
     }).catch((err) => {
         alert("impossible de charger la configuration generale: "+err);

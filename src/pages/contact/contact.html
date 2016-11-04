@@ -24,12 +24,12 @@ prochaines P'tites Bouffes Citoyennes ?... Alors laissez-nous vos coordonnées :
 
     <ion-item>
       <ion-input type="text" formControlName="firstname" placeholder="Prénom" item-left [required]="true"></ion-input>
-      <ion-input type="text" formControlName="lastname" placeholder="{{lastnamePH}}"></ion-input>
+      <ion-input type="text" formControlName="lastname" placeholder="{{lastnamePH}}" [required]="lastnameM"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" formControlName="contact" placeholder="{{contactPH}}" item-left></ion-input>
-      <ion-input type="text" formControlName="city" placeholder="{{cityPH}}"></ion-input>
+      <ion-input type="text" formControlName="contact" placeholder="{{contactPH}}" item-left [required]="contactM"></ion-input>
+      <ion-input type="text" formControlName="city" placeholder="{{cityPH}}" [required]="cityM"></ion-input>
     </ion-item>
 
     <ion-item>
