@@ -33,6 +33,8 @@ export class UserContributions {
   }
 
   cancel() {
+    this.savedMoney = 0;
+    this.savedM2 = 0;
     this.user = new User();
     this.contributions = undefined;
   }
@@ -65,7 +67,6 @@ export class UserContributions {
           this.contributions.forEach((c) => {
             console.log("Push contribution !")
             c.id_user = this.user._id;
-            console.log("ID user", this.user._id);
             promises.push(this.storedContribution.put(c));
           });
 

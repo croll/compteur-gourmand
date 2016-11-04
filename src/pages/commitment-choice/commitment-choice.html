@@ -24,7 +24,7 @@
       <button ion-button color="secondary" large [disabled]="currentContribution.nb_of_unit < 2" (click)="decrement('nb_of_unit')">
         <ion-icon name="remove"></ion-icon>
       </button>
-      <ion-input type="text" [(ngModel)]="currentContribution.nb_of_unit"></ion-input>
+      <ion-input type="text" [(ngModel)]="currentContribution.nb_of_unit" text-center></ion-input>
       <button ion-button color="secondary" large (click)="increment('nb_of_unit')">
         <ion-icon name="add"></ion-icon>
       </button>
@@ -37,7 +37,7 @@
       <button ion-button [disabled] color="secondary" large [disabled]="currentContribution.nb_of_person < 2" (click)="decrement('nb_of_person')">
         <ion-icon name="remove"></ion-icon>
       </button>
-      <ion-input type="text" [(ngModel)]="currentContribution.nb_of_person"></ion-input>
+      <ion-input type="text" [(ngModel)]="currentContribution.nb_of_person" text-center></ion-input>
       <button ion-button color="secondary" large (click)="increment('nb_of_person')">
         <ion-icon name="add"></ion-icon>
       </button>
