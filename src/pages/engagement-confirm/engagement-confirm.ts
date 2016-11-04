@@ -16,7 +16,7 @@ export class EngagementConfirmPage {
   }
 
   buttonpressed(event) {
-    if (event.code == "ShiftLeft") {
+    if (event.keyCode == 16) { // shift
       this.engage();
     }
   }
