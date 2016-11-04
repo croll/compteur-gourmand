@@ -20,6 +20,17 @@ export class UpgradePage {
 
     });
     */
+
+    /*
+    let updateUrl = "https://www.croll.fr/upgrade/compteur-gourmand/version.xml";
+    window['AppUpdate'].checkAppUpdate((suc) => {
+      // success
+      console.log("appupdate success: ", suc);
+    }, (err) => {
+      // fail
+      console.log("appupdate fail: ", err);
+    }, updateUrl);
+    */
   }
 
   ionViewDidLoad() {
