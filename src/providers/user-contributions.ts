@@ -103,7 +103,6 @@ export class UserContributions {
     let commitment = this.activeEvent.getCommitmentById(contribution.id_commitment);
     this.savedM2 += contribution.nb_of_unit * contribution.nb_of_person * commitment.m2_saved_by_unit;
     this.savedMoney += contribution.nb_of_unit * contribution.nb_of_person * commitment.euros_saved_by_unit;
-    // Hack to have numbers
   }
 
   removeContribution(userCommitment: Commitment) {
