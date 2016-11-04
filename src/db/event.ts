@@ -67,7 +67,7 @@ export class Event extends Storable {
     ], values);
   }
 
-  getActiveCommitments() {
+  getActiveCommitments() : Commitment[] {
     let cmts: Commitment[] = [];
     this.commitments.forEach((c) => {
       if (c.active === true) {
