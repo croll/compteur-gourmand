@@ -60,7 +60,7 @@
 
 </ion-content>
 
-<ion-footer>
+<ion-footer [hidden]="keyboardopened">
   <ion-toolbar>
     <div>
       <button ion-button color="light" (click)="showCancelConfirm($event)" large>

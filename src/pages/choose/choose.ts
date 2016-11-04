@@ -5,6 +5,7 @@ import { EngagementConfirmPage } from '../engagement-confirm/engagement-confirm'
 import { StoredConfiguration, Configuration } from '../../db/configuration';
 import { StoredEvent, Commitment } from '../../db/event';
 import { UserContributions } from '../../providers/user-contributions';
+import { Keyboard } from 'ionic-native';
 
 @Component({
   selector: 'page-choose',
@@ -15,8 +16,18 @@ export class ChoosePage {
   list: Commitment[];
   configuration: Configuration;
   engagementConfirmPage: any = EngagementConfirmPage;
+  keyboardopened: boolean = false
+
 
   constructor(public navCtrl: NavController, private modalCtrl: ModalController, private store_config: StoredConfiguration, private store_event: StoredEvent, public userContributions: UserContributions, private alertCtrl: AlertController) {
+    Keyboard.onKeyboardShow().subscribe(() => {
+      console.log("onKeyboardShow");
+      this.keyboardopened=true;
+    });
+    Keyboard.onKeyboardHide().subscribe(() => {
+      console.log("onKeyboardHide");
+      this.keyboardopened=false;
+    });
   }
 
   ionViewDidLoad() {
