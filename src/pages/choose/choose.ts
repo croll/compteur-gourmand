@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import { CommitmentChoicePage } from '../commitment-choice/commitment-choice';
 import { EngagementConfirmPage } from '../engagement-confirm/engagement-confirm';
-import { StoredConfiguration, Configuration } from '../../db/configuration';
-import { StoredEvent, Commitment } from '../../db/event';
+import { Commitment } from '../../db/event';
 import { UserContributions } from '../../providers/user-contributions';
 import { Keyboard } from 'ionic-native';
 
@@ -14,12 +13,11 @@ import { Keyboard } from 'ionic-native';
 export class ChoosePage {
 
   list: Commitment[];
-  configuration: Configuration;
   engagementConfirmPage: any = EngagementConfirmPage;
   keyboardopened: boolean = false
 
 
-  constructor(public navCtrl: NavController, private modalCtrl: ModalController, private store_config: StoredConfiguration, private store_event: StoredEvent, public userContributions: UserContributions, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private modalCtrl: ModalController, public userContributions: UserContributions, private alertCtrl: AlertController) {
     Keyboard.onKeyboardShow().subscribe(() => {
       console.log("onKeyboardShow");
       this.keyboardopened=true;
@@ -31,23 +29,12 @@ export class ChoosePage {
   }
 
   ionViewDidLoad() {
-
-
-    this.store_config.get("configuration/main").then((configuration) => {
-      this.configuration = configuration;
-
-      this.store_event.get(this.configuration.id_active_event).then((cg_event) => {
-        this.list = cg_event.commitments;
-      }).catch((err) => {
-        alert("erreur de recuperation l'evenement actif: "+err);
+    if (typeof(this.userContributions.user) == 'undefined' || typeof(this.userContributions.contributions) == 'undefined') {
+      this.userContributions.init().then((cmts: Commitment[]) => {
+          this.list = cmts;
+      }, (err) => {
+        console.log(err);
       });
-
-    }).catch((err) => {
-        alert("immpossible de charger la configuration generale: "+err);
-    });
-
-    if (typeof(this.userContributions.user) == 'undefined') {
-      this.userContributions.init();
     }
   }
 
@@ -99,7 +86,7 @@ export class ChoosePage {
   }
 
   choose(commitment) {
-    if (this.userContributions.has(commitment._id)) {
+    if (this.userContributions.has(commitment)) {
       this.showRemoveConfirm(commitment);
     } else {
       let modal = this.modalCtrl.create(CommitmentChoicePage, {commitment: commitment});

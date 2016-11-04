@@ -12,20 +12,46 @@
 
 <ion-content padding>
 
+  <h1 text-center margin>Appuyez sur le buzzer !</h1>
+
   <div class="main-container">
+    <!-- Left container -->
     <div class="left-cont">
-      <div class="engagement">
+      <!-- Engegement block -->
+
+      <ion-card padding>
         <div class="icon">
           <img src="assets/img/bread-icon.png" />
         </div>
-        <div class="value">
+        <div class="desc">
           <div>1x / sem</div>
-          <ion-icon name="person"></ion-icon>
+          <ion-icon name="person" big></ion-icon>
         </div>
-      </div>
+      </ion-card>
+
     </div>
+    <!-- Right container -->
     <div class="right-cont">
+      <ion-card>
+        <ion-card-header text-center>
+          Gain total
+        </ion-card-header>
+        <ion-item>
+          <img src="/assets/img/earth.png" item-left />
+          10000 m² sauvés
+        </ion-item>
+        <ion-item>
+          <img src="/assets/img/coins.png" item-left />
+          1500€ économisés
+        </ion-item>
+      </ion-card>
     </div>
+  </div>
+
+  <div class="button-cont">
+    <button ion-button (click)="engage()" large>
+      Je m'engage !
+    </button>
   </div>
 
 </ion-content>

@@ -11,8 +11,8 @@ import {
   Output
 } from '@angular/core';
 
-import 'tinymce/tinymce.min.js';
-import 'tinymce/themes/modern/theme';
+// import 'tinymce/tinymce.min.js';
+// import 'tinymce/themes/modern/theme';
 
 import { Database } from './database.service';
 
@@ -36,6 +36,11 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     let text = "Lorem ipsum";
+    // this.db.getDb().get(this.bindTo).then((s) => {
+    //   console.log(s);
+    // }, (err) => {
+    //   console.log(err);
+    // });
     this.db.getDb().get(this.bindTo).then((myString) => {
       if (myString.text == "") {
         if (this.el.nativeElement.innerHTML) {
@@ -79,11 +84,11 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
               this.save();
             }
           });
-        },
+        }
 
       });
 
-    })
+    });
   }
 
   save() {

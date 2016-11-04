@@ -8,6 +8,7 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
 import { EventListPage } from '../pages/event-list/event-list';
 import { CommitmentListPage } from '../pages/commitment-list/commitment-list';
 import { UpgradePage } from '../pages/upgrade/upgrade';
+import { EngagementConfirmPage } from '../pages/engagement-confirm/engagement-confirm';
 
 @Component({
   templateUrl: 'app.component.html'
@@ -37,6 +38,7 @@ export class CompteurGourmand {
 
       switch (miracast.mode) {
         case "tablette":
+          // this.rootPage = EngagementConfirmPage;
           this.rootPage = HomePage;
         break;
         case "presentation":
