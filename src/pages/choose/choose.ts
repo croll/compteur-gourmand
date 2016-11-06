@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, ModalController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, ModalController, AlertController, Slides } from 'ionic-angular';
 import { CommitmentChoicePage } from '../commitment-choice/commitment-choice';
 import { EngagementConfirmPage } from '../engagement-confirm/engagement-confirm';
-import { Commitment } from '../../db/event';
 import { UserContributions } from '../../providers/user-contributions';
 import { Keyboard } from 'ionic-native';
 
@@ -15,9 +14,11 @@ export class ChoosePage {
   list = [];
   engagementConfirmPage: any = EngagementConfirmPage;
   keyboardopened: boolean = false
+  @ViewChild('slider') slider: Slides;
 
 
   constructor(public navCtrl: NavController, private modalCtrl: ModalController, public userContributions: UserContributions, private alertCtrl: AlertController) {
+    console.log("constructor");
     Keyboard.onKeyboardShow().subscribe(() => {
       console.log("onKeyboardShow");
       this.keyboardopened=true;
@@ -28,24 +29,28 @@ export class ChoosePage {
     });
   }
 
-  ionViewDidLoad() {
-    if (typeof(this.userContributions.user) == 'undefined' || typeof(this.userContributions.contributions) == 'undefined') {
-      let num = -1;
-      // this.list[num] = Array();
-      this.userContributions.init().then((cmts: Commitment[]) => {
-        for(let i = 0; i < cmts.length ; i++) {
-          console.log(i % 3);
-          if (i % 3 == 0) {
-            num++;
-            this.list[num] = Array();
-          }
-          this.list[num].push(cmts[i]);
-        }
-        console.log(this.list);
-      }, (err) => {
-        console.log(err);
-      });
+  ionViewWillEnter() {
+    console.log("ionViewCanEnter");
+    let num = -1;
+    for(let i = 0; i < this.userContributions.activeCommitments.length ; i++) {
+      if (i % 3 == 0) {
+        num++;
+        this.list[num] = Array();
+      }
+      this.list[num].push(this.userContributions.activeCommitments[i]);
     }
+  }
+
+  nextCommitments() {
+    this.slider.slideNext();
+  }
+
+  prevCommitments() {
+    console.log(this.slider);
+    console.log(this.slider.length());
+    console.log(this.slider.isBeginning());
+    console.log(this.slider.isEnd());
+    this.slider.slideNext();
   }
 
   showCancelConfirm(event) {

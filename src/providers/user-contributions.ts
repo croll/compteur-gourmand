@@ -23,7 +23,7 @@ export class UserContributions {
       this.storedEvent.getActiveEvent().then((e: Event) => {
         this.activeEvent = e;
         this.activeCommitments = e.getActiveCommitments();
-        resolve(this.activeCommitments);
+        resolve(true);
       }, () => {
           console.log("ERROR gettings active commitments list");
           resolve(false);

@@ -17,10 +17,10 @@
 
 
   <div class="commitment-list" [hidden]="!userContributions.user.firstname">
-    <button ion-button class="l" color="secondary" large>
+    <button ion-button class="l" color="secondary" large (click)="prevCommitments()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
-    <ion-slides>
+    <ion-slides #slider>
       <ion-slide *ngFor="let itemGroup of list">
         <div class="commitments">
           <!-- COMMITMENT -->
@@ -53,7 +53,7 @@
         </div>
       </ion-slide>
     </ion-slides>
-    <button ion-button class="r" color="secondary" large>
+    <button ion-button class="r" color="secondary" large (click)="slider.slideNext()">
       <ion-icon name="arrow-forward"></ion-icon>
     </button>
   </div>
