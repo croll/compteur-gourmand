@@ -21,10 +21,10 @@
       <ion-icon name="arrow-back"></ion-icon>
     </button>
     <ion-slides>
-      <ion-slide>
+      <ion-slide *ngFor="let itemGroup of list">
         <div class="commitments">
           <!-- COMMITMENT -->
-          <div class="commitment" *ngFor="let item of list; let num = index">
+          <div class="commitment" *ngFor="let item of itemGroup">
             <ion-card [class.selected]="userContributions.has(item)" (click)="choose(item)">
               <div class="title">
                   <p>{{item.name}}</p>

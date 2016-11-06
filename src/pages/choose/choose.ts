@@ -12,7 +12,7 @@ import { Keyboard } from 'ionic-native';
 })
 export class ChoosePage {
 
-  list: Commitment[];
+  list = [];
   engagementConfirmPage: any = EngagementConfirmPage;
   keyboardopened: boolean = false
 
@@ -30,8 +30,18 @@ export class ChoosePage {
 
   ionViewDidLoad() {
     if (typeof(this.userContributions.user) == 'undefined' || typeof(this.userContributions.contributions) == 'undefined') {
+      let num = -1;
+      // this.list[num] = Array();
       this.userContributions.init().then((cmts: Commitment[]) => {
-          this.list = cmts;
+        for(let i = 0; i < cmts.length ; i++) {
+          console.log(i % 3);
+          if (i % 3 == 0) {
+            num++;
+            this.list[num] = Array();
+          }
+          this.list[num].push(cmts[i]);
+        }
+        console.log(this.list);
       }, (err) => {
         console.log(err);
       });
