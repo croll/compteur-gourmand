@@ -26,7 +26,7 @@ export class CommitmentChoicePage {
     });
   }
 
-  ionViewDidLoad() {
+  ionViewCanEnter() {
 
     this.currentContribution = new Contribution();
 
