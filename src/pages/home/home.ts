@@ -1,18 +1,26 @@
 import { Component } from '@angular/core';
 
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, Events } from 'ionic-angular';
 import { FootprintPage } from '../footprint/footprint';
 import { ChoosePage } from '../choose/choose';
+import { UserContributions } from '../../providers/user-contributions';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  host: { '(window:keydown)': 'listenKeyboard($event)' }
 })
 export class HomePage {
 
-  choosePage:any = ChoosePage;
+  pass = 'admin123';
+  currentEntry = '';
+  isAdmin = false;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private userContributions: UserContributions, private events: Events) {
+    events.subscribe('user:logout', () => {
+      this.isAdmin = false;
+      console.log("MENU CLOSED");
+    });
   }
 
   openPopup() {
@@ -21,8 +29,23 @@ export class HomePage {
   }
 
   openPage(p) {
-      // Temporary hack to disable animations
-      this.navCtrl.push(p, {}, {animate: false});
+    this.navCtrl.push(p);
+  }
+
+  begin() {
+    this.userContributions.init().then(() => {
+      this.navCtrl.push(ChoosePage)
+    })
+  }
+
+  listenKeyboard(event) {
+    this.currentEntry += event.key;
+    if (this.currentEntry.length > this.pass.length) {
+      this.currentEntry = this.currentEntry.substr(1, this.currentEntry.length);
+    }
+    if (this.currentEntry == this.pass) {
+      this.isAdmin = true;
+    }
   }
 
 }

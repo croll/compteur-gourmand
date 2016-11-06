@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, MenuController } from 'ionic-angular';
+import { Platform, Nav, MenuController, Events } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 import { HomePage } from '../pages/home/home';
 import { Presentation } from '../pages/presentation/presentation';
@@ -21,7 +21,7 @@ export class CompteurGourmand {
   //rootPage = HomePage;
   rootPage: any
 
-  constructor(public platform: Platform, public menu: MenuController, public miracast: CgMiracast) {
+  constructor(public platform: Platform, public menu: MenuController, public miracast: CgMiracast, public events: Events) {
 
     this.pages = [
       {title: 'Configuration', component: ConfigurationPage},
@@ -48,13 +48,18 @@ export class CompteurGourmand {
           // this.nav.setRoot(HomePage, {}, {animate: false});
     });
 
+
+
   }
 
   openPage(page) {
     this.menu.close();
-    // Temporary hack to disable animations
     this.nav.push(page.component, {});
-    // this.nav.setRoot(page.component);
+  }
+
+  logout() {
+    this.menu.close();
+    this.events.publish('user:logout');
   }
 
 }
