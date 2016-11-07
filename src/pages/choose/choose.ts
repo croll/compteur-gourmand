@@ -42,25 +42,12 @@ export class ChoosePage {
   }
 
   ionViewDidLoad() {
-    console.log(window.innerWidth);
     // Hack for ionic rc.2 to correcty initialize the swiper
     let swiperContainer = this._elementRef.nativeElement.getElementsByClassName('swiper-container')[0];
     this.waitRendered(swiperContainer).then(()=>{
       let swiper = this.slider.getSlider();
       swiper.update();
     });
-  }
-
-  nextCommitments() {
-    this.slider.slideNext();
-  }
-
-  prevCommitments() {
-    console.log(this.slider);
-    console.log(this.slider.length());
-    console.log(this.slider.isBeginning());
-    console.log(this.slider.isEnd());
-    this.slider.slideNext();
   }
 
   showCancelConfirm(event) {
