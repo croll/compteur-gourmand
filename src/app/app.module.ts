@@ -15,6 +15,7 @@ import { EngagementConfirmPage } from '../pages/engagement-confirm/engagement-co
 import { ContactPage } from '../pages/contact/contact';
 import { ContributePage } from '../pages/contribute/contribute';
 import { UpgradePage } from '../pages/upgrade/upgrade';
+import { CommitmentDetailPage } from '../pages/commitment-detail/commitment-detail';
 import { TinyMCE } from './tinymce.directive';
 import { Database } from './database.service';
 import { CgMiracast } from '../providers/cg-miracast';
@@ -31,6 +32,7 @@ import { UserContributions } from '../providers/user-contributions';
     CommitmentFormPage,
     ConfigurationPage,
     CommitmentChoicePage,
+    CommitmentDetailPage,
     HomePage,
     Presentation,
     FootprintPage,
@@ -54,6 +56,7 @@ import { UserContributions } from '../providers/user-contributions';
     EventListPage,
     CommitmentFormPage,
     CommitmentListPage,
+    CommitmentDetailPage,
     ConfigurationPage,
     CommitmentChoicePage,
     EngagementConfirmPage,

@@ -1,0 +1,24 @@
+<ion-header padding>
+  <ion-navbar>
+      <ion-title>
+      <div class="title">
+        <img src="{{commitment.image}}" />
+        <div>En savoir plus</div>
+      </div>
+    </ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="cancel()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="content">
+    {{commitment.description}}
+  </div>
+
+</ion-content>

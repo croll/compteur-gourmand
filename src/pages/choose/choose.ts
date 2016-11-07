@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, ModalController, AlertController, Slides } from 'ionic-angular';
 import { CommitmentChoicePage } from '../commitment-choice/commitment-choice';
+import { CommitmentDetailPage } from '../commitment-detail/commitment-detail';
 import { EngagementConfirmPage } from '../engagement-confirm/engagement-confirm';
 import { UserContributions } from '../../providers/user-contributions';
 import { Keyboard } from 'ionic-native';
@@ -59,10 +60,7 @@ export class ChoosePage {
       message: 'Voulez vous vraiment quitter ?',
       buttons: [
         {
-          text: 'Rester',
-          handler: () => {
-            console.log('Disagree clicked');
-          }
+          text: 'Rester'
         },
         {
           text: 'Quitter',
@@ -104,6 +102,11 @@ export class ChoosePage {
       let modal = this.modalCtrl.create(CommitmentChoicePage, {commitment: commitment});
       modal.present();
     }
+  }
+
+  showDetail(commitment) {
+      let modal = this.modalCtrl.create(CommitmentDetailPage, {commitment: commitment});
+      modal.present();
   }
 
   saveContribution() {
