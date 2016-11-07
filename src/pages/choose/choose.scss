@@ -27,18 +27,16 @@ page-choose {
   .commitment-list {
     position: relative;
     button {
-      top: 12rem;
+      top: 6.5rem;
       position: absolute;
+      z-index: 1000;
     }
     button.l {
       left: 1.5rem;
     }
     button.r {
+      top: 7.5rem;
       right: 1.5rem;
-    }
-    button {
-      border: 2px solid red;
-      z-index: 1000;
     }
     ion-slides {
       ion-slide {

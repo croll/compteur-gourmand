@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, ModalController, AlertController, Slides } from 'ionic-angular';
 import { CommitmentChoicePage } from '../commitment-choice/commitment-choice';
 import { EngagementConfirmPage } from '../engagement-confirm/engagement-confirm';
@@ -17,8 +17,7 @@ export class ChoosePage {
   @ViewChild('slider') slider: Slides;
 
 
-  constructor(public navCtrl: NavController, private modalCtrl: ModalController, public userContributions: UserContributions, private alertCtrl: AlertController) {
-    console.log("constructor");
+  constructor(public navCtrl: NavController, private modalCtrl: ModalController, public userContributions: UserContributions, private alertCtrl: AlertController,private _elementRef: ElementRef) {
     Keyboard.onKeyboardShow().subscribe(() => {
       console.log("onKeyboardShow");
       this.keyboardopened=true;
@@ -39,6 +38,15 @@ export class ChoosePage {
       }
       this.list[num].push(this.userContributions.activeCommitments[i]);
     }
+  }
+
+  ionViewDidLoad() {
+    // Hack for ionic rc.2 to correcty initialize the swiper
+    let swiperContainer = this._elementRef.nativeElement.getElementsByClassName('swiper-container')[0];
+    this.waitRendered(swiperContainer).then(()=>{
+      let swiper = this.slider.getSlider();
+      swiper.update();
+    });
   }
 
   nextCommitments() {
@@ -118,6 +126,20 @@ export class ChoosePage {
       console.log(err);
       alert("Erreur lors de la sauvegarde !");
     })
+  }
+
+  waitRendered(element:HTMLElement):Promise<HTMLElement> {
+    return new Promise((resolve) => {
+        let checkNextFrame = () => {
+            requestAnimationFrame(() => {
+                if (element.clientWidth)
+                    resolve(element);
+                else
+                    checkNextFrame();
+            });
+        };
+        checkNextFrame();
+    });
   }
 
 }

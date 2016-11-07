@@ -17,7 +17,7 @@
 
 
   <div class="commitment-list" [hidden]="!userContributions.user.firstname">
-    <button ion-button class="l" color="secondary" large (click)="prevCommitments()">
+    <button ion-button class="l" color="secondary" large (click)="slider.slidePrev()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
     <ion-slides #slider>
