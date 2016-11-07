@@ -1,11 +1,29 @@
 page-home {
   ion-content {
-    text-align: center;
+    display: flex;
+    .wrapper {
+     margin-top: -3rem;
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+     height: 100%;
+    }
     .button-container {
+      padding-top: 7rem;
+      @media(max-width: 720px) {
+        padding-top: 0;
+      }
       button {
         padding: 50px 150px;
         font-size: 2rem;
+        @media(max-width: 720px) {
+          padding: 20px;
+        }
       }
     }
+  }
+
+  ion-footer {
+    padding-left: 10px;
   }
 }

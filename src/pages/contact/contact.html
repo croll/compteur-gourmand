@@ -9,12 +9,14 @@
 
 <ion-content padding>
 
-  <div>
-  {{userContributions.user.firstname}}, <span tinymce bindTo="'CONTACT.BRAVO'">encore bravo pour votre engagement !</span>
+  <div class="title" text-center>
+    <div>
+      {{userContributions.user.firstname}}, <span tinymce bindTo="'CONTACT.BRAVO'">encore bravo pour votre engagement !</span>
+    </div>
+    <div tinymce bindTo="'CONTACT.THANKS'">La planète vous remercie.</div>
   </div>
-  <div tinymce bindTo="'CONTACT.THANKS'">La planète vous remercie.</div>
 
-  <div tinymce bindTo="'CONTACT.THANKS'">
+  <div class="content" tinymce bindTo="'CONTACT.THANKS'">
     Envie de connaître les résultats de la journée ? De faire partie de notre RéseauZéroGaspi et
 recevoir de temps en temps des recettes, conseils et astuces pour manger malin ? De participer aux
 prochaines P'tites Bouffes Citoyennes ?... Alors laissez-nous vos coordonnées :-)

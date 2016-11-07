@@ -15,27 +15,20 @@
   </ion-header>
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <div tinymce [bindTo]="'HOME.CONTENT'">
-        <br />
-        <br />
-        <br />
-        <br />
+  <div class="wrapper">
+    <div>
+      <div tinymce [bindTo]="'HOME.CONTENT'" text-center>
         <p style="font-size: 1.5rem">1/3 de la production alimentaire finit à la poubelle, dont 40% dans les poubelles de nos foyers !</p>
         <br />
         <p style="font-size: 1.8rem"><b>Voulez-vous contribuer à améliorer la situation ? C'est possible !</b></p>
         <br />
         <p style="font-size: 1.5rem">Calculez les gains financiers et écologiques que vous pouvez réaliser en adoptant une consommation alimentaire plus économe, et choisissez quels sont les petits changements sur lesquels vous pouvez vous engager... Alors, ready my radis ?</p>
-        <br />
-        <br />
-        <br />
       </div>
-    </ion-row>
-    <div class="button-container">
-      <button ion-button (click)="begin()" large>Commencer</button>
+      <div class="button-container">
+        <button ion-button (click)="begin()" large>Commencer</button>
+      </div>
     </div>
-  </ion-grid>
+  </div>
 </ion-content>
 
 <ion-footer>

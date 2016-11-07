@@ -6,16 +6,22 @@ page-choose {
     flex-wrap: wrap;
     font-size: 1.2em;
     margin: 3rem 5rem 5rem 5rem;
+    @media(max-width: 1200px) {
+      margin: 0;
+    }
     div {
       &:nth-child(2) {
         padding: 0 20px;
       }
-      @media(max-width: 715px)  {
+      @media(max-width: 1200px)  {
         margin: auto;
       }
     }
     input {
       width: 20rem;
+      @media(max-width: 1200px) {
+        width: 14rem;
+      }
     }
   }
 
@@ -30,6 +36,9 @@ page-choose {
       top: 0px;
       margin-top: 7.5rem;
       position: absolute;
+      @media(max-width: 1200px) {
+        display: none;
+      }
     }
     button.l {
       left: 0.5rem;
