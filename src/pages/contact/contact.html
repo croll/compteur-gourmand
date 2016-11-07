@@ -1,6 +1,6 @@
 <ion-header padding>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <ion-title>Restons en contact :)</ion-title>
   </ion-navbar>
 
@@ -47,6 +47,6 @@ prochaines P'tites Bouffes Citoyennes ?... Alors laissez-nous vos coordonnées :
 <ion-footer padding>
   <ion-toolbar>
     <button ion-button color="primary" (click)="save()" [disabled]="!contactForm.valid">Enregistrer mes coordonnées</button>
-    <button ion-button clear [navPush]="contributePage">Je passe</button>
+    <button ion-button clear [navPush]="contributePage" color="secondary">Je passe</button>
   </ion-toolbar>
 </ion-footer>
