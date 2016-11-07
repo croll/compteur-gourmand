@@ -17,14 +17,13 @@
 
 
   <div class="commitment-list" [hidden]="!userContributions.user.firstname">
-    <button ion-button class="l" color="secondary" large (click)="slider.slidePrev()">
+    <button ion-button class="l" color="secondary" large>
       <ion-icon name="arrow-back"></ion-icon>
     </button>
-    <ion-slides #slider>
-      <ion-slide *ngFor="let itemGroup of list">
-        <div class="commitments">
+    <ion-slides #slider [options]="sliderOptions">
+      <ion-slide *ngFor="let item of userContributions.activeCommitments">
           <!-- COMMITMENT -->
-          <div class="commitment" *ngFor="let item of itemGroup">
+          <div class="commitment">
             <ion-card [class.selected]="userContributions.has(item)" (click)="choose(item)">
               <div class="title">
                   <p>{{item.name}}</p>
@@ -50,10 +49,9 @@
             </div>
           </div>
           <!-- END -->
-        </div>
       </ion-slide>
     </ion-slides>
-    <button ion-button class="r" color="secondary" large (click)="slider.slideNext()">
+    <button ion-button class="r" color="secondary" large>
       <ion-icon name="arrow-forward"></ion-icon>
     </button>
   </div>

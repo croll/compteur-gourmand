@@ -27,28 +27,34 @@ page-choose {
   .commitment-list {
     position: relative;
     button {
-      top: 6.5rem;
+      top: 0px;
+      margin-top: 7.5rem;
       position: absolute;
-      z-index: 1000;
     }
     button.l {
-      left: 1.5rem;
+      left: 0.5rem;
     }
     button.r {
-      top: 7.5rem;
-      right: 1.5rem;
+      right: 0.5rem;
+    }
+    .swiper-button-disabled {
+      opacity: 0.4;
     }
     ion-slides {
+      .swiper-container {
+        // border: 1px solid blue;
+        width: calc(100% - 286px);
+      }
       ion-slide {
-        .commitments {
-          padding: 0 90px;
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: space-around;
+        width: 400px;
+        min-width: 400px;
+        max-width: 400px;
+        text-align: center;
           .commitment {
+            width: 400px;
+            margin: 0 auto;
             cursor: pointer;
-            max-width: 400px;
+            // border: 1px solid green;
             ion-card {
               .title {
                 display: flex;
@@ -94,7 +100,6 @@ page-choose {
               }
             }
           }
-        }
       }
     }
   }

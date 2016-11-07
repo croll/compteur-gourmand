@@ -13,7 +13,20 @@ export class ChoosePage {
 
   list = [];
   engagementConfirmPage: any = EngagementConfirmPage;
-  keyboardopened: boolean = false
+  keyboardopened: boolean = false;
+  sliderOptions: any = {
+    nextButton: '.r',
+    prevButton: '.l',
+    slidesPerView: 3,
+    slidesperGroup: 3,
+    spaceBetween: 195,
+    breakpoints: {
+      2200: {
+        slidesPerView: 1,
+        spaceBetween: 0
+      }
+    }
+  };
   @ViewChild('slider') slider: Slides;
 
 
@@ -28,19 +41,8 @@ export class ChoosePage {
     });
   }
 
-  ionViewWillEnter() {
-    console.log("ionViewCanEnter");
-    let num = -1;
-    for(let i = 0; i < this.userContributions.activeCommitments.length ; i++) {
-      if (i % 3 == 0) {
-        num++;
-        this.list[num] = Array();
-      }
-      this.list[num].push(this.userContributions.activeCommitments[i]);
-    }
-  }
-
   ionViewDidLoad() {
+    console.log(window.innerWidth);
     // Hack for ionic rc.2 to correcty initialize the swiper
     let swiperContainer = this._elementRef.nativeElement.getElementsByClassName('swiper-container')[0];
     this.waitRendered(swiperContainer).then(()=>{
