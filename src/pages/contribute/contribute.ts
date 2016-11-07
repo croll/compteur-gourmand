@@ -10,7 +10,10 @@ export class ContributePage {
   constructor(public navCtrl: NavController) {}
 
   ionViewDidLoad() {
-    console.log('Hello ContributePage Page');
+  }
+
+  end() {
+    this.navCtrl.popToRoot();
   }
 
 }
