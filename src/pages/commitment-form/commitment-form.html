@@ -23,6 +23,10 @@
       <ion-textarea type="text" formControlName="logo" (click)="fileChooserLogo()"></ion-textarea>
     </ion-item>
     <ion-item>
+      <ion-label>Image</ion-label>
+      <ion-textarea type="text" formControlName="image" (click)="fileChooserImage()"></ion-textarea>
+    </ion-item>
+    <ion-item>
       <ion-label>Demander combien de personnes composent le foyer</ion-label>
       <ion-toggle [checked]="true" formControlName="ask_for_persons"></ion-toggle>
     </ion-item>

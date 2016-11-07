@@ -37,6 +37,7 @@ export class CommitmentFormPage {
       short_description: ['', Validators.required],
       description: ['', Validators.required],
       logo: ['', Validators.required],
+      image: ['', Validators.required],
       ask_for_persons: 0,
       ask_for_periodicity: 0,
       m2_saved_by_unit: 0,
@@ -139,6 +140,18 @@ export class CommitmentFormPage {
         console.log(uri);
         this.form.patchValue({
           logo: uri,
+        });
+      }).catch((e) => {
+        console.log(e);
+      }
+    );
+  }
+
+  fileChooserImage() {
+    FileChooser.open().then((uri) => {
+        console.log(uri);
+        this.form.patchValue({
+          image: uri,
         });
       }).catch((e) => {
         console.log(e);

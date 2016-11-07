@@ -14,6 +14,7 @@ export class Commitment extends Storable {
   name: string
   short_description : string
   description : string
+  image: string
   logo: string
   ask_for_persons: boolean
   ask_for_periodicity: boolean
@@ -27,6 +28,7 @@ export class Commitment extends Storable {
       'name',
       'short_description',
       'description',
+      'image',
       'logo',
       'ask_for_persons',
       'ask_for_periodicity',
