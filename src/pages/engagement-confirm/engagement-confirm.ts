@@ -26,7 +26,6 @@ export class EngagementConfirmPage {
 
     this.storedConfiguration.get("configuration/main").then((configuration: Configuration) => {
       this.configuration = configuration;
-      console.log(this.configuration);
     });
   }
 
