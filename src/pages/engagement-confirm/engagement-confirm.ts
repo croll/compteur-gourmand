@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { UserContributions } from '../../providers/user-contributions';
 import { ContactPage } from '../contact/contact';
 import { Contribution } from '../../db/contribution';
+import { Configuration, StoredConfiguration } from '../../db/configuration';
 
 @Component({
   selector: 'page-engagement-confirm',
@@ -13,13 +14,19 @@ export class EngagementConfirmPage {
 
   contributionList: Contribution[];
   commitments: {} = {};
+  configuration: Configuration;
 
-  constructor(public navCtrl: NavController, public userContributions: UserContributions) {}
+  constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration) {}
 
   ionViewDidLoad() {
     this.contributionList = this.userContributions.contributions;
     this.userContributions.activeCommitments.forEach((commitment) => {
       this.commitments[commitment.id] = commitment;
+    });
+
+    this.storedConfiguration.get("configuration/main").then((configuration: Configuration) => {
+      this.configuration = configuration;
+      console.log(this.configuration);
     });
   }
 

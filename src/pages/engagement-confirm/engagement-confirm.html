@@ -1,6 +1,6 @@
 <ion-header padding>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton>
     <ion-title>Prêt(e) à vous engager pour un an ?</ion-title>
     <ion-buttons end>
       <img src="assets/img/logo.jpg" style="height: 45px;margin-top: 5px"/>
@@ -12,7 +12,8 @@
 
 <ion-content padding>
 
-  <h1 text-center margin>Appuyez sur le buzzer !</h1>
+  <h1 text-center margin *ngIf="!enable_physical_button">Appuyez sur le buzzer !</h1>
+  <h1 text-center margin *ngIf="enable_physical_button">Je m'engage !</h1>
 
   <div class="main-container">
     <!-- Left container -->
@@ -49,10 +50,16 @@
     </div>
   </div>
 
-  <div class="button-cont">
+  <div class="button-cont" *ngIf="enable_physical_button">
     <button ion-button (click)="engage()" large>
       Je m'engage !
     </button>
   </div>
 
 </ion-content>
+
+<ion-footer>
+  <ion-buttons>
+    <button ion-button clear navPop color="secondary">Retour à l'étape précédente</button>
+  </ion-buttons>
+</ion-footer>
