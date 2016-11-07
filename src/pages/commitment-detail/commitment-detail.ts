@@ -17,11 +17,15 @@ export class CommitmentDetailPage {
 
   commitment: Commitment;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams) {}
+  constructor(public navCtrl: NavController, private navParams: NavParams, private viewCtrl: ViewController) {
+    this.commitment = this.navParams.get('commitment');
+  }
 
   ionViewDidLoad() {
-    this.commitment = this.navParams.get('commitment');
-    console.log(this.commitment);
+  }
+
+  cancel() {
+    this.viewCtrl.dismiss();
   }
 
 }
