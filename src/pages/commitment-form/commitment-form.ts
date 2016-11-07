@@ -31,9 +31,6 @@ export class CommitmentFormPage {
       this.index=null;
     this.copyFrom = navParams.get('copy_from');
     console.log("this.copyFrom: ", this.copyFrom);
-  }
-
-  ionViewDidLoad() {
     this.form = this.formBuilder.group({
       id: '',
       name: ['', Validators.required],
@@ -47,6 +44,9 @@ export class CommitmentFormPage {
       order: 0,
       active: [false]
     });
+  }
+
+  ionViewDidLoad() {
 
     console.log("this.index : ", this.index);
     if (typeof(this.index) == 'number') {

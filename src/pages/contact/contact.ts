@@ -21,15 +21,23 @@ export class ContactPage {
   cityM: boolean = false;
   contactM: boolean = false;
 
-  constructor(public navCtrl: NavController, public userContributions: UserContributions, private formBuilder: FormBuilder, private storedConfiguration: StoredConfiguration) {}
+  constructor(public navCtrl: NavController, public userContributions: UserContributions, private formBuilder: FormBuilder, private storedConfiguration: StoredConfiguration) {
 
-  ionViewWillEnter() {
+    this.contactForm = this.formBuilder.group({
+      lastname: [''],
+      firstname: [''],
+      contact: [''],
+      newsletter: [false],
+      city: ['']
+    });
+
   }
 
   ionViewDidLoad() {
 
     this.storedConfiguration.get("configuration/main").then((configuration: Configuration) => {
       this.configuration = configuration;
+      this.contactForm.controls['firstname'].setValue(this.userContributions.user.firstname);
       if (configuration.lastname_is_mandatory) {
         this.lastnamePH+=' *';
         this.lastnameM = true;
@@ -44,14 +52,6 @@ export class ContactPage {
       }
     }).catch((err) => {
         alert("impossible de charger la configuration generale: "+err);
-    });
-
-    this.contactForm = this.formBuilder.group({
-      lastname: [''],
-      firstname: [this.userContributions.user.firstname],
-      contact: [''],
-      newsletter: [false],
-      city: ['']
     });
 
   }

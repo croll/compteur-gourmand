@@ -14,9 +14,6 @@ export class ConfigurationPage {
   loadedDoc: Configuration;
 
   constructor(public navCtrl: NavController, private formBuilder: FormBuilder, private db: Database, private store: StoredConfiguration) {
-  }
-
-  ionViewDidLoad() {
     this.form = this.formBuilder.group({
       enable_physical_button: [true, Validators.required],
       use_external_screen: [true, Validators.required],
@@ -24,6 +21,10 @@ export class ConfigurationPage {
       contact_is_mandatory: [false, Validators.required],
       city_is_mandatory: [false, Validators.required]
     });
+  }
+
+  ionViewDidLoad() {
+    console.log("DID LOAD");
     this.load();
   }
 
