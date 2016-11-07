@@ -27,20 +27,26 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
   @HostListener('onEditorKeyup', ['$event']) onEditorKeyupped(editor) {
     this.myString.text = editor.getContent();
   }
+  // @HostListener('document:click', ['$event']) onClick(e) {
+  //   console.log(e);
+  //   // e.preventDefault();
+  //   // e.stop();
+  //   // e.stopPropagation();
+  //   console.log(e.target.targetElement);
+  //   console.log(this.editor);
+  //   console.log(this.editor.isHidden());
+  // }
 
-  editor;
+
+  editor: any;
   myString;
+  elName: string;
 
   constructor(private el: ElementRef, private db: Database) {
   }
 
   ngAfterViewInit() {
     let text = "Lorem ipsum";
-    // this.db.getDb().get(this.bindTo).then((s) => {
-    //   console.log(s);
-    // }, (err) => {
-    //   console.log(err);
-    // });
     this.db.getDb().get(this.bindTo).then((myString) => {
       if (myString.text == "") {
         if (this.el.nativeElement.innerHTML) {
@@ -92,6 +98,8 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
   }
 
   save() {
+    this.editor.hide();
+    this.editor.setMode('readonly');
     this.db.getDb().put(this.myString).then((response) => {
       this.myString._rev = response.rev;
     }, (err) => {

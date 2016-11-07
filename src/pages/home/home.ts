@@ -1,26 +1,29 @@
 import { Component } from '@angular/core';
 
-import { NavController, ModalController, Events } from 'ionic-angular';
+import { NavController, ModalController, Events, MenuController } from 'ionic-angular';
 import { FootprintPage } from '../footprint/footprint';
 import { ChoosePage } from '../choose/choose';
 import { UserContributions } from '../../providers/user-contributions';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html',
-  host: { '(window:keydown)': 'listenKeyboard($event)' }
+  templateUrl: 'home.html'
 })
 export class HomePage {
 
-  pass = 'admin123';
+  pass = 'Admin123';
   currentEntry = '';
   isAdmin = false;
+  count: number = 0;
+  timer: any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private userContributions: UserContributions, private events: Events) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private userContributions: UserContributions, private events: Events, private menuCtrl: MenuController) {
     events.subscribe('user:logout', () => {
       this.isAdmin = false;
-      console.log("MENU CLOSED");
     });
+    this.timer = setInterval(() => {
+      this.count = 0;
+    }, 1500);
   }
 
   openPopup() {
@@ -38,14 +41,16 @@ export class HomePage {
     })
   }
 
-  listenKeyboard(event) {
-    this.currentEntry += event.key;
-    if (this.currentEntry.length > this.pass.length) {
-      this.currentEntry = this.currentEntry.substr(1, this.currentEntry.length);
-    }
-    if (this.currentEntry == this.pass) {
+  showAdmin() {
+    this.count++;
+    if (this.count == 3) {
       this.isAdmin = true;
+      this.menuCtrl.open();
     }
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.timer);
   }
 
 }

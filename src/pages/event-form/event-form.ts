@@ -25,15 +25,6 @@ export class EventFormPage {
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private store_config: StoredConfiguration, private alertCtrl: AlertController) {
     this.id = navParams.get('id') || null;
-  }
-
-  ionViewDidLoad() {
-    this.store_config.get("configuration/main").then((configuration) => {
-      this.configuration = configuration;
-    }).catch((err) => {
-        alert("immpossible de charger la configuration general: "+err);
-    });
-
 
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
@@ -41,6 +32,14 @@ export class EventFormPage {
       active: [false],
       start_date: ['', Validators.required],
       end_date: ['', Validators.required]
+    });
+  }
+
+  ionViewDidLoad() {
+    this.store_config.get("configuration/main").then((configuration) => {
+      this.configuration = configuration;
+    }).catch((err) => {
+        alert("immpossible de charger la configuration general: "+err);
     });
 
     if (this.id) {
