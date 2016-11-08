@@ -46,11 +46,19 @@ export class ConfigurationPage {
   }
 
   save() {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let e: Configuration
     if (this.loadedDoc) {
-      this.loadedDoc.setValues(this.form.getRawValue());
+      e = this.loadedDoc;
+    } else {
+      e = new Configuration();
     }
-    this.loadedDoc.section="main";
-    this.store.put(this.loadedDoc).then((res) => {
+    e.section="main";
+    e.setValues(this.form.getRawValue());
+
+    this.store.put(e).then((res) => {
       console.log("config saved...", res);
       this.navCtrl.pop();
     }).catch((err) => {
