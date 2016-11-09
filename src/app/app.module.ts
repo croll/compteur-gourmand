@@ -15,6 +15,7 @@ import { EngagementConfirmPage } from '../pages/engagement-confirm/engagement-co
 import { ContactPage } from '../pages/contact/contact';
 import { ContributePage } from '../pages/contribute/contribute';
 import { UpgradePage } from '../pages/upgrade/upgrade';
+import { ReinitPage } from '../pages/reinit/reinit';
 import { CommitmentDetailPage } from '../pages/commitment-detail/commitment-detail';
 import { TinyMCE } from './tinymce.directive';
 import { Database } from './database.service';
@@ -43,6 +44,7 @@ import { UserContributions } from '../providers/user-contributions';
     ContributePage,
     CommitmentAddModal,
     UpgradePage,
+    ReinitPage,
     ContactPage,
     TinyMCE
   ],
@@ -68,6 +70,7 @@ import { UserContributions } from '../providers/user-contributions';
     CommitmentAddModal,
     ContactPage,
     UpgradePage,
+    ReinitPage
   ],
   providers: [
     Database,

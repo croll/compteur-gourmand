@@ -8,6 +8,7 @@ import { ConfigurationPage } from '../pages/configuration/configuration';
 import { EventListPage } from '../pages/event-list/event-list';
 import { CommitmentListPage } from '../pages/commitment-list/commitment-list';
 import { UpgradePage } from '../pages/upgrade/upgrade';
+import { ReinitPage } from '../pages/reinit/reinit';
 // import { ContactPage } from '../pages/contact/contact';
 
 @Component({
@@ -28,6 +29,7 @@ export class CompteurGourmand {
       {title: 'Liste des événements', component: EventListPage},
       {title: 'Liste des engagements', component: CommitmentListPage},
       {title: "Mise à jour de l'app", component: UpgradePage},
+      {title: "Réinitialisation", component: ReinitPage},
     ];
 
     platform.ready().then(() => {
