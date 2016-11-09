@@ -1,7 +1,7 @@
 <ion-header padding>
 
   <ion-navbar hideBackButton>
-    <ion-title>Restons en contact :)</ion-title>
+    <ion-title tinymce [bindTo]="'CONTACT.TITLE'">Restons en contact :)</ion-title>
     <ion-buttons end>
       <button clear ion-button>
         <img src="assets/img/logo.jpg" style="height: 45px;margin-top: 5px"/>
@@ -40,9 +40,9 @@ prochaines P'tites Bouffes Citoyennes ?... Alors laissez-nous vos coordonnées :
     </ion-item>
 
     <ion-item>
-      <ion-label>Je souhaite recevoir la newsletter d’Al’Terre Breizh</ion-label>
+      <ion-label tinymce [bindTo]="'CONTACT.NEWSLETTER'">Je souhaite recevoir la newsletter d’Al’Terre Breizh</ion-label>
       <ion-checkbox checked="false" value="" formControlName="newsletter"></ion-checkbox>
-      <div class="help">Vos coordonnées ne seront jamais utilisées à des fins commerciales</div>
+      <div class="help" tinymce [bindTo]="'CONTACT.YOUR_COORDINATES'">Vos coordonnées ne seront jamais utilisées à des fins commerciales</div>
     </ion-item>
 
   </form>

@@ -12,6 +12,7 @@ export class UserContributions {
   activeCommitments: Commitment[];
   savedMoney = 0;
   savedM2 = 0;
+  isAdmin = false;
 
   constructor(private storedUser: StoredUser, private storedContribution: StoredContribution, private storedEvent: StoredEvent) {
   }

@@ -11,15 +11,13 @@ import { UserContributions } from '../../providers/user-contributions';
 })
 export class HomePage {
 
-  pass = 'Admin123';
-  currentEntry = '';
   isAdmin = false;
   count: number = 0;
   timer: any;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, private userContributions: UserContributions, private events: Events, private menuCtrl: MenuController) {
     events.subscribe('user:logout', () => {
-      this.isAdmin = false;
+      this.userContributions.isAdmin = false;
     });
     this.timer = setInterval(() => {
       this.count = 0;
@@ -44,7 +42,7 @@ export class HomePage {
   showAdmin() {
     this.count++;
     if (this.count == 3) {
-      this.isAdmin = true;
+      this.userContributions.isAdmin = true;
       this.menuCtrl.open();
     }
   }
