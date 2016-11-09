@@ -1,7 +1,7 @@
 <ion-header padding>
 
   <ion-navbar hideBackButton>
-    <ion-title>Prêt(e) à vous engager pour un an ?</ion-title>
+    <ion-title tinymce [bindTo]="'ENGAGEMENT_CONFIRM.TITLE'">Prêt(e) à vous engager pour un an ?</ion-title>
     <ion-buttons end>
       <img src="assets/img/logo.jpg" style="height: 45px;margin-top: 5px"/>
     </ion-buttons>
@@ -12,8 +12,9 @@
 
 <ion-content padding>
 
-  <h1 text-center margin *ngIf="configuration.enable_physical_button">Appuyez sur le buzzer !</h1>
-  <h1 text-center margin *ngIf="!configuration.enable_physical_button">Je m'engage !</h1>
+  <!-- <h1 text-center margin *ngIf="configuration.enable_physical_button">Appuyez sur le buzzer !</h1> -->
+  <!-- <h1 text-center margin *ngIf="!configuration.enable_physical_button">Je m'engage !</h1> -->
+  <h1 text-center margin>Je m'engage !</h1>
 
   <div class="main-container">
     <!-- Left container -->
@@ -35,7 +36,7 @@
     <!-- Right container -->
     <div class="right-cont">
       <ion-card>
-        <ion-card-header text-center>
+        <ion-card-header text-center tinymce [bindTo]="'ENGAGEMENT_CONFIRM.TOTAL_GAIN'">
           Gain total
         </ion-card-header>
         <ion-item>
@@ -50,7 +51,8 @@
     </div>
   </div>
 
-  <div class="button-cont" *ngIf="!configuration.enable_physical_button">
+  <!-- <div class="button-cont" *ngIf="!configuration.enable_physical_button"> -->
+  <div class="button-cont">
     <button ion-button (click)="engage()" large>
       Je m'engage !
     </button>

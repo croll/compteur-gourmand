@@ -16,17 +16,18 @@ export class EngagementConfirmPage {
   commitments: {} = {};
   configuration: Configuration;
 
-  constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration) {}
+  constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration) {
+    this.storedConfiguration.get("configuration/main").then((configuration: Configuration) => {
+      this.configuration = configuration;
+    });
+  }
 
-  ionViewDidLoad() {
+  ionViewCanEnter() {
     this.contributionList = this.userContributions.contributions;
     this.userContributions.activeCommitments.forEach((commitment) => {
       this.commitments[commitment.id] = commitment;
     });
 
-    this.storedConfiguration.get("configuration/main").then((configuration: Configuration) => {
-      this.configuration = configuration;
-    });
   }
 
   buttonpressed(event) {
