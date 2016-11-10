@@ -32,17 +32,14 @@ export class EngagementConfirmPage {
   }
 
   ionViewDidLoad() {
-    console.log("in");
     this.listenButton=true;
   }
 
   ionViewWillLeave() {
-    console.log("out");
     this.listenButton=false;
   }
 
   buttonpressed(event) {
-    console.log("shift pressed !");
     if (this.listenButton && event.keyCode == 16) { // shift
       this.engage();
     }
