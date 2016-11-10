@@ -38,4 +38,7 @@
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <plugin name="de.fhg.fokus.famium.presentation" spec="https://github.com/fraunhoferfokus/cordova-plugin-presentation.git" />
     <plugin name="com.megster.cordova.FileChooser" spec="http://github.com/don/cordova-filechooser.git" />
+    <allow-navigation href="http://192.168.1.18:8100" />
+    <plugin name="cordova-plugin-filepath" spec="~1.0.2" />
+    <plugin name="cordova-plugin-file" spec="~4.3.0" />
 </widget>
