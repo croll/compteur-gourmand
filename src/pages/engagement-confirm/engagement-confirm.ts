@@ -15,6 +15,7 @@ export class EngagementConfirmPage {
   contributionList: Contribution[];
   commitments: {} = {};
   configuration: Configuration;
+  listenButton: boolean = false;
 
   constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration) {
     this.storedConfiguration.get("configuration/main").then((configuration: Configuration) => {
@@ -30,8 +31,19 @@ export class EngagementConfirmPage {
 
   }
 
+  ionViewDidLoad() {
+    console.log("in");
+    this.listenButton=true;
+  }
+
+  ionViewWillLeave() {
+    console.log("out");
+    this.listenButton=false;
+  }
+
   buttonpressed(event) {
-    if (event.keyCode == 16) { // shift
+    console.log("shift pressed !");
+    if (this.listenButton && event.keyCode == 16) { // shift
       this.engage();
     }
   }
