@@ -40,7 +40,7 @@ export class Store<T extends Storable> {
       if (('_id' in obj) && (obj._id.length > 0)) {
         return obj._id;
       } else {
-        return path+(new Date().getTime());
+        return path+(new Date().getTime())+"-"+Math.floor(Math.random()*100000000);
       }
     }
   }
