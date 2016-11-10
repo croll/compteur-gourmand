@@ -104,6 +104,7 @@ export class UserContributions {
   }
 
   addContribution(contribution: Contribution) {
+    contribution.id_event = this.activeEvent._id;
     this.contributions.push(contribution);
     this.updateTotal(contribution, contribution.id_commitment, '+');
   }

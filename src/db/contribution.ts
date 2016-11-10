@@ -8,6 +8,7 @@ export class Contribution extends Storable {
 
   id_user: string
   id_commitment: string
+  id_event: string
 
   nb_of_unit: number
   nb_of_person: number
@@ -18,6 +19,7 @@ export class Contribution extends Storable {
       '_rev',
       'id_user',
       'id_commitment',
+      'id_event',
       'nb_of_unit',
       'nb_of_person',
       'timestamp',
@@ -30,4 +32,20 @@ export class StoredContribution extends Store<Contribution> {
   constructor(db: Database) {
     super(Contribution, db, Store.milliroute("contribution/"), "contribution/", "contribution0");
   }
+
+  // get Event contributions of this event
+  getEventContributions(id_event: string) : Promise<Contribution[]> {
+    return this.db.getDb().find({
+      selector: {
+        id_event: id_event
+      },
+      //sort: ['timestamp']
+    }).then(function (result) {
+      let contributions = result.docs.map((doc) => {
+        return new Contribution(doc);
+      });
+      return contributions;
+    });
+  }
+
 }
