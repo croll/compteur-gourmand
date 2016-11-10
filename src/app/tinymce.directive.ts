@@ -28,7 +28,7 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
   @HostListener('onEditorKeyup', ['$event']) onEditorKeyupped(editor) {
     this.myString.text = editor.getContent();
   }
-  @HostListener('click') onClick(editor) {
+  @HostListener('click') onClick() {
     if (typeof(this.editor) == 'undefined') {
       console.log("init editor");
       if (this.userContributions.isAdmin != true) {

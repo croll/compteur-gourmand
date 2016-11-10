@@ -15,7 +15,7 @@ export class HomePage {
   count: number = 0;
   timer: any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private userContributions: UserContributions, private events: Events, private menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public userContributions: UserContributions, private events: Events, private menuCtrl: MenuController) {
     events.subscribe('user:logout', () => {
       this.userContributions.isAdmin = false;
     });
