@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import PouchDB from 'pouchdb';
+import PouchDBFind from 'pouchdb-find';
+PouchDB.plugin(PouchDBFind);
+
+
 //import docuri from 'docuri';
 
 @Injectable()
