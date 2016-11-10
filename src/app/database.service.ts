@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import PouchDB from 'pouchdb';
+import PouchDBFind from 'pouchdb-find';
+PouchDB.plugin(PouchDBFind);
+
+
 //import docuri from 'docuri';
 
 @Injectable()
@@ -96,6 +100,18 @@ export class Database {
             console.log(JSON.stringify(docs.rows));
           });
         }
+
+        // create indexes
+        this._db.createIndex({
+          index: {
+            fields: ['id_event' ]
+          }
+        }).then((res) => {
+          console.log("index id_event creation: ", res);
+        }).catch((err) => {
+          console.log("index id_event creation failed: ", err);
+        });
+
       }).catch((err) => {
         console.log("db infos failed: ", err);
       })

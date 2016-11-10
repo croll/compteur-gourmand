@@ -4,6 +4,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 //import { Database } from '../../app/database.service';
 import { StoredConfiguration, Configuration } from '../../db/configuration';
 import { StoredEvent, Event } from '../../db/event';
+import { StoredContribution, Contribution } from '../../db/contribution'; // for csv export
 import { AlertController } from 'ionic-angular';
 
 /*
@@ -23,7 +24,7 @@ export class EventFormPage {
   loadedDoc: Event;
   wasActive = false;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private store_config: StoredConfiguration, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private store_config: StoredConfiguration, private alertCtrl: AlertController, private storedContribution: StoredContribution) {
     this.id = navParams.get('id') || null;
 
     this.form = this.formBuilder.group({
@@ -124,4 +125,12 @@ export class EventFormPage {
     confirm.present();
   }
 
+  export_csv(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this.storedContribution.getEventContributions(this.loadedDoc._id).then((docs) => {
+      console.log("commitment: ", docs);
+    });
+  }
 }
