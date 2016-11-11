@@ -49,7 +49,7 @@ prochaines P'tites Bouffes Citoyennes ?... Alors laissez-nous vos coordonnées :
 
 </ion-content>
 
-<ion-footer padding>
+<ion-footer padding *ngIf="!keyboardopened">
   <ion-toolbar>
     <button ion-button color="primary" (click)="save()" [disabled]="!contactForm.valid" large>Enregistrer mes coordonnées</button>
     <button ion-button clear [navPush]="contributePage" color="secondary" large>Je passe</button>

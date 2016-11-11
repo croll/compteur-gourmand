@@ -11,6 +11,8 @@ import {
   Output
 } from '@angular/core';
 import { UserContributions } from '../providers/user-contributions';
+import { FileChooser, File, FileEntry } from 'ionic-native';
+declare var cordova: any;
 
 // import 'tinymce/tinymce.min.js';
 // import 'tinymce/themes/modern/theme';
@@ -25,12 +27,11 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
 
   @Input() bindTo: String;
   @Output() onEditorKeyup = new EventEmitter<any>();
-  @HostListener('onEditorKeyup', ['$event']) onEditorKeyupped(editor) {
-    this.myString.text = editor.getContent();
-  }
+  // @HostListener('onEditorKeyup', ['$event']) onEditorKeyupped(editor) {
+  //   this.myString.text = editor.getContent();
+  // }
   @HostListener('click') onClick() {
     if (typeof(this.editor) == 'undefined') {
-      console.log("init editor");
       if (this.userContributions.isAdmin != true) {
         return;
       }
@@ -39,7 +40,6 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
         this.editor.show();
       });
     } else {
-      console.log("editor visible");
       this.editor.show();
     }
   }
@@ -70,9 +70,20 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
           selector: '#' + this.el.nativeElement.getAttribute('id'),
           inline: true,
           menubar: false,
-          toolbar: 'customsave | undo redo | bold italic underline strikethrough | bold italic | alignleft aligncenter alignright alignjustify | removeformat',
-          plugins: [],
+          toolbar: 'customsave | undo redo | bold italic underline strikethrough | fontsizeselect | forecolor | backcolor | alignleft aligncenter alignright alignjustify | image | fullscreen',
+          plugins: 'textcolor colorpicker image autoresize fullscreen',
+          paste_data_images: true,
           skin_url: '/assets/skins/lightgray',
+          image_description: false,
+          fontsize_formats: '1rem 1.5rem 2rem 2.5rem 3rem 3.5rem 4rem',
+          autoresize_max_height: 200,
+          file_browser_callback: (field_name, url, type, win) => {
+            this.processImageFile().then((base64) => {
+              this.editor.execCommand('insertHTML', false, '<img src="' + base64 + '">');
+            }, (err) => {
+              console.log("Error processing image");
+            })
+          },
           setup: editor => {
             editor.on('keyup', () => {
               this.onEditorKeyup.emit(editor);
@@ -120,6 +131,7 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
   }
 
   save() {
+    this.myString.text = this.editor.getContent();
     this.editor.hide();
     this.db.getDb().put(this.myString).then((response) => {
       this.myString._rev = response.rev;
@@ -130,5 +142,36 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     tinymce.remove(this.editor);
+  }
+
+  processImageFile() {
+    return FileChooser.open().then((uri) => {
+      return this.processURI(uri);
+    });
+  }
+
+  processURI(uri: string) {
+
+    return new Promise((resolve, reject) => {
+
+        File.resolveLocalFilesystemUrl(uri).then((fe: FileEntry) => {
+
+          fe.file((file) => {
+            var r = new window['FileReader']();
+             r.onloadend = function(e) {
+               resolve(this.result);
+             }
+             r.onerror = function(err) {
+               console.log("Erreur lors du traitement de l'image");
+               console.log("Error loading file");
+             }
+            r.readAsDataURL(file);
+          });
+        }, (err) => {
+          console.log("Error getting file", err);
+          reject(err);
+        });
+      });
+
   }
 }
