@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserContributions } from '../../providers/user-contributions';
 import { ContributePage } from '../contribute/contribute';
 import { Configuration, StoredConfiguration } from '../../db/configuration';
+import { Keyboard } from 'ionic-native';
 
 @Component({
   selector: 'page-contact',
@@ -20,8 +21,18 @@ export class ContactPage {
   lastnameM: boolean = false;
   cityM: boolean = false;
   contactM: boolean = false;
+  keyboardopened: boolean = false;
 
   constructor(public navCtrl: NavController, public userContributions: UserContributions, private formBuilder: FormBuilder, private storedConfiguration: StoredConfiguration) {
+
+    Keyboard.onKeyboardShow().subscribe(() => {
+      console.log("onKeyboardShow");
+      this.keyboardopened=true;
+    });
+    Keyboard.onKeyboardHide().subscribe(() => {
+      console.log("onKeyboardHide");
+      this.keyboardopened=false;
+    });
 
     this.contactForm = this.formBuilder.group({
       lastname: [''],
