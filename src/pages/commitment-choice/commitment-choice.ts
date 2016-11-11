@@ -15,7 +15,7 @@ export class CommitmentChoicePage {
   currentContribution: Contribution;
   keyboardopened: boolean = false
 
-  constructor(public navCtrl: NavController, private viewCtrl: ViewController, private navParams: NavParams, private userContributions: UserContributions) {
+  constructor(public navCtrl: NavController, private viewCtrl: ViewController, private navParams: NavParams, public userContributions: UserContributions) {
     Keyboard.onKeyboardShow().subscribe(() => {
       console.log("onKeyboardShow");
       this.keyboardopened=true;

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { StoredContribution, Contribution } from '../db/contribution';
 import { StoredUser, User } from '../db/user';
 import { Event, StoredEvent, Commitment } from '../db/event';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Injectable()
 export class UserContributions {
@@ -14,7 +15,7 @@ export class UserContributions {
   savedM2 = 0;
   isAdmin = false;
 
-  constructor(private storedUser: StoredUser, private storedContribution: StoredContribution, private storedEvent: StoredEvent) {
+  constructor(private storedUser: StoredUser, private storedContribution: StoredContribution, private storedEvent: StoredEvent, private sanitizer: DomSanitizer) {
   }
 
   init() {
@@ -122,7 +123,7 @@ export class UserContributions {
 
     let commitment = this.activeEvent.getCommitmentById(id_commitment);
     let totalM2 = commitment.m2_saved_by_unit;
-    let totalMoney = commitment.m2_saved_by_unit;
+    let totalMoney = commitment.euros_saved_by_unit;
 
     if (commitment.ask_for_persons) {
       totalM2 *= contribution.nb_of_person;
@@ -142,6 +143,10 @@ export class UserContributions {
       this.savedMoney -= totalMoney;
     }
 
+  }
+
+  sanitize(url: string):SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
 }

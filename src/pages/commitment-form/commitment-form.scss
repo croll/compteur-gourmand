@@ -1,3 +1,32 @@
 page-commitment-form {
 
+  .image-container {
+    padding: 18px;
+    display: flex;
+    align-items: center;
+
+    .image {
+      border: 1px solid #333;
+      width: 400px;
+      height: 280px;
+      background-repeat: no-repeat, repeat!important;
+      background-size: cover!important;
+      background-position: center!important;
+      background-color: #c0c0c0;
+      &.logo {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    button {
+      margin-left: 3rem;
+    }
+
+    ion-label {
+      max-width: 80px;
+    }
+
+  }
+
 }

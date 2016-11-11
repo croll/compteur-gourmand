@@ -2,7 +2,7 @@
   <ion-navbar>
       <ion-title>
       <div class="title">
-        <img src="{{commitment.logo}}" />
+        <img [src]="userContributions.sanitize(commitment.logo)" />
         <div>Bravo vous avez choisi l'engagement</div>
         <div style="margin-left: 20px;font-weight: bold">"{{commitment.name}}"</div>
       </div>

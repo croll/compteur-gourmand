@@ -80,6 +80,14 @@ page-choose {
                   color: #d0d0d0;
                 }
               }
+              .image {
+                border: 1px solid #333;
+                height: 300px;
+                background-repeat: no-repeat, repeat!important;
+                background-size: cover!important;
+                background-color: #c0c0c0;
+                background-position: center!important;
+              }
               ion-item {
                 img {
                   width: 2.5rem;

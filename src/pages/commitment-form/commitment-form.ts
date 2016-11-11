@@ -4,8 +4,9 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 //import { Database } from '../../app/database.service';
 import { StoredEvent, Event, Commitment } from '../../db/event';
 import { AlertController } from 'ionic-angular';
-import {FileChooser} from 'ionic-native';
-
+//import { FileChooser, FilePath } from 'ionic-native';
+import { FileChooser, File, FileEntry } from 'ionic-native';
+declare var cordova: any;
 /*
   Generated class for the CommitmentForm page.
 
@@ -137,26 +138,87 @@ export class CommitmentFormPage {
 
   fileChooserLogo() {
     FileChooser.open().then((uri) => {
-        console.log(uri);
-        this.form.patchValue({
-          logo: uri,
+        File.resolveLocalFilesystemUrl(uri).then((infos) => {
+             this.form.patchValue({
+               logo: uri
+             });
+          // File.copyFile(infos.fullPath.replace(infos.name, ''), infos.name, cordova.file.dataDirectory, infos.name).then(() => {
+          //   this.form.patchValue({
+          //     logo: cordova.file.dataDirectory + '' + infos.name
+          //   });
+          // }).catch((err) => {
+          //     console.log("ERROR COPYING FILE");
+          //     console.log(JSON.stringify(err));
+          // });
+        }, (err) => {
+          console.log('Error resolving image')
         });
-      }).catch((e) => {
-        console.log(e);
-      }
-    );
+        // File.resolveLocalFilesystemUrl(cordova.file.dataDirectory).then((u) => {
+        //   console.log("YABON");
+        //   console.log(JSON.stringify(u));
+        // }).catch((e) => {
+        //   console.log("YAPASBON");
+        //   console.log(JSON.stringify(e));
+        // });
+      }, (err) => {
+        console.log('Error getting file', err);
+      });
   }
 
-  fileChooserImage() {
+  processImageFile(e, fieldName) {
+    e.preventDefault();
+    e.stopPropagation();
     FileChooser.open().then((uri) => {
-        console.log(uri);
+      this.processURI(uri).then((base64) => {
+        console.log('fieldname: '+fieldName);
+        var obj = {};
+        obj[fieldName] = base64;
+        this.form.patchValue(obj);
+      }, (err) => {
+        console.log('Error processing image', err)
+      })
+    }, (err) => {
+      console.log("Error choosing image", err)
+    });
+  }
+
+  fileChooser() {
+    FileChooser.open().then((uri) => {
+      this.processURI(uri).then((base64) => {
         this.form.patchValue({
-          image: uri,
+          image : base64
         });
-      }).catch((e) => {
-        console.log(e);
-      }
-    );
+      }, (err) => {
+        console.log('Error processing image', err)
+      })
+    }, (err) => {
+      console.log("Error choosing image", err)
+    });
+  }
+
+  processURI(uri: string) {
+
+    return new Promise((resolve, reject) => {
+
+        File.resolveLocalFilesystemUrl(uri).then((fe: FileEntry) => {
+
+          fe.file((file) => {
+            var r = new window['FileReader']();
+             r.onloadend = function(e) {
+               resolve(this.result);
+             }
+             r.onerror = function(err) {
+               console.log("Erreur lors du traitement de l'image");
+               console.log("Error loading file");
+             }
+            r.readAsDataURL(file);
+          });
+        }, (err) => {
+          console.log("Error getting file", err);
+          reject(err);
+        });
+      });
+
   }
 
 }

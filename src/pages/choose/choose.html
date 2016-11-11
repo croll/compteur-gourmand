@@ -34,7 +34,7 @@
                   <p>{{item.name}}</p>
                   <ion-icon name="checkmark-circle" large></ion-icon>
               </div>
-              <img [src]="item.image">
+              <div class="image" [style.background]="'url('+item.image+')'"></div>
               <ion-item>
                 <img src="assets/img/earth.png" item-left large>
                 <h2>{{item.m2_saved_by_unit}} m²</h2>

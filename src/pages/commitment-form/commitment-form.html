@@ -18,14 +18,18 @@
       <ion-label>Description</ion-label>
       <ion-textarea type="text" formControlName="description"></ion-textarea>
     </ion-item>
-    <ion-item>
+    <div class="image-container logo">
       <ion-label>Logo</ion-label>
-      <ion-textarea type="text" formControlName="logo" (click)="fileChooserLogo()"></ion-textarea>
-    </ion-item>
-    <ion-item>
+      <div class="image logo" [style.background]="'url('+form.controls.logo.value+')'" *ngIf="form.controls.logo.value"></div>
+      <button ion-button (click)="processImageFile($event, 'logo')">Choisir le logo</button>
+      <input type="hidden" formControlName="logo" />
+    </div>
+    <div class="image-container">
       <ion-label>Image</ion-label>
-      <ion-textarea type="text" formControlName="image" (click)="fileChooserImage()"></ion-textarea>
-    </ion-item>
+      <div class="image" [style.background]="'url('+form.controls.image.value+')'" *ngIf="form.controls.image.value"></div>
+      <button ion-button (click)="processImageFile($event, 'image')">Choisir l'image</button>
+      <input type="hidden" formControlName="image" />
+    </div>
     <ion-item>
       <ion-label>Demander combien de personnes composent le foyer</ion-label>
       <ion-toggle [checked]="true" formControlName="ask_for_persons"></ion-toggle>
