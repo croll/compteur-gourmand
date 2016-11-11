@@ -20,13 +20,13 @@
     </ion-item>
     <div class="image-container logo">
       <ion-label>Logo</ion-label>
-      <div class="image logo" [style.background]="'url('+form.controls.logo.value+')'" *ngIf="form.controls.logo.value"></div>
+      <div class="image logo" [style.background]="images.logo"></div>
       <button ion-button (click)="processImageFile($event, 'logo')">Choisir le logo</button>
       <input type="hidden" formControlName="logo" />
     </div>
     <div class="image-container">
       <ion-label>Image</ion-label>
-      <div class="image" [style.background]="'url('+form.controls.image.value+')'" *ngIf="form.controls.image.value"></div>
+      <div class="image" [style.background]="images.image"></div>
       <button ion-button (click)="processImageFile($event, 'image')">Choisir l'image</button>
       <input type="hidden" formControlName="image" />
     </div>

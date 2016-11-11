@@ -24,6 +24,7 @@ export class CommitmentFormPage {
   cg_event: Event;
   commitment: Commitment;
   copyFrom: Commitment;
+  images = {logo: '', image: ''};
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private formBuilder: FormBuilder, private store: StoredEvent, private alertCtrl: AlertController) {
     this.cg_event=navParams.get('cg_event') || null;
@@ -65,6 +66,7 @@ export class CommitmentFormPage {
   load(index: number) {
     this.commitment = this.cg_event.commitments[index];
     this.form.setValue(this.commitment);
+    this.images = {image: 'url('+this.commitment.image+')', logo: 'url('+this.commitment.logo+')'};
   }
 
   save() {
@@ -136,58 +138,18 @@ export class CommitmentFormPage {
     confirm.present();
   }
 
-  fileChooserLogo() {
-    FileChooser.open().then((uri) => {
-        File.resolveLocalFilesystemUrl(uri).then((infos) => {
-             this.form.patchValue({
-               logo: uri
-             });
-          // File.copyFile(infos.fullPath.replace(infos.name, ''), infos.name, cordova.file.dataDirectory, infos.name).then(() => {
-          //   this.form.patchValue({
-          //     logo: cordova.file.dataDirectory + '' + infos.name
-          //   });
-          // }).catch((err) => {
-          //     console.log("ERROR COPYING FILE");
-          //     console.log(JSON.stringify(err));
-          // });
-        }, (err) => {
-          console.log('Error resolving image')
-        });
-        // File.resolveLocalFilesystemUrl(cordova.file.dataDirectory).then((u) => {
-        //   console.log("YABON");
-        //   console.log(JSON.stringify(u));
-        // }).catch((e) => {
-        //   console.log("YAPASBON");
-        //   console.log(JSON.stringify(e));
-        // });
-      }, (err) => {
-        console.log('Error getting file', err);
-      });
-  }
-
   processImageFile(e, fieldName) {
     e.preventDefault();
     e.stopPropagation();
     FileChooser.open().then((uri) => {
       this.processURI(uri).then((base64) => {
-        console.log('fieldname: '+fieldName);
         var obj = {};
         obj[fieldName] = base64;
         this.form.patchValue(obj);
-      }, (err) => {
-        console.log('Error processing image', err)
-      })
-    }, (err) => {
-      console.log("Error choosing image", err)
-    });
-  }
-
-  fileChooser() {
-    FileChooser.open().then((uri) => {
-      this.processURI(uri).then((base64) => {
-        this.form.patchValue({
-          image : base64
-        });
+        this.images[fieldName] = 'url('+base64+')';
+        // var c = JSON.parse(JSON.stringify(this.images));
+        // delete this.images;
+        // this.images = c;
       }, (err) => {
         console.log('Error processing image', err)
       })
