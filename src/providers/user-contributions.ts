@@ -23,8 +23,10 @@ export class UserContributions {
       this.user = new User();
       this.contributions = [];
       this.storedEvent.getActiveEvent().then((e: Event) => {
-        this.activeEvent = e;
         this.activeCommitments = e.getActiveCommitments();
+        this.activeCommitments.sort((a: Commitment, b: Commitment):number => {
+          return a.order - b.order;
+        });
         resolve(true);
       }, () => {
           console.log("ERROR gettings active commitments list");
