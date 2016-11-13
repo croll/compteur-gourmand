@@ -22,7 +22,7 @@
 
 
   <div class="commitment-list" [hidden]="!userContributions.user.firstname">
-    <button ion-button class="l" color="secondary" large>
+    <button ion-button class="l" color="secondary" large *ngIf="userContributions.activeCommitments.length > 3">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
     <ion-slides #slider [options]="sliderOptions">
@@ -56,14 +56,14 @@
           <!-- END -->
       </ion-slide>
     </ion-slides>
-    <button ion-button class="r" color="secondary" large>
+    <button ion-button class="r" color="secondary" large *ngIf="userContributions.activeCommitments.length > 3">
       <ion-icon name="arrow-forward"></ion-icon>
     </button>
   </div>
 
 </ion-content>
 
-<ion-footer *ngIf="!keyboardopened">
+<ion-footer padding *ngIf="!keyboardopened">
   <ion-toolbar>
     <div>
       <button ion-button color="light" (click)="showCancelConfirm($event)" large>
