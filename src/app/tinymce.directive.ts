@@ -23,13 +23,18 @@ import { Database } from './database.service';
   selector: '[tinymce]'
 })
 
-export class TinyMCE implements OnDestroy, AfterViewInit {
+export class TinyMCEDirective implements OnDestroy, AfterViewInit {
 
-  @Input() bindTo: String;
+  @Input() bindTo: string;
+  // @Input() formElement: any;
+  @Input() form: any;
+  @Output() ngModelChange: EventEmitter<any> = new EventEmitter(false);
   @Output() onEditorKeyup = new EventEmitter<any>();
-  // @HostListener('onEditorKeyup', ['$event']) onEditorKeyupped(editor) {
-  //   this.myString.text = editor.getContent();
-  // }
+  @HostListener('onEditorKeyup', ['$event']) onEditorKeyupped(editor) {
+    let obj = {}
+    obj[this.bindTo] = editor.getContent();
+    this.form.patchValue(obj);
+  }
   @HostListener('click') onClick() {
     if (typeof(this.editor) == 'undefined') {
       if (this.userContributions.isAdmin != true) {
@@ -60,6 +65,7 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
 
 
   constructor(private el: ElementRef, private db: Database, private userContributions: UserContributions) {
+    this.myString = {_id: '', text: ''};
   }
 
   _initEditor() {
@@ -70,7 +76,7 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
           selector: '#' + this.el.nativeElement.getAttribute('id'),
           inline: true,
           menubar: false,
-          toolbar: 'customsave | undo redo | bold italic underline strikethrough | fontsizeselect | forecolor | backcolor | alignleft aligncenter alignright alignjustify | image | fullscreen',
+          toolbar: 'customsave | undo redo | bold italic underline strikethrough | fontsizeselect | forecolor | backcolor | alignleft aligncenter alignright alignjustify | image',
           plugins: 'textcolor colorpicker image autoresize fullscreen',
           paste_data_images: true,
           skin_url: '/assets/skins/lightgray',
@@ -91,13 +97,22 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
             editor.on('init', () => {
                 editor.show();
             });
-            editor.addButton('customsave', {
-              text: 'Enregistrer',
-              icon: false,
-              onclick: () => {
-                this.save();
-              }
-            });
+            if (!this.form) {
+              editor.addButton('customsave', {
+                text: 'Enregistrer',
+                icon: false,
+                onclick: () => {
+                  // this.ngModelChange.emit(this.el.nativeElement.innerHTML);
+                    this.myString.text = this.editor.getContent();
+                    this.db.getDb().put(this.myString).then((response) => {
+                      this.myString._rev = response.rev;
+                    }, (err) => {
+                      console.log(err);
+                    });
+                  this.editor.hide();
+                }
+              });
+            }
             resolve(editor)
           }
         });
@@ -105,6 +120,21 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    if (!this.form) {
+      return this.getFromDb();
+    } else {
+      return new Promise((resolve, reject) => {
+        this.myString = {
+          _id: '',
+          text: this.form.controls.description
+        };
+        setTimeout(() => {this.el.nativeElement.innerHTML = this.form.controls.description.value}, 100);
+        resolve(this.form.controls.description);
+      });
+    }
+  }
+
+  getFromDb() {
     let text = "Lorem ipsum";
     return new Promise((resolve, reject) => {
       this.db.getDb().get(this.bindTo).then((myString) => {
@@ -127,16 +157,6 @@ export class TinyMCE implements OnDestroy, AfterViewInit {
           this.el.nativeElement.innerHTML = this.myString.text;
           resolve();
       });
-    });
-  }
-
-  save() {
-    this.myString.text = this.editor.getContent();
-    this.editor.hide();
-    this.db.getDb().put(this.myString).then((response) => {
-      this.myString._rev = response.rev;
-    }, (err) => {
-      console.log(err);
     });
   }
 

@@ -13,8 +13,6 @@
 
 <ion-content padding>
 
-  <div class="content">
-    {{commitment.description}}
-  </div>
+  <div class="content" [innerHTML]="commitment.description"></div>
 
 </ion-content>

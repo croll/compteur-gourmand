@@ -1,5 +1,9 @@
 page-commitment-form {
 
+  .editable {
+    border: 1px solid red;
+    min-height: 300px;
+  }
   .image-container {
     padding: 18px;
     display: flex;

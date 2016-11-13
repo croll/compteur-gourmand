@@ -11,13 +11,16 @@
       <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Description courte</ion-label>
+      <ion-label>Phrase d'accroche</ion-label>
       <ion-textarea type="text" formControlName="short_description"></ion-textarea>
     </ion-item>
-    <ion-item>
-      <ion-label>Description</ion-label>
-      <ion-textarea type="text" formControlName="description"></ion-textarea>
-    </ion-item>
+    <div>
+      <ion-label>Contenu de la popup</ion-label>
+      <div>
+        <div class="editable" tinymce [form]="form" bindTo="description" ></div>
+        <input type="hidden" formControlName="description" />
+      </div>
+    </div>
     <div class="image-container logo">
       <ion-label>Logo</ion-label>
       <div class="image logo" [style.background]="images.logo"></div>
@@ -37,6 +40,10 @@
     <ion-item>
       <ion-label>Demander le nombre de fois par semaines</ion-label>
       <ion-toggle [checked]="true" formControlName="ask_for_periodicity"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Texte de remplacement</ion-label>
+      <ion-textarea type="text" formControlName="alternative_text"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label>Nombre de m² sauvés par unité</ion-label>

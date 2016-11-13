@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-//import { Database } from '../../app/database.service';
 import { StoredEvent, Event, Commitment } from '../../db/event';
 import { AlertController } from 'ionic-angular';
 //import { FileChooser, FilePath } from 'ionic-native';
@@ -42,6 +41,7 @@ export class CommitmentFormPage {
       image: ['', Validators.required],
       ask_for_persons: 0,
       ask_for_periodicity: 0,
+      alternative_text: '',
       m2_saved_by_unit: 0,
       euros_saved_by_unit: 0,
       order: 0,
@@ -51,7 +51,6 @@ export class CommitmentFormPage {
 
   ionViewDidLoad() {
 
-    console.log("this.index : ", this.index);
     if (typeof(this.index) == 'number') {
       this.load(this.index);
     }
@@ -60,6 +59,7 @@ export class CommitmentFormPage {
       console.log("copying from : ", this.copyFrom);
       this.form.setValue(this.copyFrom);
     }
+
   }
 
 
@@ -147,9 +147,6 @@ export class CommitmentFormPage {
         obj[fieldName] = base64;
         this.form.patchValue(obj);
         this.images[fieldName] = 'url('+base64+')';
-        // var c = JSON.parse(JSON.stringify(this.images));
-        // delete this.images;
-        // this.images = c;
       }, (err) => {
         console.log('Error processing image', err)
       })
@@ -182,5 +179,7 @@ export class CommitmentFormPage {
       });
 
   }
+
+
 
 }
