@@ -17,7 +17,7 @@ import { ContributePage } from '../pages/contribute/contribute';
 import { UpgradePage } from '../pages/upgrade/upgrade';
 import { ReinitPage } from '../pages/reinit/reinit';
 import { CommitmentDetailPage } from '../pages/commitment-detail/commitment-detail';
-import { TinyMCE } from './tinymce.directive';
+import { TinyMCEDirective } from './tinymce.directive';
 import { Database } from './database.service';
 import { CgMiracast } from '../providers/cg-miracast';
 import { StoredEvent } from '../db/event';
@@ -46,7 +46,7 @@ import { UserContributions } from '../providers/user-contributions';
     UpgradePage,
     ReinitPage,
     ContactPage,
-    TinyMCE
+    TinyMCEDirective
   ],
   imports: [
       IonicModule.forRoot(CompteurGourmand)
@@ -79,7 +79,7 @@ import { UserContributions } from '../providers/user-contributions';
     StoredConfiguration,
     StoredContribution,
     StoredUser,
-    UserContributions
+    UserContributions,
   ]
 })
 export class AppModule {}
