@@ -39,7 +39,7 @@ export class CgMiracast {
     this._mode="tablette";
     navigator.presentation.onavailablechange = (screenEvent) => {
       if(screenEvent.available) {
-        this.session = navigator.presentation.requestSession("display.html");
+        this.session = navigator.presentation.requestSession("presentation/index.html");
         this.session.onmessage = (msg) => {
           this.onmessage.emit(msg);
         }; // we don't care this app

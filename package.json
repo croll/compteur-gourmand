@@ -27,6 +27,7 @@
     "ionic-angular": "2.0.0-rc.2-201611041759",
     "ionic-native": "2.2.4",
     "ionicons": "3.0.0",
+    "json-2-csv": "^2.1.0",
     "pouchdb": "6.0.7",
     "pouchdb-find": "^0.10.3",
     "rxjs": "5.0.0-beta.12",

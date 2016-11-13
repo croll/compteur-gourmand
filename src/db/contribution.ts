@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Database } from '../app/database.service';
 import { Store, Storable } from './store';
+import { StoredUser } from './user';
+import { Event } from './event';
+
+// for csv export
+//import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+import { json2csv } from 'json-2-csv';
 
 export class Contribution extends Storable {
   _id: string
@@ -27,17 +33,18 @@ export class Contribution extends Storable {
   }
 }
 
+
 @Injectable()
 export class StoredContribution extends Store<Contribution> {
-  constructor(db: Database) {
+  constructor(db: Database, private storedUser: StoredUser) {
     super(Contribution, db, Store.milliroute("contribution/"), "contribution/", "contribution0");
   }
 
   // get Event contributions of this event
-  getEventContributions(id_event: string) : Promise<Contribution[]> {
+  getEventContributions(event: Event) : Promise<Contribution[]> {
     return this.db.getDb().find({
       selector: {
-        id_event: id_event
+        id_event: event._id
       },
       //sort: ['timestamp']
     }).then(function (result) {
@@ -46,6 +53,72 @@ export class StoredContribution extends Store<Contribution> {
       });
       return contributions;
     });
+  }
+
+  getEventContributionsCSV(event: Event) : Promise<string> {
+    let cols = [
+      'Nom event',
+      'Desc event',
+      'Date debut',
+      'Date fin',
+      'Nom Engagement',
+      'Nombre de m² sauvés',
+      "Nombre d'€ économisés",
+      "Fréquence",
+      "Nombre de personnes",
+      "Nom",
+      "Prenom",
+      "Contact",
+      "Ville"
+    ];
+
+      return this.getEventContributions(event).then((contributions) => {
+        var csvarray=[];
+
+        let chain = Promise.resolve("");
+
+        contributions.forEach((contribution) => {
+          let commitment = event.getCommitmentById(contribution.id_commitment);
+          let row = { };
+          row['Nom event'] = event.name;
+          row['Desc event'] = event.description;
+          row['Date debut'] = event.start_date;
+          row['Date fin'] = event.end_date;
+          row['Nom Engagement'] = commitment.name;
+          row['Nombre de m² sauvés'] = commitment.m2_saved_by_unit;
+          row['Nombre d\'€ économisés'] = commitment.euros_saved_by_unit;
+          row['Fréquence'] = contribution.nb_of_unit;
+          row['Nombre de personnes'] = contribution.nb_of_person;
+
+          chain=chain.then(() => {
+            return this.storedUser.get(contribution.id_user).then((user) => {
+              row['Nom']=user.lastname;
+              row['Prenom']=user.firstname;
+              row['Contact']=user.email;
+              row['Ville']=user.city;
+
+              csvarray.push(row);
+              return "";
+            });
+          });
+
+        });
+
+        chain=chain.then(() => {
+          return new Promise((resolve, reject) => {
+            json2csv(csvarray, (err, csv) => {
+              resolve(csv);
+            }, {
+              keys: cols,
+              delimiter: {
+                wrap: '"'
+              }
+            });
+          });
+        });
+
+        return chain;
+      });
   }
 
 }

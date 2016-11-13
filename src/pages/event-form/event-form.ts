@@ -4,8 +4,9 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 //import { Database } from '../../app/database.service';
 import { StoredConfiguration, Configuration } from '../../db/configuration';
 import { StoredEvent, Event } from '../../db/event';
-import { StoredContribution, Contribution } from '../../db/contribution'; // for csv export
+import { StoredContribution } from '../../db/contribution'; // for csv export
 import { AlertController } from 'ionic-angular';
+//import { File } from 'ionic-native';
 
 /*
   Generated class for the EventForm page.
@@ -34,6 +35,28 @@ export class EventFormPage {
       start_date: ['', Validators.required],
       end_date: ['', Validators.required]
     });
+
+/*
+    console.log("HACK window['cordova'].file.externalRootDirectory : " +window['cordova'].file.externalRootDirectory);
+
+    window['requestFileSystem'](window['PERSISTENT'], 0, (fs) => {
+        fs.root.getDirectory(window['cordova'].file.externalRootDirectory+'/Download', {
+            create : true,
+            exclusive : false
+        }, function (dirEntry) { //success
+          console.log("dirEntry: "+JSON.stringify(dirEntry));
+            //do here what you need to do with Download folder
+        }, function (err) {
+          console.log("dirEntry err: "+JSON.stringify(err));
+            //error getDirectory
+        });
+    }, (err) => {
+      console.log("err request file system");
+    }
+  );
+*/
+
+
   }
 
   ionViewDidLoad() {
@@ -129,8 +152,109 @@ export class EventFormPage {
     event.preventDefault();
     event.stopPropagation();
 
-    this.storedContribution.getEventContributions(this.loadedDoc._id).then((docs) => {
-      console.log("commitment: ", docs);
+    /* ionic-native sux
+    this.storedContribution.getEventContributionsCSV(this.loadedDoc).then((csv) => {
+      let filename = this.loadedDoc.name+"-"+new Date().toDateString()+".csv";
+      //let filename = "test.csv";
+      console.log("saving file ... "+filename);
+      let dataObj = new Blob([csv], { type: 'text/plain' });
+      return File.writeFile("/sdcard/Download/",
+        this.loadedDoc.name+"-"+new Date().toDateString()+".csv",
+        dataObj, {}).then(() => {
+          alert("Le fichier "+filename+" à été créé.");
+      }, (err) => {
+        console.error("write file failed : "+JSON.stringify(err));
+        alert("CSV Save Failed: "+JSON.stringify(err));
+      });
+    }).catch((err) => {
+      alert("CSV Download Failed: "+err);
+      console.error("CSV Download failed err : ", err);
+      console.error(JSON.stringify(err));
+    });
+    */
+
+    /* version cordova
+    this.storedContribution.getEventContributionsCSV(this.loadedDoc).then((csv) => {
+      let filename = this.loadedDoc.name+"-"+new Date().toDateString()+".csv";
+      //let filename = "test.csv";
+      console.log("saving file ... "+filename);
+      window['requestFileSystem'](window['PERSISTENT'], 0, (fs) => {
+        console.log('file system open: ' + fs.name);
+        fs.root.getDirectory(this.path_download, { create: true }, (dirEntry) => {
+          console.log("dirEntry: ", JSON.stringify(dirEntry));
+        });
+        console.log('file system: ' + JSON.stringify(fs));
+
+        fs.root.getFile(this.path_download+'/'+filename, { create: true, exclusive: false }, (fileEntry) => {
+          console.log("fileEntry is file?" + fileEntry.isFile.toString());
+          console.log('fileentry: '+JSON.stringify(fileEntry));
+          // fileEntry.name == 'someFile.txt'
+          // fileEntry.fullPath == '/someFile.txt'
+
+          fileEntry.createWriter((fileWriter) => {
+
+              fileWriter.onwriteend = () => {
+                alert("Le fichier "+filename+" à été créé.");
+              };
+
+              fileWriter.onerror = (e) => {
+                  console.log("Failed file write: " + e.toString());
+              };
+
+              let dataObj = new Blob([csv], { type: 'text/plain' });
+
+              fileWriter.write(dataObj);
+          });
+
+        }, (err) => {
+          alert("creation du fichier raté : "+JSON.stringify(err));
+        });
+      }, (err) => {
+        alert("requestFileSystem : "+JSON.stringify(err));
+      });
+    }).catch((err) => {
+      alert("CSV Download Failed: "+err);
+      console.error("CSV Download failed err : ", err);
+      console.error(JSON.stringify(err));
+    });
+    */
+
+    // version ca commence a me gonfler
+    this.storedContribution.getEventContributionsCSV(this.loadedDoc).then((csv) => {
+      let filename = this.loadedDoc.name+"-"+new Date().toDateString()+".csv";
+      this.writeToFile(filename, csv);
     });
   }
+
+
+  writeToFile(fileName, data) {
+    window['resolveLocalFileSystemURL'](window['cordova'].file.externalRootDirectory, (directoryEntry) => {
+        directoryEntry.getFile(fileName, { create: true }, (fileEntry) => {
+            fileEntry.createWriter((fileWriter) => {
+                fileWriter.onwriteend = (e) => {
+                    // for real-world usage, you might consider passing a success callback
+                    console.log('Write of file "' + fileName + '"" completed.');
+                    alert("Le fichier '"+fileName+"' à été généré.");
+                };
+
+                fileWriter.onerror = (e) => {
+                    // you could hook this up with our global error handler, or pass in an error callback
+                    console.log('Write failed: ' + e.toString());
+                    alert("Impossible d'écrire le fichier (4) : "+JSON.stringify(e));
+                };
+
+                var blob = new Blob([data], { type: 'text/plain' });
+                fileWriter.write(blob);
+            }, (err) => {
+              alert("Impossible d'écrire le fichier (3) : "+JSON.stringify(err));
+            });
+        }, (err) => {
+          alert("Impossible d'écrire le fichier (2) : "+JSON.stringify(err));
+        });
+    }, (err) => {
+      alert("Impossible d'écrire le fichier (1) : "+JSON.stringify(err));
+    });
+  }
+
+
 }

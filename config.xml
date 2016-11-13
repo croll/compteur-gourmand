@@ -28,6 +28,7 @@
   <preference name="FadeSplashScreen" value="false"/>
   <preference name="FadeSplashScreenDuration" value="0"/>
   <preference name="SplashScreenBackgroundColor" value="0xFFFFFFFF"/>
+  <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,assets,root"/>
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
@@ -41,4 +42,6 @@
   <plugin name="com.megster.cordova.FileChooser" spec="http://github.com/don/cordova-filechooser.git"/>
   <plugin name="cordova-plugin-file" spec="~4.3.0"/>
   <allow-navigation href="http://192.168.1.18:8100"/>
+  <allow-navigation href="http://10.11.12.2:8101"/>
+  <allow-navigation href="http://10.11.12.2:8100"/>
 </widget>
