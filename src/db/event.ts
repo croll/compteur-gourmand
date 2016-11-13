@@ -16,6 +16,7 @@ export class Commitment extends Storable {
   description : string
   image: string
   logo: string
+  alternative_text: string
   ask_for_persons: boolean
   ask_for_periodicity: boolean
   m2_saved_by_unit: number
@@ -32,6 +33,7 @@ export class Commitment extends Storable {
       'logo',
       'ask_for_persons',
       'ask_for_periodicity',
+      'alternative_text',
       'm2_saved_by_unit',
       'euros_saved_by_unit',
       'order',
