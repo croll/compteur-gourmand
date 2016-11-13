@@ -1,13 +1,14 @@
 page-commitment-form {
-
-  .editable {
-    border: 1px solid red;
-    min-height: 300px;
-  }
-  .image-container {
+  .image-container, .custom-item {
     padding: 18px;
     display: flex;
     align-items: center;
+
+    .editable {
+      border: 1px solid #ccc;
+      min-height: 300px;
+      width: 80%;
+    }
 
     .image {
       border: 1px solid #333;
@@ -28,7 +29,7 @@ page-commitment-form {
     }
 
     ion-label {
-      max-width: 80px;
+      max-width: 200px;
     }
 
   }

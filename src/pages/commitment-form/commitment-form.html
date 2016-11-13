@@ -14,12 +14,10 @@
       <ion-label>Phrase d'accroche</ion-label>
       <ion-textarea type="text" formControlName="short_description"></ion-textarea>
     </ion-item>
-    <div>
-      <ion-label>Contenu de la popup</ion-label>
-      <div>
-        <div class="editable" tinymce [form]="form" bindTo="description" ></div>
-        <input type="hidden" formControlName="description" />
-      </div>
+    <div class="custom-item">
+      <ion-label>Contenu du popup<br /><span class="help">(cliquez sur la zone pour <br />activer l'éditeur)</span></ion-label>
+      <div class="editable" tinymce [form]="form" bindTo="description" ></div>
+      <input type="hidden" formControlName="description" />
     </div>
     <div class="image-container logo">
       <ion-label>Logo</ion-label>
