@@ -26,11 +26,13 @@ import { Database } from './database.service';
 export class TinyMCEDirective implements OnDestroy, AfterViewInit {
 
   @Input() bindTo: string;
-  // @Input() formElement: any;
   @Input() form: any;
   @Output() ngModelChange: EventEmitter<any> = new EventEmitter(false);
   @Output() onEditorKeyup = new EventEmitter<any>();
   @HostListener('onEditorKeyup', ['$event']) onEditorKeyupped(editor) {
+    if (!this.form) {
+      return;
+    }
     let obj = {}
     obj[this.bindTo] = editor.getContent();
     this.form.patchValue(obj);
