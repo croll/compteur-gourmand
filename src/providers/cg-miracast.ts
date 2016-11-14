@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { UserContributions } from '../providers/user-contributions';
-import { Contribution, StoredContribution } from '../db/contribution';
-import { Event, StoredEvent } from '../db/event';
+import { StoredContribution } from '../db/contribution';
+import { StoredEvent } from '../db/event';
 import 'rxjs/add/operator/map';
 
 /*
@@ -73,14 +73,40 @@ export class CgMiracast {
     return this._mode;
   }
 
-  updateAll() {
+  updateAll(displayLastContrib: boolean = false) {
+    console.log("update all ! "+displayLastContrib);
     this.storedEvent.getActiveEvent().then((cg_event) => {
       return this.storedContribution.getTotauxOfEvent(cg_event).then((total) => {
+        let merci = "";
+        if (displayLastContrib) {
+          let commitment_list = '';
+          let merci_tpl = "Grâce à ses engagements _COMMITMENTS_LIST_ sur un an, _USER_FIRSTNAME_ a économisé _TOTAL_EUROS_€ et vient de permettre de diminuer notre empreinte écologique de _TOTAL_M2_m2 ! Bravo !";
+
+          this.userContributions.contributions.forEach((contribution, i) => {
+            let commitment = cg_event.getCommitmentById(contribution.id_commitment);
+            if (i == 0) {
+              commitment_list += '"'+commitment.name+'"';
+            } else if (i < (this.userContributions.contributions.length - 1)) {
+              commitment_list += ', "'+commitment.name+'"';
+            } else {
+              commitment_list += ' et "'+commitment.name+'"';
+            }
+          });
+
+          merci_tpl = merci_tpl.replace('_COMMITMENTS_LIST_', commitment_list);
+          merci_tpl = merci_tpl.replace('_USER_FIRSTNAME_', this.userContributions.user.firstname);
+          merci_tpl = merci_tpl.replace('_TOTAL_EUROS_', ""+this.userContributions.savedMoney);
+          merci_tpl = merci_tpl.replace('_TOTAL_M2_', ""+this.userContributions.savedM2);
+
+          merci = merci_tpl;
+
+          console.log("merci: ", merci);
+        }
         return this.session.postMessage({
           display_m2: total.m2,
           display_euros: total.euros,
           display_repas: Math.round(total.m2 / 10),
-          display_merci: "plop",
+          display_merci: merci,
         });
       });
     });
