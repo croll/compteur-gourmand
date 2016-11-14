@@ -46,7 +46,7 @@ export class Commitment extends Storable {
     super();
     if (values)
       this.setValues(values);
-    if (!this.id)
+    if (!this.id || this.id == '')
       this.id = 'commitment/'+Store.guid();
   }
 }
