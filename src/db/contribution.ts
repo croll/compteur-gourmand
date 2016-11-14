@@ -49,8 +49,11 @@ export class StoredContribution extends Store<Contribution> {
       };
       contributions.forEach((contribution) => {
         let commitment = event.getCommitmentById(contribution.id_commitment);
-        total.m2 += commitment.m2_saved_by_unit * contribution.nb_of_unit;
-        total.euros += commitment.euros_saved_by_unit * contribution.nb_of_unit;
+        let nb_of_unit = contribution.nb_of_unit ? contribution.nb_of_unit : 1;
+        let nb_of_person = contribution.nb_of_person ? contribution.nb_of_person : 1;
+
+        total.m2 += commitment.m2_saved_by_unit * nb_of_unit * nb_of_person * 365;
+        total.euros += commitment.euros_saved_by_unit * nb_of_unit * nb_of_person * 365;
       });
       return total;
     });
