@@ -4,6 +4,7 @@ import { UserContributions } from '../../providers/user-contributions';
 import { ContactPage } from '../contact/contact';
 import { Contribution } from '../../db/contribution';
 import { Configuration, StoredConfiguration } from '../../db/configuration';
+import { CgMiracast} from '../../providers/cg-miracast';
 
 @Component({
   selector: 'page-engagement-confirm',
@@ -17,7 +18,7 @@ export class EngagementConfirmPage {
   configuration: any = {};
   listenButton: boolean = false;
 
-  constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration) {
+  constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration, private cg_miracast: CgMiracast) {
   }
 
   ionViewCanEnter() {
@@ -55,6 +56,7 @@ export class EngagementConfirmPage {
 
   engage() {
     this.userContributions.save().then(() => {
+      this.cg_miracast.updateAll(true);
       this.navCtrl.push(ContactPage);
     });
     // Errors already handled in userContributions.save().
