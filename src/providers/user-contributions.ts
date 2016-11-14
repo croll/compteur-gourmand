@@ -127,8 +127,8 @@ export class UserContributions {
   updateTotal(contribution: Contribution, id_commitment: string, action: string) {
 
     let commitment = this.activeEvent.getCommitmentById(id_commitment);
-    let totalM2 = Math.round(commitment.m2_saved_by_unit * 365);
-    let totalMoney = Math.round(commitment.euros_saved_by_unit * 365);
+    let totalM2 = Math.round(commitment.m2_saved_by_unit * 52);
+    let totalMoney = Math.round(commitment.euros_saved_by_unit * 52);
 
     if (commitment.ask_for_persons) {
       totalM2 *= contribution.nb_of_person;
