@@ -33,6 +33,7 @@ export class CommitmentFormPage {
     this.copyFrom = navParams.get('copy_from');
     console.log("this.copyFrom: ", this.copyFrom);
     this.form = this.formBuilder.group({
+      id: [''],
       name: ['', Validators.required],
       short_description: ['', Validators.required],
       description: ['', Validators.required],
