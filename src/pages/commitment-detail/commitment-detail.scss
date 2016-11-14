@@ -1,3 +1,16 @@
 page-commitment-detail {
 
+  ion-navbar {
+    .title {
+      display: flex;
+      align-items: center;
+      div:nth-child(2) {
+        margin-left: 2rem;
+      }
+    }
+    img {
+      height: 3rem;
+    }
+  }
+
 }

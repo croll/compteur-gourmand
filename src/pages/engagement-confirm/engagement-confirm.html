@@ -12,9 +12,8 @@
 
 <ion-content padding>
 
-  <!-- <h1 text-center margin *ngIf="configuration.enable_physical_button">Appuyez sur le buzzer !</h1> -->
-  <!-- <h1 text-center margin *ngIf="!configuration.enable_physical_button">Je m'engage !</h1> -->
-  <h1 text-center margin>Je m'engage !</h1>
+  <h1 text-center margin *ngIf="configuration.enable_physical_button">Appuyez sur le buzzer !</h1>
+  <h1 text-center margin *ngIf="configuration.enable_physical_button == false">Je m'engage !</h1>
 
   <div class="main-container">
     <!-- Left container -->
@@ -51,8 +50,7 @@
     </div>
   </div>
 
-  <!-- <div class="button-cont" *ngIf="!configuration.enable_physical_button"> -->
-  <div class="button-cont">
+  <div class="button-cont" *ngIf="configuration.enable_physical_button == false">
     <button ion-button (click)="engage()" large>
       Je m'engage !
     </button>

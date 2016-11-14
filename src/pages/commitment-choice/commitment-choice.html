@@ -18,7 +18,7 @@
 
 <ion-content padding>
 
-  <div class="question" [hidden]="!commitment.ask_for_periodicity">
+  <div class="question" *ngIf="commitment.ask_for_periodicity">
     <div class="label">Combien de fois <b>par semaines</b> souhaitez vous prendre cet engagement ?</div>
     <div class="buttons">
       <button ion-button color="secondary" large [disabled]="currentContribution.nb_of_unit < 2" (click)="decrement('nb_of_unit')">
@@ -31,7 +31,11 @@
     </div>
   </div>
 
-  <div class="question" [hidden]="!commitment.ask_for_persons">
+  <div class="question alternative-text" *ngIf="commitment.ask_for_periodicity == false">
+    {{commitment.alternative_text}}
+  </div>
+
+  <div class="question" *ngIf="commitment.ask_for_persons">
     <div class="label"><b>Au total</b>, combien de personnes vont s'engager dans votre foyer ?</div>
     <div class="buttons">
       <button ion-button [disabled] color="secondary" large [disabled]="currentContribution.nb_of_person < 2" (click)="decrement('nb_of_person')">

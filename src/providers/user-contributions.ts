@@ -20,9 +20,12 @@ export class UserContributions {
 
   init() {
     return new Promise((resolve, reject) => {
+      this.savedMoney = 0;
+      this.savedM2 = 0;
       this.user = new User();
       this.contributions = [];
       this.storedEvent.getActiveEvent().then((e: Event) => {
+        this.activeEvent = e;
         this.activeCommitments = e.getActiveCommitments();
         this.activeCommitments.sort((a: Commitment, b: Commitment):number => {
           return a.order - b.order;
