@@ -1,4 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { UserContributions } from '../providers/user-contributions';
+import { Contribution, StoredContribution } from '../db/contribution';
+import { Event, StoredEvent } from '../db/event';
 import 'rxjs/add/operator/map';
 
 /*
@@ -14,7 +17,7 @@ export class CgMiracast {
   private session: any;
   public onmessage = new EventEmitter<any>()
 
-  constructor() {
+  constructor(private userContributions: UserContributions, private storedContribution: StoredContribution, private storedEvent: StoredEvent) {
     console.log("CgMiracast...");
     //this.init();
   }
@@ -42,6 +45,7 @@ export class CgMiracast {
         this.session = navigator.presentation.requestSession("presentation/index.html");
         this.session.onmessage = (msg) => {
           this.onmessage.emit(msg);
+          this.updateAll(); // allez hop
         }; // we don't care this app
         this.session.onstatechange = function() {
           //button.disabled = self.session.state != "connected";
@@ -67,6 +71,19 @@ export class CgMiracast {
 
   get mode() {
     return this._mode;
+  }
+
+  updateAll() {
+    this.storedEvent.getActiveEvent().then((cg_event) => {
+      return this.storedContribution.getTotauxOfEvent(cg_event).then((total) => {
+        return this.session.postMessage({
+          display_m2: total.m2,
+          display_euros: total.euros,
+          display_repas: Math.round(total.m2 / 10),
+          display_merci: "plop",
+        });
+      });
+    });
   }
 
 }
