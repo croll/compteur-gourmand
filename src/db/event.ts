@@ -102,7 +102,7 @@ export class StoredEvent extends Store<Event> {
     super(Event, db, Store.milliroute("event/"), "event/", "event0");
   }
 
-  getActiveEvent() {
+  getActiveEvent() : Promise<Event> {
     return new Promise((resolve, reject) => {
       this.stored_config.get("configuration/main").then((configuration) => {
         this.get(configuration.id_active_event).then((cg_event) => {
