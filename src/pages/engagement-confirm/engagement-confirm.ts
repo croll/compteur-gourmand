@@ -14,16 +14,16 @@ export class EngagementConfirmPage {
 
   contributionList: Contribution[];
   commitments: {} = {};
-  configuration: Configuration;
+  configuration: any = {};
   listenButton: boolean = false;
 
   constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration) {
-    this.storedConfiguration.get("configuration/main").then((configuration: Configuration) => {
-      this.configuration = configuration;
-    });
   }
 
   ionViewCanEnter() {
+    this.storedConfiguration.get("configuration/main").then((configuration: Configuration) => {
+      this.configuration = configuration;
+    });
     this.contributionList = this.userContributions.contributions;
     this.userContributions.activeCommitments.forEach((commitment) => {
       this.commitments[commitment.id] = commitment;
