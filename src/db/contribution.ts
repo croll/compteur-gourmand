@@ -40,6 +40,22 @@ export class StoredContribution extends Store<Contribution> {
     super(Contribution, db, Store.milliroute("contribution/"), "contribution/", "contribution0");
   }
 
+  // get totaux of this event
+  getTotauxOfEvent(event: Event) : Promise<{ m2, euros }> {
+    return this.getEventContributions(event).then((contributions) => {
+      let total = {
+        m2: 0,
+        euros: 0,
+      };
+      contributions.forEach((contribution) => {
+        let commitment = event.getCommitmentById(contribution.id_commitment);
+        total.m2 += commitment.m2_saved_by_unit * contribution.nb_of_unit;
+        total.euros += commitment.euros_saved_by_unit * contribution.nb_of_unit;
+      });
+      return total;
+    });
+  }
+
   // get Event contributions of this event
   getEventContributions(event: Event) : Promise<Contribution[]> {
     return this.db.getDb().find({
