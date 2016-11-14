@@ -19,7 +19,7 @@
 <ion-content padding>
 
   <div class="question" *ngIf="commitment.ask_for_periodicity">
-    <div class="label">Combien de fois <b>par semaines</b> souhaitez vous prendre cet engagement ?</div>
+    <div class="label">Combien de fois <b>par semaine</b> souhaitez vous prendre cet engagement ?</div>
     <div class="buttons">
       <button ion-button color="secondary" large [disabled]="currentContribution.nb_of_unit < 2" (click)="decrement('nb_of_unit')">
         <ion-icon name="remove"></ion-icon>

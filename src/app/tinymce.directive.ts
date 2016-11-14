@@ -76,7 +76,7 @@ export class TinyMCEDirective implements OnDestroy, AfterViewInit {
         this.el.nativeElement.setAttribute('id', id);
         this.editor = tinymce.init({
           selector: '#' + this.el.nativeElement.getAttribute('id'),
-          inline: true,
+          // inline: true,
           menubar: false,
           toolbar: 'customsave | undo redo | bold italic underline strikethrough | fontsizeselect | forecolor | backcolor | alignleft aligncenter alignright alignjustify | image',
           plugins: 'textcolor colorpicker image autoresize fullscreen',
@@ -84,7 +84,8 @@ export class TinyMCEDirective implements OnDestroy, AfterViewInit {
           skin_url: '/assets/skins/lightgray',
           image_description: false,
           fontsize_formats: '1rem 1.5rem 2rem 2.5rem 3rem 3.5rem 4rem',
-          autoresize_max_height: 200,
+          // autoresize_max_height: 200,
+          width: '100%',
           file_browser_callback: (field_name, url, type, win) => {
             this.processImageFile().then((base64) => {
               this.editor.execCommand('insertHTML', false, '<img src="' + base64 + '">');
