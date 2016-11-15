@@ -42,9 +42,9 @@ export class TinyMCEDirective implements OnDestroy, AfterViewInit {
       if (this.userContributions.isAdmin != true) {
         return;
       }
-      this._initEditor().then((editor) => {
-        this.editor = editor;
-        this.editor.show();
+      this._initEditor().then((res: {editor: any, id: string}) => {
+        this.editor = res.editor;
+        tinymce.execCommand("mceAddControl", true, res.id)
       });
     } else {
       this.editor.show();
@@ -72,7 +72,7 @@ export class TinyMCEDirective implements OnDestroy, AfterViewInit {
 
   _initEditor() {
     return new Promise((resolve, reject) => {
-        const id = (+new Date().getTime() + Math.random()).toString().replace('.', '');
+        let id: string = (+new Date().getTime() + Math.random()).toString().replace('.', '');
         this.el.nativeElement.setAttribute('id', id);
         this.editor = tinymce.init({
           selector: '#' + this.el.nativeElement.getAttribute('id'),
@@ -84,6 +84,8 @@ export class TinyMCEDirective implements OnDestroy, AfterViewInit {
           skin_url: '/assets/skins/lightgray',
           image_description: false,
           fontsize_formats: '1rem 1.5rem 2rem 2.5rem 3rem 3.5rem 4rem',
+          inline: true,
+          mode: 'exact',
           // autoresize_max_height: 200,
           width: '100%',
           file_browser_callback: (field_name, url, type, win) => {
@@ -96,9 +98,6 @@ export class TinyMCEDirective implements OnDestroy, AfterViewInit {
           setup: editor => {
             editor.on('keyup', () => {
               this.onEditorKeyup.emit(editor);
-            });
-            editor.on('init', () => {
-                editor.show();
             });
             if (!this.form) {
               editor.addButton('customsave', {
@@ -116,7 +115,7 @@ export class TinyMCEDirective implements OnDestroy, AfterViewInit {
                 }
               });
             }
-            resolve(editor)
+            resolve({editor: editor, id: id});
           }
         });
       });
