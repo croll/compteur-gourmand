@@ -11,38 +11,35 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
 
-  <script src="departure-board/js/departure-board.js"></script>
-  <link rel="stylesheet" href="departure-board/css/departure-board.css" />
   <link rel="stylesheet" href="presentation.css" />
 
+  <!-- cordova.js required for cordova apps -->
+  <script src="cordova.js"></script>
+
   <script src="presentation.js"></script>
+
 </head>
 <body onload="init()">
 
   <h1>AUJOURD'HUI, GRÂCE À VOS ENGAGEMENTS ...</h1>
+ <div id='debug'></div>
 
   <table>
     <tr>
       <th>SUR UN AN, NOUS ALLONS DIMINUER<br/>NOTRE EMPREINTE ÉCOLOGIQUE DE</th>
-      <th id='display_m2'></th>
+      <th id='display_m2'>0</th>
       <th>POUR UN MONTANT<br />TOTAL ÉCONOMISÉ DE</th>
-      <th id='display_euros'></th>
+      <th id='display_euros'>0</th>
     </tr>
   </table>
 
   <br />
-  <h2>Soit un gain d'empreinte équivalent à <span id='display_repas'>8532</span> repas</h2>
+  <h2>Soit un gain d'empreinte équivalent à <span id='display_repas'>0</span> repas</h2>
 
-  <div id='display_merci' class="merci">Grâce à ses engagements "Repas végétarien" et "Pain perdu" sur un an, Marion à économisé 619€<br />
-    et vient de permettre de diminuer notre empreinte écologique de 3640m2 ! Bravo !</div>
+  <div id='display_merci' class="merci">Merci ! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. lorem</div>
 
   <br />
   <h3>La planète vous remercie pour votre action !</h3>
-
-  <audio id="audioplayer">
-    <source src="sf_afficheur_gare.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-  </audio>
 
 <script></script>
 </body>

@@ -1,5 +1,13 @@
 console.log("presentation js");
 
+function utf8_to_b64( str ) {
+  return window.btoa(unescape(encodeURIComponent( str )));
+}
+
+function b64_to_utf8( str ) {
+  return decodeURIComponent(escape(window.atob( str )));
+}
+
 var onDeviceReady = function(){
   console.log("presentation ready");
 
@@ -12,9 +20,8 @@ var onDeviceReady = function(){
   navigator.presentation.onpresent = function(presentEvent){
       session = presentEvent.session;
       session.onmessage = function(msg){
-        msg = JSON.parse(msg);
-        //document.getElementById ('display_m2').innerText="m: "+msg+".";
-        //document.getElementById ('display_m2').innerText=JSON.stringify(msg));
+        msg = JSON.parse(b64_to_utf8(msg));
+
         el_display_m2.innerText = msg.display_m2;
         el_display_euros.innerText = msg.display_euros;
         el_display_repas.innerText = msg.display_repas;
@@ -27,4 +34,3 @@ var onDeviceReady = function(){
 
 
 document.addEventListener('deviceready', onDeviceReady, false);
-alert("allo");

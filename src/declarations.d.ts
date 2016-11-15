@@ -15,3 +15,6 @@ declare module '*';
 
 interface Navigator { presentation: any }
 interface Window { PouchDB: any }
+
+declare function escape(s:string): string;
+declare function unescape(s:string): string;
