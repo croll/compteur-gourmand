@@ -52,8 +52,8 @@ export class StoredContribution extends Store<Contribution> {
         let nb_of_unit = contribution.nb_of_unit ? contribution.nb_of_unit : 1;
         let nb_of_person = contribution.nb_of_person ? contribution.nb_of_person : 1;
 
-        total.m2 += commitment.m2_saved_by_unit * nb_of_unit * nb_of_person * 52;
-        total.euros += commitment.euros_saved_by_unit * nb_of_unit * nb_of_person * 52;
+        total.m2 += commitment.m2_saved_by_unit * nb_of_unit * nb_of_person;
+        total.euros += commitment.euros_saved_by_unit * nb_of_unit * nb_of_person;
       });
       return total;
     });
