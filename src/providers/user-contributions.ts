@@ -140,6 +140,9 @@ export class UserContributions {
       totalMoney *= contribution.nb_of_unit;
     }
 
+    totalM2 = Math.round(totalM2);
+    totalMoney = Math.round(totalMoney);
+
     if (action == '+') {
       this.savedM2 += totalM2 ;
       this.savedMoney += totalMoney;
@@ -147,9 +150,6 @@ export class UserContributions {
       this.savedM2 -= totalM2 ;
       this.savedMoney -= totalMoney;
     }
-
-    this.savedM2 = Math.round(this.savedM2);
-    this.savedMoney = Math.round(this.savedMoney);
 
   }
 

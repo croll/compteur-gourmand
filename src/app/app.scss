@@ -56,4 +56,43 @@ ion-footer {
    left: 10%;
    right: 10%;
    height: 80%;
+
+  table {
+    margin: 100px auto;
+  }
+
+  ion-content {
+    padding-top: 30px;
+  }
+  .img-container {
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    img {
+    }
+  }
+
+  .label-container {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .source {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+}
+
+.label-container {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.source {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+strong {
+  font-weight: bold;
 }
