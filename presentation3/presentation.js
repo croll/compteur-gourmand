@@ -22,6 +22,10 @@ var onDeviceReady = function(){
       session.onmessage = function(msg){
         msg = JSON.parse(b64_to_utf8(msg));
 
+        // reformat
+        msg.display_m2 = parseInt(msg.display_m2).toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1 ') + " m2";
+        msg.display_euros = parseInt(msg.display_euros).toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1 ') + " €";
+
         el_display_m2.innerText = msg.display_m2;
         el_display_euros.innerText = msg.display_euros;
         el_display_repas.innerText = msg.display_repas;

@@ -73,11 +73,15 @@ export class CgMiracast {
     return this._mode;
   }
 
+  utf8_to_b64( str ) {
+    return window.btoa(unescape(encodeURIComponent( str )));
+  }
+
   updateAll(displayLastContrib: boolean = false) {
     console.log("update all ! "+displayLastContrib);
     this.storedEvent.getActiveEvent().then((cg_event) => {
       return this.storedContribution.getTotauxOfEvent(cg_event).then((total) => {
-        let merci = "";
+        let merci = '';
         if (displayLastContrib) {
           let commitment_list = '';
           let merci_tpl = "Grâce à ses engagements _COMMITMENTS_LIST_ sur un an, _USER_FIRSTNAME_ a économisé _TOTAL_EUROS_€ et vient de permettre de diminuer notre empreinte écologique de _TOTAL_M2_m2 ! Bravo !";
@@ -99,15 +103,13 @@ export class CgMiracast {
           merci_tpl = merci_tpl.replace('_TOTAL_M2_', ""+this.userContributions.savedM2);
 
           merci = merci_tpl;
-
-          console.log("merci: ", merci);
         }
-        return this.session.postMessage({
+        return this.session.postMessage(this.utf8_to_b64(JSON.stringify({
           display_m2: total.m2,
           display_euros: total.euros,
           display_repas: Math.round(total.m2 / 10),
           display_merci: merci,
-        });
+        })));
       });
     });
   }
