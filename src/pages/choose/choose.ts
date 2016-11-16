@@ -20,7 +20,7 @@ export class ChoosePage {
     prevButton: '.l',
     slidesPerView: 3,
     slidesperGroup: 3,
-    spaceBetween: 195,
+    spaceBetween: 125,
     breakpoints: {
       2200: {
         slidesPerView: 1,
@@ -132,6 +132,10 @@ export class ChoosePage {
         };
         checkNextFrame();
     });
+  }
+
+  round(n: number) {
+    return Math.round(n);
   }
 
 }

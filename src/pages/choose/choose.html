@@ -37,12 +37,12 @@
               <div class="image" [style.background]="'url('+item.image+')'"></div>
               <ion-item>
                 <img src="assets/img/earth.png" item-left large>
-                <h2>{{item.m2_saved_by_unit}} m²</h2>
+                <h2>{{round(item.m2_saved_by_unit)}} m²</h2>
                 <p>Surface préservée</p>
               </ion-item>
               <ion-item>
                 <img src="assets/img/coins.png" item-left large>
-                <h2>{{item.euros_saved_by_unit}}€</h2>
+                <h2>{{round(item.euros_saved_by_unit)}}€</h2>
                 <p>Argent économisé</p>
               </ion-item>
             </ion-card>

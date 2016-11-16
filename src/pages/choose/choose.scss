@@ -55,12 +55,12 @@ page-choose {
         width: calc(100% - 286px);
       }
       ion-slide {
-        width: 400px;
-        min-width: 400px;
-        max-width: 400px;
+        width: 450px;
+        min-width: 450px;
+        max-width: 450px;
         text-align: center;
           .commitment {
-            width: 400px;
+            width: 450px;
             margin: 0 auto;
             cursor: pointer;
             // border: 1px solid green;
@@ -81,7 +81,7 @@ page-choose {
                 }
               }
               .image {
-                height: 18rem;
+                height: 16rem;
                 background-repeat: no-repeat!important;
                 background-size: cover!important;
                 background-color: #c0c0c0;
