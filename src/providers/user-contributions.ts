@@ -127,8 +127,8 @@ export class UserContributions {
   updateTotal(contribution: Contribution, id_commitment: string, action: string) {
 
     let commitment = this.activeEvent.getCommitmentById(id_commitment);
-    let totalM2 = commitment.m2_saved_by_unit * 52;
-    let totalMoney = commitment.euros_saved_by_unit * 52;
+    let totalM2 = commitment.m2_saved_by_unit;
+    let totalMoney = commitment.euros_saved_by_unit;
 
     if (commitment.ask_for_persons) {
       totalM2 *= contribution.nb_of_person;
@@ -139,9 +139,6 @@ export class UserContributions {
       totalM2 *= contribution.nb_of_unit;
       totalMoney *= contribution.nb_of_unit;
     }
-
-    totalM2 = Math.round(totalM2);
-    totalMoney = Math.round(totalMoney);
 
     if (action == '+') {
       this.savedM2 += totalM2 ;
