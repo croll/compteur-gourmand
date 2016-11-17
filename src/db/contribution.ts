@@ -128,7 +128,6 @@ export class StoredContribution extends Store<Contribution> {
         chain=chain.then(() => {
           return new Promise((resolve, reject) => {
             json2csv(csvarray, (err, csv) => {
-              console.log("csv: ", csv);
               resolve(csv);
             }, {
               keys: cols,
