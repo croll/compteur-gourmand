@@ -5,6 +5,7 @@ import { ContactPage } from '../contact/contact';
 import { Contribution } from '../../db/contribution';
 import { Configuration, StoredConfiguration } from '../../db/configuration';
 import { CgMiracast} from '../../providers/cg-miracast';
+import { MediaPlugin } from 'ionic-native';
 
 @Component({
   selector: 'page-engagement-confirm',
@@ -17,8 +18,18 @@ export class EngagementConfirmPage {
   commitments: {} = {};
   configuration: any = {};
   listenButton: boolean = false;
+  // file: any;
 
   constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration, private cg_miracast: CgMiracast) {
+    // this.file = new MediaPlugin('assets/audio/applause.mp3');
+    // console.log(JSON.stringify(this.file));
+    /*
+    this.file.init().then(() => {
+      console.log("Init audio ok");
+    }, (err) => {
+      console.log(err);
+    })
+    */
   }
 
   ionViewCanEnter() {
@@ -57,6 +68,8 @@ export class EngagementConfirmPage {
   engage() {
     this.userContributions.save().then(() => {
       this.cg_miracast.updateAll(true);
+      // this.file.play();
+
       this.navCtrl.push(ContactPage);
     });
     // Errors already handled in userContributions.save().

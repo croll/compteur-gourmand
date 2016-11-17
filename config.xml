@@ -41,6 +41,7 @@
   <plugin name="de.fhg.fokus.famium.presentation" spec="https://github.com/fraunhoferfokus/cordova-plugin-presentation.git"/>
   <plugin name="com.megster.cordova.FileChooser" spec="http://github.com/don/cordova-filechooser.git"/>
   <plugin name="cordova-plugin-file" spec="~4.3.0"/>
+  <plugin name="cordova-plugin-media" spec="~2.4.0"/>
   <allow-navigation href="http://192.168.1.18:8100"/>
   <allow-navigation href="http://10.11.12.2:8101"/>
   <allow-navigation href="http://10.11.12.2:8100"/>

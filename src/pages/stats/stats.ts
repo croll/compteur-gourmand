@@ -33,6 +33,7 @@ export class StatsPage {
       this.event = event;
       return storedContribution.getEventContributions(event);
     }).then((contributions: Contribution[]): Promise<User[]> => {
+      console.log(typeof(contributions));
       if (typeof(contributions) == 'undefined' || contributions.length == 0) {
         return;
       }
@@ -70,7 +71,9 @@ export class StatsPage {
         });
       })
     }).then((users) => {
-      this.users = users;
+      if (typeof(users) != 'undefined') {
+        this.users = users;
+      }
     }, (err) => {
       alert("Erreur lors de la récupération des statistiques");
       console.log(err);
