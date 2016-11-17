@@ -19,16 +19,15 @@ export class EngagementConfirmPage {
   commitments: {} = {};
   configuration: any = {};
   listenButton: boolean = false;
-  mediaWinner: MediaPlugin = null;
-  // file: any;
+  mediaApplause: MediaPlugin = null;
 
   constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration, private cg_miracast: CgMiracast, private platform: Platform) {
-    // this.file = new MediaPlugin('/android_asset/www/assets/audio/applause.mp3');
-    // console.log(JSON.stringify(this.file));
     this.platform.ready().then(() => {
-      this.mediaWinner = new MediaPlugin('/android_asset/www/assets/audio/applause.mp3');
+      if (this.platform.is('android')) {
+        this.mediaApplause = new MediaPlugin('/android_asset/www/assets/audio/applause.mp3');
+      }
     }).catch(err=> {
-      console.log(err);
+      console.log(JSON.stringify(err));
     });
   }
 
@@ -68,16 +67,17 @@ export class EngagementConfirmPage {
   engage() {
     this.userContributions.save().then(() => {
       this.cg_miracast.updateAll(true);
-      this.mediaWinner.play();
-      // document['getElementById']('audio-applause')['play']();
+      if (this.platform.is('android')) {
+        this.mediaApplause.play();
+      }
 
       this.navCtrl.push(ContactPage);
     });
     // Errors already handled in userContributions.save().
   }
 
-  round(n: number) {
-    return Math.round(n);
+  round(n) {
+    return parseInt(n).toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1 ')
   }
 
 }

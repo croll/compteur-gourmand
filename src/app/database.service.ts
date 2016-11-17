@@ -94,13 +94,13 @@ export class Database {
               console.log("aie: ", err, row)
             });
           });
-        } else {
-          this._db.allDocs({
-            include_docs: true,
-            attachments: true
-          }).then(function(docs) {
-            console.log(JSON.stringify(docs.rows));
-          });
+        // } else {
+          // this._db.allDocs({
+          //   include_docs: true,
+          //   attachments: true
+          // }).then(function(docs) {
+          //   console.log(JSON.stringify(docs.rows));
+          // });
         }
 
         // create indexes

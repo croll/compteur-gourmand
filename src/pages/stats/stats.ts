@@ -21,6 +21,7 @@ export class StatsPage {
   contributions: Contribution[] = [];
   users: User[] = [];
   total: {m2, euros} = {m2: 0, euros: 0};
+  totalPersons: number = 0;
 
   constructor(public navCtrl: NavController, private db: Database, private storedEvent: StoredEvent, private storedUser: StoredUser, private storedContribution: StoredContribution) {
 
@@ -48,6 +49,8 @@ export class StatsPage {
           let commitment = this.event.getCommitmentById(contrib.id_commitment);
           let nb_of_unit = contrib.nb_of_unit ? contrib.nb_of_unit : 1;
           let nb_of_person = contrib.nb_of_person ? contrib.nb_of_person : 1;
+
+          this.totalPersons += nb_of_person;
 
           this.total.m2 += commitment.m2_saved_by_unit * nb_of_unit * nb_of_person;
           this.total.euros += commitment.euros_saved_by_unit * nb_of_unit * nb_of_person;
@@ -83,8 +86,8 @@ export class StatsPage {
   ionViewDidLoad() {
   }
 
-  round(n: number) {
-    return Math.round(n);
+  round(n) {
+    return parseInt(n).toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1 ')
   }
 
 }

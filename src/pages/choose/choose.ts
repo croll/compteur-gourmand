@@ -134,8 +134,8 @@ export class ChoosePage {
     });
   }
 
-  round(n: number) {
-    return Math.round(n);
+  round(n) {
+    return parseInt(n).toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1 ')
   }
 
 }
