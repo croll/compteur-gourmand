@@ -69,6 +69,7 @@ export class EngagementConfirmPage {
     this.userContributions.save().then(() => {
       this.cg_miracast.updateAll(true);
       // this.file.play();
+      document['getElementById']('audio-applause').play();
 
       this.navCtrl.push(ContactPage);
     });
