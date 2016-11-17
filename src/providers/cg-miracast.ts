@@ -84,7 +84,7 @@ export class CgMiracast {
         let merci = '';
         if (displayLastContrib) {
           let commitment_list = '';
-          let merci_tpl = "Grâce à ses engagements _COMMITMENTS_LIST_ sur un an, _USER_FIRSTNAME_ a économisé _TOTAL_EUROS_€ et vient de permettre de diminuer notre empreinte écologique de _TOTAL_M2_m2 ! Bravo !";
+          let merci_tpl = "Grâce à ses engagements _COMMITMENTS_LIST_ sur un an, _USER_FIRSTNAME_ a économisé _TOTAL_EUROS_ € et vient de permettre de diminuer notre empreinte écologique de _TOTAL_M2_ m2 ! Bravo !";
 
           this.userContributions.contributions.forEach((contribution, i) => {
             let commitment = cg_event.getCommitmentById(contribution.id_commitment);
@@ -99,8 +99,10 @@ export class CgMiracast {
 
           merci_tpl = merci_tpl.replace('_COMMITMENTS_LIST_', commitment_list);
           merci_tpl = merci_tpl.replace('_USER_FIRSTNAME_', this.userContributions.user.firstname);
-          merci_tpl = merci_tpl.replace('_TOTAL_EUROS_', ""+this.userContributions.savedMoney);
-          merci_tpl = merci_tpl.replace('_TOTAL_M2_', ""+this.userContributions.savedM2);
+          //merci_tpl = merci_tpl.replace('_TOTAL_EUROS_', ""+this.userContributions.savedMoney);
+          //merci_tpl = merci_tpl.replace('_TOTAL_M2_', ""+this.userContributions.savedM2);
+          merci_tpl = merci_tpl.replace('_TOTAL_EUROS_', ""+this.userContributions.savedMoney.toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1 '));
+          merci_tpl = merci_tpl.replace('_TOTAL_M2_', ""+this.userContributions.savedM2.toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1 '));
 
           merci = merci_tpl;
         }

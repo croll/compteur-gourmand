@@ -51,7 +51,6 @@ th.vide {
 }
 
 h1 {
-  padding-top: 1.8em;
   padding-bottom: 1.8em;
   text-align: center;
 }
@@ -69,7 +68,7 @@ div#display_merci {
   font-weight: bold;
   background-color: #cfc;
   padding: 1.2em;
-  margin-top: 2.8em;
+  margin-top: 2em;
   margin-left: 1em;
   margin-right: 1em;
   border: solid 0.15em black;
