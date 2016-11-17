@@ -62,4 +62,8 @@ export class EngagementConfirmPage {
     // Errors already handled in userContributions.save().
   }
 
+  round(n: number) {
+    return Math.round(n);
+  }
+
 }

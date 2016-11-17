@@ -15,6 +15,7 @@ import { EngagementConfirmPage } from '../pages/engagement-confirm/engagement-co
 import { ContactPage } from '../pages/contact/contact';
 import { ContributePage } from '../pages/contribute/contribute';
 import { UpgradePage } from '../pages/upgrade/upgrade';
+import { StatsPage } from '../pages/stats/stats';
 import { ReinitPage } from '../pages/reinit/reinit';
 import { CommitmentDetailPage } from '../pages/commitment-detail/commitment-detail';
 import { TinyMCEDirective } from './tinymce.directive';
@@ -40,6 +41,7 @@ import { UserContributions } from '../providers/user-contributions';
     ChoosePage,
     EventListPage,
     EventFormPage,
+    StatsPage,
     EngagementConfirmPage,
     ContributePage,
     CommitmentAddModal,
@@ -64,6 +66,7 @@ import { UserContributions } from '../providers/user-contributions';
     EngagementConfirmPage,
     ContributePage,
     HomePage,
+    StatsPage,
     Presentation,
     FootprintPage,
     ChoosePage,

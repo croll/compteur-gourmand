@@ -37,11 +37,11 @@
         </ion-card-header>
         <ion-item>
           <img src="/assets/img/earth.png" item-left />
-          {{userContributions.savedM2}}m² sauvés
+          {{round(userContributions.savedM2)}}m² sauvés
         </ion-item>
         <ion-item>
           <img src="/assets/img/coins.png" item-left />
-          {{userContributions.savedMoney}}€ économisés
+          {{round(userContributions.savedMoney)}}€ économisés
         </ion-item>
       </ion-card>
     </div>

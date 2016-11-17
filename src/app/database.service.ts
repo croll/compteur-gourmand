@@ -77,7 +77,7 @@ export class Database {
       window.PouchDB=PouchDB; // hack to enable pouchdb inspector
       this._db = new PouchDB('compteurgourmand');
       this._db.info().then((infos) => {
-        console.log("db infos: ", infos);
+        // console.log("db infos: ", infos);
         if (infos.doc_count <= 0) { // init the db
 
 /*

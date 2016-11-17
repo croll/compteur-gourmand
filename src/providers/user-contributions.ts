@@ -75,7 +75,6 @@ export class UserContributions {
           let promises = [];
 
           this.contributions.forEach((c) => {
-            console.log("Push contribution !")
             c.id_user = this.user._id;
             promises.push(this.storedContribution.put(c));
           });
