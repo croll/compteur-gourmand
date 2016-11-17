@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Platform } from "ionic-angular/index";
 import { UserContributions } from '../../providers/user-contributions';
 import { ContactPage } from '../contact/contact';
 import { Contribution } from '../../db/contribution';
@@ -18,18 +19,17 @@ export class EngagementConfirmPage {
   commitments: {} = {};
   configuration: any = {};
   listenButton: boolean = false;
+  mediaWinner: MediaPlugin = null;
   // file: any;
 
-  constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration, private cg_miracast: CgMiracast) {
-    // this.file = new MediaPlugin('assets/audio/applause.mp3');
+  constructor(public navCtrl: NavController, public userContributions: UserContributions, private storedConfiguration: StoredConfiguration, private cg_miracast: CgMiracast, private platform: Platform) {
+    // this.file = new MediaPlugin('/android_asset/www/assets/audio/applause.mp3');
     // console.log(JSON.stringify(this.file));
-    /*
-    this.file.init().then(() => {
-      console.log("Init audio ok");
-    }, (err) => {
+    this.platform.ready().then(() => {
+      this.mediaWinner = new MediaPlugin('/android_asset/www/assets/audio/applause.mp3');
+    }).catch(err=> {
       console.log(err);
-    })
-    */
+    });
   }
 
   ionViewCanEnter() {
@@ -68,8 +68,8 @@ export class EngagementConfirmPage {
   engage() {
     this.userContributions.save().then(() => {
       this.cg_miracast.updateAll(true);
-      // this.file.play();
-      document['getElementById']('audio-applause')['play']();
+      this.mediaWinner.play();
+      // document['getElementById']('audio-applause')['play']();
 
       this.navCtrl.push(ContactPage);
     });
