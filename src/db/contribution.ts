@@ -88,7 +88,8 @@ export class StoredContribution extends Store<Contribution> {
       "Nom",
       "Prenom",
       "Contact",
-      "Ville"
+      "Ville",
+      "Newsletter"
     ];
 
       return this.getEventContributions(event).then((contributions) => {
@@ -113,8 +114,9 @@ export class StoredContribution extends Store<Contribution> {
             return this.storedUser.get(contribution.id_user).then((user) => {
               row['Nom']=user.lastname;
               row['Prenom']=user.firstname;
-              row['Contact']=user.email;
+              row['Contact']=user.contact;
               row['Ville']=user.city;
+              row['Newsletter']=user.newsletter;
 
               csvarray.push(row);
               return "";
@@ -126,6 +128,7 @@ export class StoredContribution extends Store<Contribution> {
         chain=chain.then(() => {
           return new Promise((resolve, reject) => {
             json2csv(csvarray, (err, csv) => {
+              console.log("csv: ", csv);
               resolve(csv);
             }, {
               keys: cols,

@@ -8,10 +8,10 @@ export class User extends Storable {
 
   firstname: string
   lastname: string
-  email: string
-  phone: string
+  contact: string
   city: string
   photo: string
+  newsletter: boolean
 
   setValues(values) {
     super.copyHelper(['_id',
