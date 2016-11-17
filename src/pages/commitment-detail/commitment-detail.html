@@ -1,6 +1,6 @@
 <ion-header padding>
   <ion-navbar>
-      <img src="{{commitment.image}}" style="float: left"/>
+      <div class="title-icon" [style.background]="'url('+commitment.logo+')'"></div>
       <ion-title>En savoir plus</ion-title>
       <ion-buttons end>
         <button ion-button (click)="cancel()">

@@ -58,23 +58,25 @@ ion-footer {
    height: 80%;
 
   table {
-    margin: 100px auto;
+    margin: 3rem auto;
   }
 
-  ion-content {
-    padding-top: 30px;
+  td {
+    padding: 0 30px;
   }
   .img-container {
-    padding: 30px;
-    width: 400px;
+    max-width: 20rem;
     text-align: center;
     img {
+      padding-left: 20px;
+      max-height: 14rem;
     }
   }
 
   .label-container {
     text-align: center;
     font-size: 1rem;
+    max-width: 20rem;
   }
 
   .source {
