@@ -57,15 +57,21 @@ export class CommitmentFormPage {
 
     if (this.copyFrom) {
       console.log("copying from : ", this.copyFrom);
-      this.form.setValue(this.copyFrom);
+      this.copyFrom.id = null;
+      this.copyFrom = new Commitment(this.copyFrom);
+      this.setValue(this.copyFrom);
     }
 
   }
 
+  setValue(o) {
+    if (!('alternative_text' in o)) o.alternative_text="";
+    this.form.setValue(o);
+  }
 
   load(index: number) {
     this.commitment = this.cg_event.commitments[index];
-    this.form.setValue(this.commitment);
+    this.setValue(this.commitment);
     this.images = {image: 'url('+this.commitment.image+')', logo: 'url('+this.commitment.logo+')'};
   }
 
