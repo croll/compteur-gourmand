@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { CommitmentFormPage } from '../commitment-form/commitment-form';
 import { StoredConfiguration, Configuration } from '../../db/configuration';
 import { StoredEvent, Event, Commitment } from '../../db/event';
-import { ModalController } from 'ionic-angular';
+import { ModalController, ViewController } from 'ionic-angular';
 
 @Component({
   selector: 'page-commitment-list',
@@ -14,6 +14,7 @@ export class CommitmentListPage {
   list: Commitment[];
   cg_event: Event;
   configuration: Configuration;
+  commitmentAddModal: any;
 
   constructor(public navCtrl: NavController, private store_config: StoredConfiguration, private store_event: StoredEvent, private modalCtrl: ModalController) {
   }
@@ -52,13 +53,13 @@ export class CommitmentListPage {
   }
 
   addFromOther() {
-    let profileModal = this.modalCtrl.create(CommitmentAddModal, {
+    this.commitmentAddModal = this.modalCtrl.create(CommitmentAddModal, {
       cg_event: this.cg_event,
     });
-    profileModal.onDidDismiss(data => {
+    this.commitmentAddModal.onDidDismiss(data => {
       console.log(data);
     });
-    profileModal.present();
+    this.commitmentAddModal.present();
   }
 }
 
@@ -80,7 +81,7 @@ export class CommitmentAddModal {
   commitments: Commitment[] = [];
   commitment: Commitment;
 
-  constructor(private navCtrl: NavController, private params: NavParams, private store_config: StoredConfiguration, private store_event: StoredEvent, private modalCtrl: ModalController) {
+  constructor(private viewCtrl: ViewController, private navCtrl: NavController, private params: NavParams, private store_config: StoredConfiguration, private store_event: StoredEvent, private modalCtrl: ModalController) {
     this.cg_event = params.get('cg_event');
     this.store_event.list().then((res) => {
       this.events = res.docs;
@@ -115,8 +116,13 @@ export class CommitmentAddModal {
     console.log("this.commitment : ", this.commitment);
   }
 
-  go() {
-    this.navCtrl.pop();
+  add_cancel() {
+    this.viewCtrl.dismiss();
+  }
+
+  add_go() {
+    this.viewCtrl.dismiss();
+    //this.navCtrl.pop();
     if (this.new_type == 'new') {
       this.navCtrl.push(CommitmentFormPage, {
         cg_event: this.cg_event,
