@@ -7,7 +7,7 @@ import { CgMiracast } from '../providers/cg-miracast';
 import { ConfigurationPage } from '../pages/configuration/configuration';
 import { EventListPage } from '../pages/event-list/event-list';
 import { CommitmentListPage } from '../pages/commitment-list/commitment-list';
-import { UpgradePage } from '../pages/upgrade/upgrade';
+// import { UpgradePage } from '../pages/upgrade/upgrade';
 import { ReinitPage } from '../pages/reinit/reinit';
 import { StatsPage } from '../pages/stats/stats';
 // import { ContactPage } from '../pages/contact/contact';
